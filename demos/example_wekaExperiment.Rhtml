@@ -1,0 +1,273 @@
+<html>
+
+<head>
+<title>Title</title>
+</head>
+
+<body>
+
+<h3>Introduction</h3>
+
+<p>
+In this example we make use of the <i>wekaExperiment</i> dataset that is packaged
+with exreport. This datasets represents a series of experiment in which several
+Machine Learning classifiers are compared by using a set of public datasets
+(UCI repository) as benchmark. The performance measures are the classification
+accuracy and the training time and have been obtained from a 10-fold cross-validation.
+</p>
+
+<p>
+The <i>wekaExperiment</i> contains a variable for the method and dataset and two
+variables for the respective outputs. The datasets contains two parameters, the
+mentioned fold of the cross-validation for each entry and an additional boolean
+parameter to indicate if feature selection has been performed or not in the execution.
+</p>
+
+<!--begin.rcode
+library(exreport)
+colnames(wekaExperiment)
+end.rcode-->
+
+<p>
+In this example we will start with a basic workflow in which we will compare the
+performace regarding accuracy of the different methods. For that we will follow
+the proposed scheme for an exreport procedure: "Process, Validate, Describe, Visualice"
+</p>
+
+<p>
+We will start by loading the experiment into an exreport object, notice that we
+must indicate that the numeric variable "fold" is in fact a parameter.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expCreate(wekaExperiment, name="weka", parameters=c("fold"))
+end.rcode-->
+
+<p>
+A first look into the object shows us the different number of methods and datasets
+of our experiment as well as he different parameters and outputs. We can also
+access the raw data of the experiment by obtaining the coresponding parameter:
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+summary(experiment)
+# Print a few lines of random raw data
+head(experiment$data)
+end.rcode-->
+
+
+<h3>Preprocessing</h3>
+
+<p>
+First of all, we will check the integrity of our experiment by checking that 
+there are not repeated entries that would disrupt the analysis:
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+expGetDuplicated(experiment)
+end.rcode-->
+
+<p>
+The resulting experiment is empty, so we are allowed to continue
+</p>
+
+<p>
+Before proceeding with any kind of analysis we must preprocess our results by
+performing the appropiate operations. We will begin by aggregating the result of
+the 10-fold cross validation performed for each method and dataset. For that, we 
+reduce the fold parameter by using the mean function:
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expReduce(experiment, "fold", FUN = mean)
+# Print a few lines of random raw data
+head(experiment$data)
+end.rcode-->
+
+<p>
+Our first objetive will be to compare the different methods given its accuracy results,
+for that we first need to obtain a particular configuration of the parameters.
+Now that the <i>fold</i> parameter has been removed we have to deal with the 
+<i>featureSelection</i> one. In our first test we want to compare the experiments
+performed when this parameter is set to <i>"no"</i>, so we perform a subset operation.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expSubset(experiment, list(featureSelection = "no"))
+end.rcode-->
+
+<p>
+Now that we have a single configuration we instantiate the methods with the 
+available paramaters. In this case, the <i>featureSelection</i> can be removed as
+it is unary:
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expInstantiate(experiment, removeUnary = T)
+end.rcode-->
+
+
+<h3>Evaluation</h3>
+
+<p>
+Our experiment is now ready to be validated by using statistical tests. In this
+case we have more than two methods, so we will choose a multiple comparison test.
+We want to obtain a ranking among the methods and decide which one is the best one,
+for that we will perform a "testMultipleControl" test, including a Friedman test
+followed by a post-hoc test using the Holm procedure. As the target variable is
+the accuracy, the test will measure maximization.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+testAccuracy <- testMultipleControl(experiment, "accuracy", "max")
+summary(testAccuracy)
+end.rcode-->
+
+<p>
+The test show that there is a clearly hierarchy between the methods, and that
+some of them are statistically superior to the others. In the next section we
+will summarize this results and generate some graphics and tables.
+</p>
+
+<h3>Visualization</h3>
+
+<p>
+The previous test show that our results are promising, however we may want to
+observe at detail the results. For that exreport is packed with many plots and
+tables.
+</p>
+
+<p>
+We will start by obtaining a visual overview of the performance of the methods.
+For that, we can summarize the experiment with an appropiate bar plot. There is
+a perfect built in function to achieve this:
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+plot1 <- plotExpSummary(experiment, "accuracy")
+plot1
+end.rcode-->
+
+<p>
+The plot is nice, but perhaps there are too much datasets and the results are not
+clearly displayed. Luckily, the majority of the graphical exreport functions can
+be parametrized, in this case, we will split the plot by methods.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+plot1 <- plotExpSummary(experiment, "accuracy", columns = 3)
+plot1
+end.rcode-->
+
+<p>
+Next, we want to obtain additional information from the test we performed before.
+We will start by looking at the different ranks computed for the Friedman test,
+for that we have another built in function.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+plot2 <- plotCumulativeRank(testAccuracy)
+plot2
+end.rcode-->
+
+<p>
+The plot is a good representation of the results obtained by the test. However, 
+we want to look at the results with some numeric precission. For that, we can
+generate a table using another built in function. In this case we generate a 
+tabular summary for the test, in which we specify the different metric we need.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+table1 <- tabularTestSummary(testAccuracy, columns =  c("pvalue", "rank", "wtl"))
+table1
+end.rcode-->
+
+<p>
+The final element we are going to create is a graphical representation of the 
+Holm's post-hoc test using another built in functions, that generates a plot
+comparing the ranks distributions as well as the status of the test hypotheses.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+plot3 <- plotRankDistribution(testAccuracy)
+plot3
+end.rcode-->
+
+<p>
+We are good with all of this new information, but surely we will be more confortable
+to study it out of the console, in fact, we need to discuss it with our coleages, so
+why not generating a nice graphical report?
+</p>
+
+<h3>Communicating</h3>
+
+<p>
+At this point we can collect all the output we have generated during this exreport 
+workflow and pack it into a nice document. In this case we will be creating an interactive
+HTML report, from which we are going to b able to download the figures and the LaTeX code
+of the figures.
+</p>
+
+<p>
+We start by initializing the report object:
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+report <- exreport("Your wekaExperiment example report")
+end.rcode-->
+
+<p>
+And now it is time to add some content, be aware that the order of the elements in
+the report coincides with the order you add them. All the exreport objects have its
+own HTML and PDF representation, showing detailled summaries of their values and
+the operations performed with them.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+# Add the experiment object for reference:
+report <- exreportAdd(report, experiment)
+# Now add the test:
+report <- exreportAdd(report, testAccuracy)
+# Finally you can add the different tables and plots.
+report <- exreportAdd(report, list(plot1,plot2,table1,plot3))
+end.rcode-->
+
+<p>
+At this point we would like to include an additional item in our report.
+We need a detailed table of our experiment, as we are preparing
+a scientific paper and we would like to have an overview of it to be included in 
+an annex, despite the good summaries that we are providing with the plots and tests. 
+Fortnunately, we have another built in function for this.
+</p>
+
+<p>
+We have decided to generate the table at this point of the tutorial to discusse
+some special formating parameters of this function. Concretely, some of the
+tabular outputs generated by exreport have some properties that are only useful
+when rendering the objets in a graphic report, and have no effect in the object
+representation in the R console. In this case, we will tell the function to
+boldface the method that maximices the result for each column, and to split the
+table into to pieces when rendering.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+# We create the table:
+table2 <- tabularExpSummary(experiment, "accuracy", digits=4, format="f", boldfaceColumns="max", tableSplit=2)
+# And add it to the report:
+report <- exreportAdd(report, table2)
+end.rcode-->
+
+<p>
+Now that we have finished adding elements to the report it is time to render it.
+We want to generate an HTML report, so we call the appropiate function, by default 
+it renders and opens the report in your browser using a temporary file, but you
+can optionally specify a folder in which the report will be saved for future use.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+# Render the report:
+exreportRender(report, target = "HTML", visualize = T)
+end.rcode-->
+
+</body>
+</html>

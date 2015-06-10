@@ -1,0 +1,140 @@
+/* ------------------
+ styling for the tables 
+   ------------------   */
+
+h1 h2 h3 h4 h5 h6 {font-weight: strong;}
+h1 {font-size: 36px;}
+h2 {font-size: 24px;}
+h3 {font-size: 20px;}
+h4 {font-size: 16px;}
+h5 {font-size: 14px;}
+h6 {font-size: 12px;}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:      -o-linear-gradient(left, #ccc, #333, #ccc); 
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+a:link {
+    color:#000000;
+    text-decoration:underline;
+}
+a:visited {
+    color:#000000;
+}
+a:active {
+    color:#000000;
+}
+a:hover {
+    color:#0000bb;
+}
+
+body
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;  
+	margin:0px;  
+	background-color: #eee;
+}
+
+#header-wrap
+{
+    background-color: #000000;
+    color: #aaaaaa;
+  	height:60px; 
+    line-height: 60px;  
+}
+#header-container
+{
+    margin: 0 auto; 
+    width: 75%;
+}
+#header-container a {
+    color: #aaaaaa;
+    text-decoration: underlined;
+}
+#header-container a:hover {
+    color:#eeeeee;
+}
+#footer-wrap
+{
+    background-color: #000000;
+    color: #aaaaaa;
+}
+#footer-container
+{
+    margin: 0 auto; 
+    text-align: center;
+    width: 50%;
+    padding-bottom:15px;
+    padding-top:5px;
+}
+
+.spanner {
+padding:15px;
+}
+
+#main-wrap 
+{
+    margin: 0 auto; 
+    width:75%;
+	background-color: #fff;
+    padding-top:50px;
+    padding-bottom:150px;
+}
+ 
+.container
+{ 
+    margin: 0 auto; 
+    width: 60%;
+}
+ 
+
+.mlTable
+{
+
+}
+ 
+.mlTable table
+{
+	background: #fff;
+	font-size:12;
+	border-collapse: collapse;
+	text-align: left;
+	border-bottom: 2px solid #555;
+}
+
+.mlTable th
+{
+	font-weight: strong;
+	color: #000;
+	padding: 10px 8px;
+	border-bottom: 2px solid #555;
+	border-top: 2px solid #555;
+}
+
+.mlTable td
+{
+	color: #000;
+	padding: 9px 8px 0px 8px;
+}
+
+.mlTable tbody tr:hover td
+{
+	color: #000;
+    background: #ccc;
+}
+
+.mlPlot
+{
+
+}

@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-8">
+    <!-- {{{readme}}} -->
+      <h3>Welcome to the exreport documentation.</h3>
+
+    <h2>Help topics</h2>
+
+    {{#sections}}
+    <h3>{{title}}</h3>
+    {{{description}}}
+
+    <ul class="index">
+    {{#items}}
+    {{#icon}}
+      <li class = "icon">
+        <a href="{{file_out}}"><img src="{{icon}}" width = "40" height = "40" /></a><code><a href="{{file_out}}">{{name}}</a></code>{{aliases}}<br />
+        {{{title}}}</li>
+    {{/icon}}
+    {{^icon}}
+      <li>
+        <code><a href="{{file_out}}">{{name}}</a></code>{{aliases}}<br />{{{title}}}</li>
+    {{/icon}}
+    {{/items}}
+    </ul>
+    {{/sections}}
+  </div>
+
+  <div class="col-md-4">
+    {{#vignettes}}
+    <h2>Vignettes</h2>
+    <ul>
+    {{#vignette}}
+      <li><a href="vignettes/{{filename}}">{{title}}</a></li>
+    {{/vignette}}
+    </ul>
+    {{/vignettes}}
+
+    {{#demos}}
+    <h2>Demos</h2>
+    <ul>
+    {{#demo}}
+      <li><a href="{{filename}}">{{title}}</a></li>
+    {{/demo}}
+    </ul>
+    {{/demos}}
+
+    {{#dependencies}}
+    <h2>Dependencies</h2>
+    <ul>
+      <li><strong>Depends</strong>: {{depends}}</li>
+      <li><strong>Imports</strong>: {{imports}}</li>
+      <li><strong>Suggests</strong>: {{suggests}}</li>
+      <li><strong>Extends</strong>: {{extends}}</li>
+    </ul>
+    {{/dependencies}}
+
+    <h2>Authors</h2>
+    <ul>
+    {{#authors}}
+      <li>{{{.}}}</li>
+    {{/authors}}
+    </ul>
+
+  </div>
+</div>

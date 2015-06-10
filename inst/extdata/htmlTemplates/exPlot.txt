@@ -1,0 +1,41 @@
+
+<!--
+Parameters:
+
+title, htmlTable, id, latexTable
+
+-->
+<div class="mlPlot">
+
+    <center><h2>{{title}}</h2></center>
+    <center>From experiment: <a href="#{{context}}">{{context}}</a></center>
+    </br>
+    </br>
+
+    <center>
+    <img  src="./img/{{id}}.svg" width="100%"/>
+    </center>
+
+    </br>
+    </br>
+        Download
+        <select id="{{id}}_download">
+            <option value=".eps">EPS</option>
+            <option value=".pdf">PDF</option>
+            <option value=".png">PNG</option>
+            <option value=".svg">SVG</option>
+        </select>
+        <input type="button" value="Get File" onclick="
+            var name = './img/{{id}}';
+            var ext = document.getElementById('{{id}}_download').value;
+            window.open(name.concat(ext));"
+        /> 
+    
+    </br>
+    </br>
+    <hr>
+    </br>
+    </br>
+</div>
+
+

@@ -1,0 +1,41 @@
+
+<!--
+Parameters:
+
+title, context, htmlTable, id, latexTable
+
+-->
+<div class="mlTable">
+
+    <center><h2>{{title}}</h2></center>
+    <center>From experiment: <a href="#{{context}}">{{context}}</a></center>
+    </br>
+    </br>
+    
+    <center>
+    {{htmlTable}}
+    </center>
+    
+    </br>
+    </br>
+        
+    <input type="checkbox" name="Show Latex Code" id="{{id}}_check"    
+    onclick="    
+    if (document.getElementById('{{id}}_check').checked) {
+        document.getElementById('{{id}}').style.display  = 'block';
+    } else {
+        document.getElementById('{{id}}').style.display  = 'none';
+    }">
+    <span style="font-size: 14px;">Show LaTeX Code</span>
+    </br>
+    </br>
+    
+    <div id="{{id}}" class="latexCode" style="display:none;">
+        <input type="button" value="Select All" onclick="selectText('{{id}}_code')"/>
+        <pre><code id="{{id}}_code"class="language-latex">{{latexTable}}</code></pre>
+    </div>
+    </br>
+    <hr>
+    </br>
+    </br>
+</div>

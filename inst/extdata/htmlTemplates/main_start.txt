@@ -1,0 +1,58 @@
+<!--
+Parameters:
+
+title, date
+
+-->
+<html>
+
+<script type="text/javascript">
+    function selectText(containerid) {
+        if (window.getSelection) {
+          if (window.getSelection().empty) {  // Chrome
+            window.getSelection().empty();
+          } else if (window.getSelection().removeAllRanges) {  // Firefox
+            window.getSelection().removeAllRanges();
+          }
+        } else if (document.selection) {  // IE?
+          document.selection.empty();
+        }
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select();
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+        }
+    }
+</script>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <link href="assets/prism.css" rel="stylesheet" />
+    
+    <title>{{title}}</title>
+</head>
+
+<body>
+
+<div id="header-wrap">
+    <div id="header-container">
+        <h5><a href="http://exreport.jarias.es">exreport - beta 0.1</a></h5>
+    </div>
+</div>
+
+<div class="spanner"></div>
+
+<div id="main-wrap">
+
+    <div class="container">
+    
+        <center><h1>{{title}}</h1></center>
+        <center><h3>{{date}}</h3></center>
+        <br>
+        <br>
+        <hr>
+        <br>
