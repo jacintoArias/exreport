@@ -103,7 +103,7 @@ exreportRender <- function(rep, destination=NULL, target="html", safeMode=TRUE, 
   dir.create( file.path(path, "img"), showWarnings = FALSE )
   dir.create( file.path(path, "assets"), showWarnings = FALSE )
   sourceAssets <- system.file("extdata","htmlTemplates/assets/" , package="exreport")
-  file.copy( sprintf("%s/", sourceAssets), sprintf("%s/", path), recursive=TRUE )
+  file.copy( sprintf("%s", sourceAssets), sprintf("%s/", path), recursive=TRUE )
   
   
   # Add the head
