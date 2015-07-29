@@ -27,17 +27,29 @@
 }
 
 .shafferS <- function(k){
-  if(k<=1)
+  prev <- list()
+  for(i in 0:k){
+    tmp <- .shafferSIterative(i,prev)
+    #The plus 1 is because indexes of lists (must be >0)
+    prev[[i+1]] <- tmp
+  }
+  tmp
+}
+.shafferSIterative <- function(k, previous){
+  if(k<=1){
     mySet <- c(0)
+  }
   else{
     mySet <- c()
     for(j in 1:k){
-      tmp <- .shafferS(k-j)
+      #The plus 1 is because indexes of lists (must be >0)
+      tmp <- previous[[k-j+1]]
       tmp <- tmp + choose(j,2)
       mySet <- union(mySet,tmp)
     }
   }
-  mySet[order(mySet)]
+  mySet <- mySet[order(mySet)]
+  mySet
 }
 
 .statisticsWilcoxon <- function(x,y, alternative = "less"){
