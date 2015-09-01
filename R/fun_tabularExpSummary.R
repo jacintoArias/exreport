@@ -85,13 +85,13 @@ tabularExpSummary <- function(exp, outputs, boldfaceColumns="none", format="f", 
     table <- reshape2::dcast(exp$data, paste(exp$method, "~", exp$problem), value.var = outputs[i])
     # We set the index value for boldfaceColumns, format and digits as they may be single numbers or arrays.
     # In case of index out of range, we use the last value for the rest of elements.
-    ibf <- 1
+    ibf <- i
     if(i>length(boldfaceColumns))
       ibf <- length(boldfaceColumns)
-    ifmt <- 1
+    ifmt <- i
     if(i>length(format))
       ifmt <- length(format)
-    idig <- 1
+    idig <- i
     if(i>length(digits))
       idig <- length(digits)
       
