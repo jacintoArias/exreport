@@ -42,6 +42,13 @@ plotRankDistribution <- function(testMultiple) {
     color <- accepted
     color[accepted==TRUE | is.na(accepted)]  <- "white"
     color[accepted==FALSE] <- "grey"
+    # Now color says if the method i in testMultiple$names pass the test or not
+    # (but the index is different from da!) --> We have to reorder
+    disorderedNames <- as.character(means[["method"]]) # as characters
+    orderedNames <- as.character(testMultiple$names[[1]]) # as characters
+    indexNames <- sapply(orderedNames,FUN=function(x) which(disorderedNames==x))
+    #Now we reorder the color array
+    color <- color[indexNames]
   } else {
     color <- rep("white", nrow(means))
   }
