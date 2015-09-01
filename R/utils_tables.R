@@ -224,7 +224,7 @@
   
   tab <- .exTabular(tables = newTables,
                     formats=newFormats,
-                    splitCols=exTabular$splitCols,
+                    tableSplit=exTabular$tableSplit,
                     tableType= exTabular$tableType,
                     title = exTabular$title,
                     tags = exTabular$tags)

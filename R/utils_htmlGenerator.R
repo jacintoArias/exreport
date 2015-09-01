@@ -79,13 +79,17 @@
   maxCol <- ncol(tables[[1]])
   colIndex <- 2
   
-  if (element$splitCols <= 0)
+  if (element$tableSplit <= 1)
     numCols <- maxCol
   else
-    numCols <- element$splitCols
+    numCols <- round( (maxCol - 1) / element$tableSplit)
   
   # The first iteration is out of the loop just for formating reasons
-  endIndex <- min(colIndex+numCols-1, maxCol)
+  # The first table has different number of columns (the rest will have the
+  # same numbre, so this first one is filled with the rest)
+  # floor((maxCol-1)/colIndex) is the number of tables minus the first one
+  numColsFirstTable <- maxCol-1 - numCols*(element$tableSplit-1)
+  endIndex <- colIndex+numColsFirstTable-1
   auxTables <- lapply(tables, FUN = function(tab){
     cbind(colHeader,tab[,colIndex:endIndex,drop=F])
   })
@@ -95,11 +99,11 @@
   
   htmlTable  <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "html")
   latexTable <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "latex")
-  colIndex <- colIndex + numCols
+  colIndex <- colIndex + numColsFirstTable
   
   while (colIndex <= maxCol)
   {
-    endIndex <- min(colIndex+numCols-1, maxCol)
+    endIndex <- colIndex+numCols-1
     auxTables <- lapply(tables, FUN = function(tab){
       cbind(colHeader,tab[,colIndex:endIndex,drop=F])
     })

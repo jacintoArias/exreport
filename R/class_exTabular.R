@@ -15,7 +15,7 @@ summary.exTabular <- function (x, ...) {
 }
 
 #Anonymous constructor
-.exTabular <- function(tables, formats, splitCols, tableType, title, tags) {
+.exTabular <- function(tables, formats, tableSplit, tableType, title, tags) {
   
   newTags <- .metaTags(title = title)
   tags <- .updateTags(tags, newTags)
@@ -23,7 +23,7 @@ summary.exTabular <- function (x, ...) {
   tab <- list(
     "tables"     = tables,#a list of data.frames (one per output) with the data
     "formats"    = formats,#a list of data.frames (one per output, each one same dim of data) with the format and appearance of data
-    "splitCols" = splitCols,
+    "tableSplit" = tableSplit,
     "tableType" = tableType,
     "tags"      = tags
   )

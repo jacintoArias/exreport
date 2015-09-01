@@ -105,7 +105,7 @@ tabularTestPairwise <- function(ph, value="pvalue", charForNAs = "-")  {
   
   res <- .exTabular(tables = list("testPairwise"=tab), 
                     formats=list("testPairwise"=tabFormat), 
-                    splitCols=-1, 
+                    tableSplit=1, 
                     tableType=tableType, 
                     title = title, 
                     tags = ph$tags)

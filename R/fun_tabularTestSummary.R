@@ -74,7 +74,7 @@ tabularTestSummary <- function(ph, columns=c("pvalue"))  {
   
   tab <- .exTabular(tables = list("testMultiple"=df), 
                     formats =list("testMultiple"=format), 
-                    splitCols=-1, 
+                    tableSplit=1, 
                     tableType=tableType, 
                     title = title, 
                     tags = ph$tags)

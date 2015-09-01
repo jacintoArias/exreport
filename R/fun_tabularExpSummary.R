@@ -126,14 +126,12 @@ tabularExpSummary <- function(exp, outputs, boldfaceColumns="none", format="f", 
     tables[[outputs[i]]] <- table
     formats[[outputs[i]]] <- tableFormat
   }
-    
-  splitCols=ceiling((ncol(table)-1)/tableSplit)
   
   title <- sprintf("Detailed results for output(s) %s", paste0("\"",outputs,"\"", collapse = ", "))  
   
   tab <- .exTabular(tables = tables, 
                     formats=formats, 
-                    splitCols=splitCols, 
+                    tableSplit=tableSplit, 
                     tableType="plain", 
                     title = title, 
                     tags = exp$tags)
