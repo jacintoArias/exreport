@@ -63,7 +63,7 @@ testMultipleControl <- function(e , output, rankOrder = "max", alpha = 0.05) {
   # If the friedman test determines that there is no difference 
   # between methods, we stop here.
   if(f$tags$pvalue >= alpha)
-    warning( sprintf("%s test was not rejected with p-value %.4e >= %.4f alpha, computed p-values will not be significant.", f$tags$method,f$pvalue, f$alpha))
+    warning(.callWarningMessage("friedmanTestNotRejected", f$tags$pvalue, alpha))
   
   # Apply a posthoc test control to the testFriedman object.
   controlGeneral <- .statisticsGeneralControl(f)

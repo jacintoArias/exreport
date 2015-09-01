@@ -24,7 +24,8 @@
   outputsRemoved            = "Warning: Only the outputs '%s' will remain in the experiment",
   unmatchedInstancesRemoved = "There are unmatched instances between experiments. The combined experiment will omit them",
   outputsRenamed            = "There are common output names (%s). They will be renamed",
-  varsInTemplateNotExist     = "The variables [%s] in the text have not been provided"
+  varsInTemplateNotExist    = "The variables [%s] in the text have not been provided",
+  friedmanTestNotRejected   = "Friedman test was not rejected with p-value %.4e >= %.4f alpha, computed p-values will not be significant."
 )
 
 .callErrorMessage <- function(error, ...)
