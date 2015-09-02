@@ -61,7 +61,7 @@ plotRankDistribution <- function(testMultiple) {
   p <- p + geom_text(data = means, aes(label = sprintf("%.2f",value), y = value + 0.08), colour="black", fontface="bold", size=4)
   p <- p + ylab(sprintf("Ranking Distributions for var %s", testMultiple$tags$target))
   p <- p + xlab("")
-  p <- p + theme(axis.text.x  = element_text(face="bold", colour="#000000", size=12, angle= 90))
+  p <- p + theme(axis.text.x  = element_text(face="bold", colour="#000000", size=12, angle= 90, hjust = 1))
   p <- p + theme(axis.title.y = element_text(face="bold", colour="#000000", size=20, vjust=0.5))
   p <- p + guides(colour=FALSE)
   

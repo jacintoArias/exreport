@@ -58,7 +58,7 @@ plotCumulativeRank <- function(testMultiple, grayscale=FALSE) {
   
   p <- p + theme(axis.text.x  = element_text(face="bold", colour="#000000", size=12, angle= 90))
   p <- p + scale_x_discrete(breaks=da$continuous, labels=da$Var1)
-  p <- p + theme(axis.text.x  = element_text(face="bold", colour="#000000", size=12, angle= 90))
+  p <- p + theme(axis.text.x  = element_text(face="bold", colour="#000000", size=12, angle= 90, hjust = 1))
   p <- p + theme(axis.title.y = element_text(face="bold", colour="#000000", size=20, vjust=0.5))
   p <- p + ylab(sprintf("Cumulative Ranking for output \"%s\"", friedman$tags$target))
   p <- p + xlab("")
