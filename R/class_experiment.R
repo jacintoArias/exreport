@@ -25,37 +25,30 @@ is.experiment <- function(x) {
 toString.experiment <- function (x, ...) {
   d <- x[["data"]]
   
-  result <- paste("experiment ", x$name,"\n\n",sep="")
+  result <- paste0("experiment ", x$name,"\n\n")
   
-  result <- paste(result,
+  result <- paste0(result,
                   sprintf("#%s: %s\n", 
                           x$method, paste(levels(experiment$data[[experiment$method]]),
-                                          collapse = ', ') ) , 
-                  sep="")
-  result <- paste(result,
+                                          collapse = ', ') ))
+  result <- paste0(result,
                   sprintf("#%s: %s\n",
                           x$problem, paste(levels(experiment$data[[experiment$problem]]),
-                                           collapse = ', ') ), "
-                  \n",
-                  sep="")
+                                     collapse = ', ') ), 
+                  "\n")
   
-  if (length(x["parameters"]) != 0)
-    result <- paste(result, 
-                    sprintf("#parameters: %s", 
-                            paste(x[["parameters"]], collapse = ', ') ),
-                    sep="")
-  
-  if (length(x["configuration"]) != 0)
-    result <- paste(result, 
-                    sprintf("%s", 
-                            paste(x[["configuration"]], "(instantiated)", collapse = ', ') ),
-                    sep="")
+  result <- paste0(result,"#parameters: ")
+  if (length(x$parameters) != 0) {
+    result <- paste(result, paste0(x[["parameters"]], collapse = ', '))
+    if (length(x$configuration) != 0) 
+      result <- paste0(result, ", ")
+  }
+    
+  if (length(x$configuration) != 0)
+    result <- paste0(result, paste(x[["configuration"]], "(instantiated)", collapse = ', '))
   result <- paste0(result,"\n")
   
-  result <- paste(result, 
-                  sprintf("#outputs: %s\n", 
-                          paste(x[["outputs"]], collapse = ', ') ),
-                  sep="")
+  result <- paste0(result, sprintf("#outputs: %s\n", paste(x[["outputs"]], collapse = ', ') ))
 }
 
 #' @export

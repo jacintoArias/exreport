@@ -21,13 +21,16 @@
   methods     <- paste(levels(element$data[[element$method]]), collapse = ', ')
   problems    <- paste(levels(element$data[[element$problem]]), collapse = ', ')
   
-  parameters <- "none"
+  parameters <- ""
   
-  if (length(element[["parameters"]]) != 0)
-    parameters  <- paste(element[["parameters"]], collapse = ', ')
+  if (length(element$parameters) != 0) {
+    parameters  <- paste(element$parameters, collapse = ', ')
+    if (length(element$configuration) != 0)
+      parameters <- paste0(parameters, ", ")
+  }
   
-  if (length(element[["configuration"]]) != 0)
-    parameters  <- paste(element[["configuration"]], "(instantiated)", collapse = ', ')
+  if (length(element$configuration) != 0)
+    parameters  <- paste(parameters, element$configuration, "(instantiated)", collapse = ', ')
   
   outputs     <- paste(element[["outputs"]], collapse = ', ')
   
