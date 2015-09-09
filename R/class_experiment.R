@@ -8,6 +8,7 @@
                   "problem" = problem,
                   "parameters" = params,
                   "outputs" = outs,
+                  "configuration" = list(),
                   "tags" = tags,
                   "historic" = historic)
   
@@ -28,21 +29,28 @@ toString.experiment <- function (x, ...) {
   
   result <- paste(result,
                   sprintf("#%s: %s\n", 
-                          x$method, paste(unique(x$data[[x$method]]),
+                          x$method, paste(levels(experiment$data[[experiment$method]]),
                                           collapse = ', ') ) , 
                   sep="")
   result <- paste(result,
                   sprintf("#%s: %s\n",
-                          x$problem, paste(unique(x$data[[x$problem]]),
+                          x$problem, paste(levels(experiment$data[[experiment$problem]]),
                                            collapse = ', ') ), "
                   \n",
                   sep="")
   
-  if (length(x["paramaters"]) != 0)
+  if (length(x["parameters"]) != 0)
     result <- paste(result, 
-                    sprintf("#parameters: %s\n", 
+                    sprintf("#parameters: %s", 
                             paste(x[["parameters"]], collapse = ', ') ),
                     sep="")
+  
+  if (length(x["configuration"]) != 0)
+    result <- paste(result, 
+                    sprintf("%s", 
+                            paste(x[["configuration"]], "(instantiated)", collapse = ', ') ),
+                    sep="")
+  result <- paste0(result,"\n")
   
   result <- paste(result, 
                   sprintf("#outputs: %s\n", 

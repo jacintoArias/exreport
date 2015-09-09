@@ -18,13 +18,16 @@
 .print2exreport.experiment <- function(element, id, file, path) {
 
   # Format experiment data:
-  methods     <- paste(unique(element$data[[element$method]]), collapse = ', ')
-  problems    <- paste(unique(element$data[[element$problem]]), collapse = ', ')
+  methods     <- paste(levels(element$data[[element$method]]), collapse = ', ')
+  problems    <- paste(levels(element$data[[element$problem]]), collapse = ', ')
   
   parameters <- "none"
   
   if (length(element[["parameters"]]) != 0)
     parameters  <- paste(element[["parameters"]], collapse = ', ')
+  
+  if (length(element[["configuration"]]) != 0)
+    parameters  <- paste(element[["configuration"]], "(instantiated)", collapse = ', ')
   
   outputs     <- paste(element[["outputs"]], collapse = ', ')
   
