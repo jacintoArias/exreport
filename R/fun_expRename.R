@@ -61,6 +61,9 @@ expRename  <- function(e, elements){
     }
   }
   
+  # Copy the experiment
+  result <- e
+  
   # Now we apply all the renames
   for(var in names(elements)){
     l <- levels(e$data[[var]])
@@ -68,7 +71,19 @@ expRename  <- function(e, elements){
       idx <- which(l==val)
       l[idx] <- elements[[var]][val]
     }
-    levels(e$data[[var]]) <- l
+    levels(result$data[[var]]) <- l
   }
-  e
+  
+  # Append this operation in the historic
+  varNames <- names(elements)
+  oldElemNames <- lapply(elements, FUN=names)
+  newElemNames <- lapply(elements, FUN=identity)
+  renames <- c()
+  for(i in varNames){
+    renames <- c(renames,paste0(i,": [",paste(oldElemNames[[i]],newElemNames[[i]],sep="->",collapse=", "), "]"))
+  }
+  result$historic <- c(result$historic, 
+                       list(paste0("Discrete values from method, problem or parameters columns have been renamed: ",
+                            paste(renames,collapse = "; "))))
+  result
 }
