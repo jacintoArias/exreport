@@ -25,30 +25,34 @@ is.experiment <- function(x) {
 toString.experiment <- function (x, ...) {
   d <- x[["data"]]
   
-  result <- paste0("experiment ", x$name,"\n\n")
+  # Print experiment name
+  result <- paste0("#Experiment name: ", x$tags$title,"\n\n")
   
+  # Print method list
   result <- paste0(result,
                   sprintf("#%s: %s\n", 
                           x$method, paste(levels(experiment$data[[experiment$method]]),
-                                          collapse = ', ') ))
+                                          collapse = ', ') ), "\n")
+  # Print problem list
   result <- paste0(result,
                   sprintf("#%s: %s\n",
                           x$problem, paste(levels(experiment$data[[experiment$problem]]),
-                                     collapse = ', ') ), 
-                  "\n")
+                                     collapse = ', ') ), "\n")
   
-  result <- paste0(result,"#parameters: ")
-  if (length(x$parameters) != 0) {
-    result <- paste(result, paste0(x[["parameters"]], collapse = ', '))
-    if (length(x$configuration) != 0) 
-      result <- paste0(result, ", ")
-  }
+  result <- paste0(result,"#parameters:\n")
+  
+  # Print the parameters list if any
+  params <- c()
+  if (length(x$parameters) != 0) 
+    for (p in x$parameters)
+      params <- c(params, paste0(p, ' [', paste0(levels(x$data[[p]]), collapse = ","), ']'))
     
-  if (length(x$configuration) != 0)
-    result <- paste0(result, paste(x[["configuration"]], "(instantiated)", collapse = ', '))
-  result <- paste0(result,"\n")
+  if (length(x$configuration) != 0) 
+    params <- c(params, x$configuration)
   
-  result <- paste0(result, sprintf("#outputs: %s\n", paste(x[["outputs"]], collapse = ', ') ))
+    result <- paste0(result, .nestedList2String(params, numbered=F))
+  
+  result <- paste0(result, sprintf("\n#outputs: %s\n", paste(x[["outputs"]], collapse = ', ') ))
 }
 
 #' @export

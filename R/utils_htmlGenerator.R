@@ -18,20 +18,25 @@
 .print2exreport.experiment <- function(element, id, file, path) {
 
   # Format experiment data:
+  
+  # First, methods and problems
   methods     <- paste(levels(element$data[[element$method]]), collapse = ', ')
   problems    <- paste(levels(element$data[[element$problem]]), collapse = ', ')
   
   parameters <- ""
   
-  if (length(element$parameters) != 0) {
-    parameters  <- paste(element$parameters, collapse = ', ')
-    if (length(element$configuration) != 0)
-      parameters <- paste0(parameters, ", ")
-  }
+  # Print the parameters list if any
+  params <- c()
+  if (length(element$parameters) != 0) 
+    for (p in element$parameters)
+      params <- c(params, paste0(p, ' [', paste0(levels(element$data[[p]]), collapse = ","), ']'))
   
-  if (length(element$configuration) != 0)
-    parameters  <- paste(parameters, element$configuration, "(instantiated)", collapse = ', ')
+  if (length(element$configuration) != 0) 
+    params <- c(params, element$configuration)
   
+  parameters <- .nestedList2HTML(params, numbered=F)
+  
+  # Print the outputs
   outputs     <- paste(element[["outputs"]], collapse = ', ')
   
   history <- .nestedList2HTML(element$h)
