@@ -5,7 +5,7 @@
 \title{Load data and create an exreport experiment}
 \usage{
 expCreate(data, methods = "method", problems = "problem",
-  parameters = c(), name, tol = 1e-09)
+  parameters = c(), respectOrder = F, name, tol = 1e-09)
 }
 \arguments{
 \item{data}{A data.frame object satisfying the experiment format}
@@ -21,6 +21,10 @@ By default the remaining categorical columns
 are identified as parameters, so this list is useful only to identify numeric
 columns.}
 
+\item{respectOrder}{A logical parameter which indicates if the order of the
+elements of the method and problem columns must be respected by appearance or
+ordered alphabeticaly. It affects to the look of data representations.}
+
 \item{name}{A string which will identify the experiment in the report.}
 
 \item{tol}{Tolerance factor to identify repeated experiments for duplicated
@@ -32,7 +36,7 @@ A new exreport experiment object.
 \description{
 This function loads a data.frame, checks its properties and formats an
 exreport experiment object. The columns of an experiments must contain at
-least to categorical columns to be identified as the method and problem
+least two categorical columns to be identified as the method and problem
 variables and a thrid numerical column to be identified as an output variable.
 Additional columns can be added as parameters or additional outputs.
 }

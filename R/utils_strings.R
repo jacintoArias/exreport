@@ -3,6 +3,7 @@
   variableNotPresentError   = "Error: Specified %s variable not present in data",
   noOutputsError            = "Error: At least one output variable must be present in the input data",
   noNamesError              = "Error: Please provide valid names for the variables input list",
+  noValueNamesError         = "Error: Please provide valid names for the values input array",
   parametersDifferError     = "Error: The parameter of the given experiments differ",
   commonOutputsError        = "Error: There is no common output variables in the given experiments",
   failedIntegrityError      = "Error: The output of one or more duplicated rows differs, please check the experiment integrity",
