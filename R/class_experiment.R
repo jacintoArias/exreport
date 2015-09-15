@@ -31,12 +31,12 @@ toString.experiment <- function (x, ...) {
   # Print method list
   result <- paste0(result,
                   sprintf("#%s: %s\n", 
-                          x$method, paste(levels(experiment$data[[experiment$method]]),
+                          x$method, paste(levels(x$data[[x$method]]),
                                           collapse = ', ') ), "\n")
   # Print problem list
   result <- paste0(result,
                   sprintf("#%s: %s\n",
-                          x$problem, paste(levels(experiment$data[[experiment$problem]]),
+                          x$problem, paste(levels(x$data[[x$problem]]),
                                      collapse = ', ') ), "\n")
   
   result <- paste0(result,"#parameters:\n")
