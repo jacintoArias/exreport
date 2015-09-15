@@ -2,7 +2,7 @@
 #'
 #' This function loads a data.frame, checks its properties and formats an
 #' exreport experiment object. The columns of an experiments must contain at 
-#' least to categorical columns to be identified as the method and problem 
+#' least two categorical columns to be identified as the method and problem 
 #' variables and a thrid numerical column to be identified as an output variable. 
 #' Additional columns can be added as parameters or additional outputs.
 #'
@@ -16,6 +16,9 @@
 #' By default the remaining categorical columns 
 #' are identified as parameters, so this list is useful only to identify numeric 
 #' columns.
+#' @param respectOrder A logical parameter which indicates if the order of the
+#' elements of the method and problem columns must be respected by appearance or
+#' ordered alphabeticaly. It affects to the look of data representations.
 #' @param name A string which will identify the experiment in the report.
 #' @param tol Tolerance factor to identify repeated experiments for duplicated 
 #' rows.
@@ -33,7 +36,7 @@
 #' parameters="fold", 
 #' name="Test Experiment")
 #' 
-expCreate <- function(data, methods="method", problems="problem", parameters = c(), name, tol = 1E-9) {
+expCreate <- function(data, methods="method", problems="problem", parameters = c(), respectOrder = F, name, tol = 1E-9) {
   # PARAMETER VALIDATION:
   # Check if parameters are correct
   if (!is.data.frame(data))
@@ -54,8 +57,14 @@ expCreate <- function(data, methods="method", problems="problem", parameters = c
   }
   
   # Convert columns to factors
-  data[,methods]  <- as.factor(data[,methods])
-  data[,problems] <- as.factor(data[,problems])
+  if (respectOrder){
+    data[,methods]  <- factor(data[,methods], levels = unique(data[,methods]))
+    data[,problems] <- factor(data[,problems], levels = unique(data[,problems]))
+  }
+  else{
+    data[,methods]  <- as.factor(data[,methods])
+    data[,problems] <- as.factor(data[,problems])
+  }
   
   # Store the column names for methods and problems for further reference
   method <- methods
@@ -72,7 +81,10 @@ expCreate <- function(data, methods="method", problems="problem", parameters = c
           is.character(data[column])) {
       params <- c(params, column)
       # Convert it to a factor
-      data[,column] <- as.factor(data[,column])
+      if (respectOrder)
+        data[,column] <- factor(data[,column], levels = unique(data[,column]))
+      else
+        data[,column] <- as.factor(data[,column])
       next
     }    
   }
@@ -120,7 +132,7 @@ expCreate <- function(data, methods="method", problems="problem", parameters = c
 #'
 #' Create an exreport experiment object from a tabular representation. 
 #' The input data must be a table having methods as rows and problems as columns.
-#' The values in such table correspond to a particular output. 
+#' The values in such table correspond to a particular output.
 #' The resulting experiment can be characterized with static parameters.
 #'
 #' @export
@@ -133,6 +145,9 @@ expCreate <- function(data, methods="method", problems="problem", parameters = c
 #' of the algorithm. The name of each element of the list will correspond with 
 #' the name of a parameter
 #' and the element with the value asigned.
+#' @param respectOrder A logical parameter which indicates if the order of the
+#' elements of the method and problem columns must be respected by appearance or
+#' ordered alphabeticaly. It affects to the look of data representations.
 #' @return A new exreport experiment object.
 #' 
 #' @seealso expCreate
@@ -151,11 +166,11 @@ expCreate <- function(data, methods="method", problems="problem", parameters = c
 #' # We can create it and parametrice accordingly:
 #' expCreateFromTable(df, output="accuracy", name="weka")
 #' 
-#' # Optionally we can set a fixed value for parameters:
+#' # Optionally we can set a fixed value for parameters, and ordered by appearance:
 #' expCreateFromTable(df, output="accuracy", name="weka", 
-#' parameters=list(featureSelection = "no"))
+#' parameters=list(featureSelection = "no"), respectOrder=T)
 #' 
-expCreateFromTable <- function(data, output, name, parameters=list()) {
+expCreateFromTable <- function(data, output, name, parameters=list(), respectOrder = F) {
   # PARAMETER VALIDATION:
   # Check if parameters are correct
   if (!is.data.frame(data))
@@ -180,7 +195,7 @@ expCreateFromTable <- function(data, output, name, parameters=list()) {
   names(convertedData) <- c("method", "problem", output)
   
   # Create the experiment:
-  exp <- expCreate(convertedData, name=name)
+  exp <- expCreate(convertedData, respectOrder = respectOrder, name = name)
   
   # Add fixed parameters:
   if (length(parameters)!=0)
