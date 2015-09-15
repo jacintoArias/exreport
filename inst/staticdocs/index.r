@@ -18,6 +18,7 @@ sd_section("Experimental Data Manipulation",
              "expReduce",
              "expRemoveDuplicated",
              "expRename",
+             "expReorder",
              "expSubset"
            )
 )
