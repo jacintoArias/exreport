@@ -4,7 +4,8 @@
 \alias{expCreateFromTable}
 \title{Create an exreport experiment from a tabular representation}
 \usage{
-expCreateFromTable(data, output, name, parameters = list())
+expCreateFromTable(data, output, name, parameters = list(),
+  respectOrder = F)
 }
 \arguments{
 \item{data}{Input tabular data satisfying the previous constraints.}
@@ -19,6 +20,10 @@ static configuration
 of the algorithm. The name of each element of the list will correspond with
 the name of a parameter
 and the element with the value asigned.}
+
+\item{respectOrder}{A logical parameter which indicates if the order of the
+elements of the method and problem columns must be respected by appearance or
+ordered alphabeticaly. It affects to the look of data representations.}
 }
 \value{
 A new exreport experiment object.
@@ -43,9 +48,9 @@ fun.aggregate = mean)
 # We can create it and parametrice accordingly:
 expCreateFromTable(df, output="accuracy", name="weka")
 
-# Optionally we can set a fixed value for parameters:
+# Optionally we can set a fixed value for parameters, and ordered by appearance:
 expCreateFromTable(df, output="accuracy", name="weka",
-parameters=list(featureSelection = "no"))
+parameters=list(featureSelection = "no"), respectOrder=T)
 }
 \seealso{
 expCreate

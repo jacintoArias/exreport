@@ -8,6 +8,7 @@
                   "problem" = problem,
                   "parameters" = params,
                   "outputs" = outs,
+                  "configuration" = list(),
                   "tags" = tags,
                   "historic" = historic)
   
@@ -24,30 +25,34 @@ is.experiment <- function(x) {
 toString.experiment <- function (x, ...) {
   d <- x[["data"]]
   
-  result <- paste("experiment ", x$name,"\n\n",sep="")
+  # Print experiment name
+  result <- paste0("#Experiment name: ", x$tags$title,"\n\n")
   
-  result <- paste(result,
+  # Print method list
+  result <- paste0(result,
                   sprintf("#%s: %s\n", 
-                          x$method, paste(unique(x$data[[x$method]]),
-                                          collapse = ', ') ) , 
-                  sep="")
-  result <- paste(result,
+                          x$method, paste(levels(x$data[[x$method]]),
+                                          collapse = ', ') ), "\n")
+  # Print problem list
+  result <- paste0(result,
                   sprintf("#%s: %s\n",
-                          x$problem, paste(unique(x$data[[x$problem]]),
-                                           collapse = ', ') ), "
-                  \n",
-                  sep="")
+                          x$problem, paste(levels(x$data[[x$problem]]),
+                                     collapse = ', ') ), "\n")
   
-  if (length(x["paramaters"]) != 0)
-    result <- paste(result, 
-                    sprintf("#parameters: %s\n", 
-                            paste(x[["parameters"]], collapse = ', ') ),
-                    sep="")
+  result <- paste0(result,"#parameters:\n")
   
-  result <- paste(result, 
-                  sprintf("#outputs: %s\n", 
-                          paste(x[["outputs"]], collapse = ', ') ),
-                  sep="")
+  # Print the parameters list if any
+  params <- c()
+  if (length(x$parameters) != 0) 
+    for (p in x$parameters)
+      params <- c(params, paste0(p, ' [', paste0(levels(x$data[[p]]), collapse = ","), ']'))
+    
+  if (length(x$configuration) != 0) 
+    params <- c(params, x$configuration)
+  
+    result <- paste0(result, .nestedList2String(params, numbered=F))
+  
+  result <- paste0(result, sprintf("\n#outputs: %s\n", paste(x[["outputs"]], collapse = ', ') ))
 }
 
 #' @export

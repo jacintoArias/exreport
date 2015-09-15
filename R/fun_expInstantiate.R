@@ -82,6 +82,13 @@ expInstantiate <- function(e, parameters = NULL, removeUnary=T) {
   e1$historic <- c(e1$historic, 
                    list(paste("Methods has been instanciated with the parameters: ",
                               toString(auxParameters), sep="")))
+ 
+  # Reflect this operation in the configuration to show instantiated parameters:
+  config = c()
+  for (p in auxParameters)
+    config <- c(config, paste0(p, ' [', paste0(levels(e$data[[p]]), collapse = ","), '] (instantiated)'))
+  
+  e1$configuration = config
   
   e1
 }
