@@ -20,31 +20,34 @@
   }
   s
 }
-.nestedList2String <- function(l){
+.nestedList2String <- function(l, numbered=T){
   # A toString method por nested lists.
   x <- .createDepthStructure(l)
   s <- ""
   for(i in 1:length(x)){
-    s <- paste(s,do.call(function(...){ paste(...,sep="") },as.list(c(rep('\t',x[[i]]$depth),i,') ',x[[i]]$str,'\n'))),sep="")
+    sep <- ifelse(numbered, paste0(i," ) "), '*) ')
+    s <- paste(s,do.call(function(...){ paste(...,sep="") },as.list(c(rep('\t',x[[i]]$depth),sep,x[[i]]$str,'\n'))),sep="")
   }
   s
 }
 
-.nestedList2HTML <- function(l){
+.nestedList2HTML <- function(l, numbered=T){
   # A toString method por nested lists.
   x <- .createDepthStructure(l)
   depth <- 0
-  s <- "<ol>\n"
+  sepA <- ifelse(numbered, "<ol>\n", "<ul>\n")
+  sepB <- ifelse(numbered, "\n</ol>", "\n</ul>")
+  s <- sepA
   for (i in 1:length(x)){
     
     if (x[[i]]$depth > depth)
-      s <- paste0(s, "<ol>\n")
+      s <- paste0(s, sepA)
     if (x[[i]]$depth < depth)
-      s <- paste0(s, "\n</ol>")
+      s <- paste0(s, sepB)
     
     depth <- x[[i]]$depth
     s <- paste0(s, sprintf("<li>%s</li>\n", x[[i]]$str))
   }
-  s <- paste0(s, "\n</ol>")
+  s <- paste0(s, sepB)
   s
 }

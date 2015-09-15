@@ -9,12 +9,14 @@ title, methods, problems, parameters, outputs, history
 <div class="experiment">
 <a id="{{title}}"></a>
     <center><h2>Experiment: {{title}}</h2></center>
-    </br>
     <ul>
+    </br>
         <li><strong>Methods:</strong> {{methods}}</li>
-        <li><strong>Problems:</strong> {{problems}}</li>      
-        <li><strong>Parameters:</strong> {{parameters}}</li>      
-        <li><strong>Outputs:</strong> {{outputs}}</li>      
+        <li><strong>Problems:</strong> {{problems}}</li>
+        <li><strong>Parameters:</strong>
+        {{parameters}}
+        </li>      
+        <li><strong>Outputs:</strong> {{outputs}}</li>
     </ul>
     <h5>History:</h5>
         {{history}}
