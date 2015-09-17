@@ -1,0 +1,34 @@
+
+%
+% Parameters:
+%
+% title, target, bestMethod, worstMethod, objetive, statistic, pvalue, alpha, outcome
+%
+
+
+\exTitle{{{title}}}
+
+\begin{center}
+From experiment: \hyperref[{{context}}] { \textbf{ {{context}} } }
+\end{center}
+
+\bigskip
+
+Wilcoxon Signed Rank test for output {{target}}
+\bigskip
+
+
+\begin{itemize}
+\item $H_0$: {{bestMethod}} method is equivalent to {{worstMethod}}.
+\item $H_1$: {{bestMethod}} method is better than {{worstMethod}}.
+\end{itemize}
+\begin{itemize}
+\item Strategy for ranks: {{objetive}}
+\item Computed Wilcoxon Signed Rank Statistic: {{statistic}}
+\item Computed p-value: {{pvalue}}
+\item Outcome for $\alpha$ = {{alpha}}: $H_0$ \textbf{{{outcome}}}
+\end{itemize}
+
+\bigskip
+\bigskip 
+

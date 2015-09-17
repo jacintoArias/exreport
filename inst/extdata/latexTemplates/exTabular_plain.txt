@@ -1,0 +1,21 @@
+
+%
+% Parameters:
+%
+% title, context, latexTable
+%
+
+\exTitle{{{title}}}
+\begin{center}
+Experiment source: \hyperref[{{context}}] { \textbf{ {{context}} } }
+\end{center}
+\bigskip
+\bigskip
+
+{{latexTable}}
+
+\bigskip
+\bigskip
+\hrule
+\bigskip
+\bigskip
