@@ -5,6 +5,8 @@
 % title, context, scope, method, alpha, latexTable
 %
 
+\begin{minipage}{\textwidth}
+
 \exTitle{{{title}}}
 \bigskip
 
@@ -23,5 +25,7 @@
 \bigskip
 \bigskip
 \hrule
+
+\end{minipage}
 \bigskip
 \bigskip

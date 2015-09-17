@@ -5,6 +5,8 @@
 % title, methods, problems, parameters, outputs, history
 %
 
+\begin{minipage}{\textwidth}
+
 \exTitle{Experiment: {{title}}}
 \label{{{title}}}
 \bigskip 
@@ -19,6 +21,7 @@
 
 \exTitle{History:}
 {{history}}
-\bigskip
+
+\end{minipage}
 \bigskip 
 \bigskip 

@@ -5,6 +5,8 @@
 % title, context, latexTable
 %
 
+\begin{minipage}{\textwidth}
+
 \exTitle{{{title}}}
 \begin{center}
 Experiment source: \hyperref[{{context}}] { \textbf{ {{context}} } }
@@ -17,5 +19,7 @@ Experiment source: \hyperref[{{context}}] { \textbf{ {{context}} } }
 \bigskip
 \bigskip
 \hrule
+
+\end{minipage}
 \bigskip
 \bigskip
