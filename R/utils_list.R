@@ -48,3 +48,22 @@
   s <- paste0(s, "\n</ol>")
   s
 }
+
+.nestedList2Latex <- function(l){
+  # A toString method por nested lists.
+  x <- .createDepthStructure(l)
+  depth <- 0
+  s <- "\\begin{enumerate}\n"
+  for (i in 1:length(x)){
+    
+    if (x[[i]]$depth > depth)
+      s <- paste0(s, "\\begin{enumerate}\n")
+    if (x[[i]]$depth < depth)
+      s <- paste0(s, "\n\\end{enumerate}")
+    
+    depth <- x[[i]]$depth
+    s <- paste0(s, sprintf("\\item %s\n", x[[i]]$str))
+  }
+  s <- paste0(s, "\n\\end{enumerate}")
+  s
+}

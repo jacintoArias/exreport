@@ -67,5 +67,13 @@
   #do.call(function(...) sprintf(formatedString,...), vars[names])
 }
 
-
+.replaceQuotesForLatex <- function(text){
+  # Single and double quotes in latex are represented by `' and ``". Because
+  # we represent that internally as '' and "", we need to change them when they
+  # are use for latex code
+  
+  newText <- gsub("'([^']*)'","`\\1'",text)
+  newText <- gsub("\\\"(([^\\][^\"])*)\\\"","``\\1\\\"",newText)
+  newText
+}
 
