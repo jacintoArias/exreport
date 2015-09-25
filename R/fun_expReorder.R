@@ -55,6 +55,7 @@ expReorder  <- function(e, elements, placeRestAtEnd = T){
       newLevels <- levels[as.integer(c(specifiedValues,nonSpecifiedValues))]
     else
       newLevels <- levels[as.integer(c(nonSpecifiedValues,specifiedValues))]
+    
     result$data[[elem]] <- factor(result$data[[elem]],  levels = newLevels)
   }
   
