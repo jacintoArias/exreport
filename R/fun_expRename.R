@@ -40,8 +40,7 @@ expRename  <- function(e, elements=list(), name = NULL){
   for(param in e$parameters){
     oldParameters[[param]] <- levels(e$data[[param]])
   }
-  
-  
+
   # Copy the experiment
   result <- e
   
@@ -74,5 +73,6 @@ expRename  <- function(e, elements=list(), name = NULL){
   result$historic <- c(result$historic, 
                        list(paste0("From experiment renamed to ",result$name, ", discrete values from method, problem or parameters columns have been renamed: ",
                                    paste(renames,collapse = "; "))))
+
   result
 }
