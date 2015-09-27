@@ -1,6 +1,6 @@
 Package: exreport
 Title: Fast, Reliable and Elegant Reproducible Research
-Version: 0.1.4
+Version: 1.0.0
 Authors@R: c(person("Jacinto", "Arias", , "jacinto.arias@uclm.es", role = c("aut", "cre")), person("Javier", "Cozar", , "javier.cozar@uclm.es", role = c("aut")))
 Description: Analysis of experimental results and automatic report generation in both interactive HTML and LaTeX. This package ships with a rich interface for data modeling and built in functions for the rapid application of statistical tests and generation of common plots and tables with publish-ready quality.
 Depends: R (>= 3.1.1)
