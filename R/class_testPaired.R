@@ -1,12 +1,12 @@
-is.testWilcoxon <- function(x) {
-  is(x, "testWilcoxon")
+is.testPaired <- function(x) {
+  is(x, "testPaired")
 }
 
-print.testWilcoxon <- function (x, ...) {
+print.testPaired <- function (x, ...) {
   cat( sprintf("Wilcoxon test p-value (%s the output named %s), comparing %s versus %s: %.4e", x$tags$objetive, x$tags$target, x$bestMethod, x$worstMethod, x$tags$pvalue) )
 }
 
-summary.testWilcoxon <- function (object, ...) {
+summary.testPaired <- function (object, ...) {
   cat( sprintf("Wilcoxon test (%s the output named %s)\n\n", object$tags$objetive,object$tags$target) )
   cat( sprintf("Statistic distributed according to Wilcoxon Signed Rank: %.4f\n", object$statistic) )
   if(object$tags$pvalue<object$tags$alpha)
@@ -15,7 +15,7 @@ summary.testWilcoxon <- function (object, ...) {
     cat( sprintf("%s vs %s. Test accepted: p-value: %.4e >= %.4f", object$bestMethod, object$worstMethod, object$tags$pvalue, object$tags$alpha) )
 }
 
-.testWilcoxon <- function(bestMethod, worstMethod, statistic, pvalue, alpha, target, objetive, tags) {
+.testPaired <- function(bestMethod, worstMethod, statistic, pvalue, alpha, target, objetive, tags) {
   
   if (pvalue < alpha)
     outcome <- "Rejected"
@@ -37,6 +37,6 @@ summary.testWilcoxon <- function (object, ...) {
     "worstMethod"    = worstMethod,
     "tags"           = tags
   )
-  class(w) <- c("testWilcoxon", "reportable")
+  class(w) <- c("testPaired", "reportable")
   w
 }

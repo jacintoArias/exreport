@@ -43,26 +43,34 @@ expReorder  <- function(e, elements, placeRestAtEnd = T){
   result <- e
   
   # Now we apply all the reordering
+  newLevels <- c()
   for (elem in names(elements)){
     levels = levels(e$data[[elem]])
     specifiedValues <- sapply(elements[[elem]],FUN=function(x){which(x==levels)})
+    # If at least one element has been correctly specified, it will be numeric
+    if(!is.numeric(specifiedValues))
+      next
     nonSpecifiedValues <- seq(1,length(levels))[-1*specifiedValues]
     if (placeRestAtEnd)
       newLevels <- levels[as.integer(c(specifiedValues,nonSpecifiedValues))]
     else
       newLevels <- levels[as.integer(c(nonSpecifiedValues,specifiedValues))]
-    levels(result$data[[elem]]) <- newLevels
+    
+    result$data[[elem]] <- factor(result$data[[elem]],  levels = newLevels)
   }
   
-  # Append this operation in the historic
-  
-  reorders <- c()
-  for(i in names(elements)){
-    reorders <- c(reorders,paste0(i,": [",toString(newLevels), "]"))
+  # Append this operation in the historic, only if at least one change has been made
+  # (if newLevels is c() means no changes have been made)
+  if(length(newLevels)>0)
+  {
+    reorders <- c()
+    for(i in names(elements)){
+      reorders <- c(reorders,paste0(i,": [",toString(newLevels), "]"))
+    }
+    result$historic <- c(result$historic, 
+                         list(paste0("Discrete values from method, problem or parameters columns have been reordered: ",
+                                     paste(reorders,collapse = "; "))))
   }
-  result$historic <- c(result$historic, 
-                       list(paste0("Discrete values from method, problem or parameters columns have been reordered: ",
-                                   paste(reorders,collapse = "; "))))
   result
   
 }
