@@ -1,0 +1,31 @@
+
+%
+% Parameters:
+%
+% title, context, scope, method, alpha, latexTable
+%
+
+\begin{minipage}{\textwidth}
+
+\exTitle{{{title}}}
+\bigskip
+
+\begin{itemize}
+\item Experiment source: \hyperref[{{context}}] { \textbf{ {{context}} } }
+\item Test: {{scope}} post-hoc test
+\item Adjust Method: {{method}}
+\item $\alpha$ = {{alpha}}
+\item Boldfaced results represent non-rejected hipotheses
+\end{itemize}
+\bigskip
+\bigskip
+
+{{latexTable}}
+
+\bigskip
+\bigskip
+\hrule
+
+\end{minipage}
+\bigskip
+\bigskip

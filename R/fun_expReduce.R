@@ -73,7 +73,7 @@ expReduce  <- function(e, parameters = NULL, FUN=mean){
   e1$historic <- c(e1$historic, 
                    list(paste("Parameters '",
                               toString(parameters),
-                              "'' have been removed using the function '",
+                              "' have been removed using the function '",
                               formals()$FUN,"'", sep="")))
   
   e1

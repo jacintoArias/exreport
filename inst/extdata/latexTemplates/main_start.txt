@@ -1,0 +1,38 @@
+%
+% Parameters:
+%
+% title, date
+%
+\documentclass[]{report}
+\input{assets/imports}
+\input{assets/commands}
+
+\begin{document}
+
+\begin{flushright}
+\begin{large}
+\href{http://exreport.jarias.es}{exreport - beta 0.1.4}
+
+\end{large}
+\end{flushright}
+
+\bigskip
+\bigskip
+\bigskip        
+
+\begin{center}
+\begin{Huge}
+\textbf{{{title}}}
+\end{Huge}
+\end{center}
+
+\begin{center}
+\begin{Large}
+\textbf{{{date}}}
+\end{Large}
+\end{center}
+        
+\bigskip
+\bigskip
+\hrule
+\bigskip

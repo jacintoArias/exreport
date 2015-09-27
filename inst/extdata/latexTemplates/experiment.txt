@@ -1,0 +1,27 @@
+
+%
+% Parameters:
+%
+% title, methods, problems, parameters, outputs, history
+%
+
+\begin{minipage}{\textwidth}
+
+\exTitle{Experiment: {{title}}}
+\label{{{title}}}
+\bigskip 
+
+\begin{itemize}
+\item \textbf{Methods:} {{methods}}
+\item \textbf{Problems:} {{problems}}
+\item \textbf{Parameters:} {{parameters}}
+\item \textbf{Outputs:} {{outputs}}
+\end{itemize}
+\bigskip 
+
+\exTitle{History:}
+{{history}}
+
+\end{minipage}
+\bigskip 
+\bigskip 

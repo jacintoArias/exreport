@@ -12,7 +12,7 @@ exreportRender(rep, destination = NULL, target = "html", safeMode = TRUE,
 
 \item{destination}{Path to the rendered file. If NULL, it uses a temporary directory}
 
-\item{target}{The format of the target rendering}
+\item{target}{The format of the target rendering. HTML and PDF are allowed.}
 
 \item{safeMode}{Denies or allows (TRUE or FALSE) output files overwriting}
 

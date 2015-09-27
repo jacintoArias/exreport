@@ -1,0 +1,27 @@
+
+%
+% Parameters:
+%
+% title, htmlTable, id, latexTable
+%
+
+\begin{minipage}{\textwidth}
+
+\exTitle{{{title}}}
+\bigskip
+
+\begin{center}
+From experiment: \hyperref[{{context}}] { \textbf{ {{context}} } }
+\end{center}
+\bigskip
+\bigskip
+
+
+\exPlot{{{id}}}
+\bigskip
+\bigskip
+\hrule
+
+\end{minipage}
+\bigskip
+\bigskip
