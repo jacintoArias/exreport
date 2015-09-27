@@ -63,7 +63,7 @@
   font-weight: bold;
 }
 </style>
-<title>Title</title>
+<title>Machine Learning Weka Basic</title>
 </head>
 
 <body>
@@ -88,7 +88,7 @@ parameter to indicate if feature selection has been performed or not in the exec
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(exreport)</span>
 <span class="hl kwd">colnames</span><span class="hl std">(wekaExperiment)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;method&quot;           &quot;dataset&quot;          &quot;featureSelection&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;method&quot;           &quot;problem&quot;          &quot;featureSelection&quot;
 ## [4] &quot;fold&quot;             &quot;accuracy&quot;         &quot;trainingTime&quot;
 </pre></div>
 </div></div>
@@ -116,21 +116,24 @@ access the raw data of the experiment by obtaining the coresponding parameter:
 
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(experiment)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 1) Experiment weka loaded from a data set.
+<div class="output"><pre class="knitr r">## 1 ) Experiment weka loaded from a data set.
 ## 
-## experiment 
+## #Experiment name: weka
 ## 
-## #method: NaiveBayes, J48, RandomForest, OneR
-## #dataset: hypothyroid, liver-disorders, vehicle, car, ionosphere, soybean, vote, anneal, lymph, vowel, audiology, glass, primary-tumor, balance-scale, horsecolic
+## #method: J48, NaiveBayes, OneR, RandomForest
 ## 
-##                   
-## #parameters: featureSelection, fold
+## #problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+## 
+## #parameters:
+## *) featureSelection [no,yes]
+## *) fold [0,1,2,3,4,5,6,7,8,9]
+## 
 ## #outputs: accuracy, trainingTime
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># Print a few lines of random raw data</span>
 <span class="hl kwd">head</span><span class="hl std">(experiment</span><span class="hl opt">$</span><span class="hl std">data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##       method     dataset featureSelection fold accuracy trainingTime
+<div class="output"><pre class="knitr r">##       method     problem featureSelection fold accuracy trainingTime
 ## 1 NaiveBayes hypothyroid               no    0  94.9735       0.0824
 ## 2 NaiveBayes hypothyroid               no    1  93.6508       0.0177
 ## 3 NaiveBayes hypothyroid               no    2  93.6340       0.0065
@@ -150,13 +153,16 @@ there are not repeated entries that would disrupt the analysis:
 
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">expGetDuplicated</span><span class="hl std">(experiment)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## experiment 
+<div class="output"><pre class="knitr r">## #Experiment name: weka
 ## 
-## #method: 
-## #dataset: 
+## #method: J48, NaiveBayes, OneR, RandomForest
 ## 
-##                   
-## #parameters: featureSelection, fold
+## #problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+## 
+## #parameters:
+## *) featureSelection [no,yes]
+## *) fold [0,1,2,3,4,5,6,7,8,9]
+## 
 ## #outputs: accuracy, trainingTime
 </pre></div>
 </div></div>
@@ -176,7 +182,7 @@ reduce the fold parameter by using the mean function:
 <span class="hl com"># Print a few lines of random raw data</span>
 <span class="hl kwd">head</span><span class="hl std">(experiment</span><span class="hl opt">$</span><span class="hl std">data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##         method   dataset featureSelection accuracy trainingTime
+<div class="output"><pre class="knitr r">##         method   problem featureSelection accuracy trainingTime
 ## 1          J48    anneal               no 98.77529      0.03192
 ## 2   NaiveBayes    anneal               no 86.52808      0.00989
 ## 3         OneR    anneal               no 83.63296      0.00804
@@ -387,7 +393,8 @@ table into to pieces when rendering.
 </p>
 
 <div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># We create the table:</span>
-<span class="hl std">table2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularExpSummary</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl kwc">digits</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">format</span><span class="hl std">=</span><span class="hl str">&quot;f&quot;</span><span class="hl std">,</span> <span class="hl kwc">boldfaceColumns</span><span class="hl std">=</span><span class="hl str">&quot;max&quot;</span><span class="hl std">,</span> <span class="hl kwc">tableSplit</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
+<span class="hl std">table2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularExpSummary</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl kwc">digits</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">,</span>
+                            <span class="hl kwc">format</span><span class="hl std">=</span><span class="hl str">&quot;f&quot;</span><span class="hl std">,</span> <span class="hl kwc">boldfaceColumns</span><span class="hl std">=</span><span class="hl str">&quot;max&quot;</span><span class="hl std">,</span> <span class="hl kwc">tableSplit</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
 <span class="hl com"># And add it to the report:</span>
 <span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report, table2)</span>
 </pre></div>
@@ -400,8 +407,10 @@ it renders and opens the report in your browser using a temporary file, but you
 can optionally specify a folder in which the report will be saved for future use.
 </p>
 
-<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Render the report:</span>
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Render the report in HTML format:</span>
 <span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;HTML&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">= T)</span>
+<span class="hl com"># Render the report in pdf format:</span>
+<span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;PDF&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">= T)</span>
 </pre></div>
 </div></div>
 
