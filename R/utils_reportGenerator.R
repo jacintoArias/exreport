@@ -98,6 +98,16 @@
   cat( content, file = file)
 }
 
+.loadHTMLTemplate <- function(name, params=list()) {
+  sourceFile <- system.file("extdata",sprintf("htmlTemplates/%s.txt", name) , package="exreport")
+  template <- readChar(sourceFile, file.info(sourceFile)$size)  
+  template <- .replaceVarsForContent(template,params)
+  #for ( var in names(params))
+  #  template <- gsub( sprintf("$%s", var), params[[var]], template, fixed=TRUE)
+  
+  template
+}
+
 .print2exreport.exTabular <- function(element, id, file, path, target) {
   
   # Configure tabular structures:
@@ -110,13 +120,17 @@
   maxCol <- ncol(tables[[1]])
   colIndex <- 2
   
-  if (element$splitCols <= 0)
+  if (element$tableSplit <= 1)
     numCols <- maxCol
   else
-    numCols <- element$splitCols
+    numCols <- round( (maxCol - 1) / element$tableSplit)
   
   # The first iteration is out of the loop just for formating reasons
-  endIndex <- min(colIndex+numCols-1, maxCol)
+  # The first table has different number of columns (the rest will have the
+  # same numbre, so this first one is filled with the rest)
+  # floor((maxCol-1)/colIndex) is the number of tables minus the first one
+  numColsFirstTable <- maxCol-1 - numCols*(element$tableSplit-1)
+  endIndex <- colIndex+numColsFirstTable-1
   auxTables <- lapply(tables, FUN = function(tab){
     cbind(colHeader,tab[,colIndex:endIndex,drop=F])
   })
@@ -127,25 +141,24 @@
   if(target=="html")
     htmlTable  <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "html")
   latexTable <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "latex")
-  colIndex <- colIndex + numCols
+  colIndex <- colIndex + numColsFirstTable
   
   while (colIndex <= maxCol)
   {
-    endIndex <- min(colIndex+numCols-1, maxCol)
+    endIndex <- colIndex+numCols-1
     auxTables <- lapply(tables, FUN = function(tab){
       cbind(colHeader,tab[,colIndex:endIndex,drop=F])
     })
     auxFormats <- lapply(formats, FUN = function(tab){
       cbind(colFormatHeader,tab[,colIndex:endIndex,drop=F])
     })
-    
     if(target=="html")
       htmlTable  <- paste0(htmlTable, "\n<br/><br/>\n", .formatDataFrame(tables = auxTables, formats = auxFormats, src = "html"))
     latexTable <- paste0(latexTable, "\n\n", .formatDataFrame(tables = auxTables, formats = auxFormats, src = "latex"))
     
     colIndex <- colIndex + numCols
   }
-
+  
   if(target=="html"){
     templateParams <- c(id = id,
                         element$tags,
@@ -162,17 +175,15 @@
     templateParams <- c(id = id,
                         element$tags,
                         latexTable = latexTable
-    )
+                        )
     # Generate final output, it is conditioned on tableType
     if (element$tableType=="plain")
       content <- .loadLatexTemplate("exTabular_plain", templateParams)
     else if (element$tableType=="phtest")
       content <- .loadLatexTemplate("exTabular_phtest", templateParams)
-    
     # For latex code, we need to replace single and double quotes for `' and ``"
     content <- .replaceQuotesForLatex(content)
   }
-  
   cat( content, file = file )
 }
 
