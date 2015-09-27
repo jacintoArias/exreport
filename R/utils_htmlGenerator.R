@@ -68,7 +68,7 @@
   cat( html, file = file)
 }
 
-.print2exreport.testWilcoxon <- function(element, id, file, path) {
+.print2exreport.testPaired <- function(element, id, file, path) {
   
   templateParams <- c(id = id,
                       element$tags,

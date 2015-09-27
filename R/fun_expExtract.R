@@ -43,7 +43,8 @@ expExtract <- function(ph){
   e$data <- e$data[interaction(e$data[,c(e$method,e$parameters)],sep = ",",drop=T) %in% remaining,,drop=F]
   
   #Append this operation in the historic
-  e$historic <- c(e$historic, list(paste("Subset of experiment based on the results of the", ph$methodName,sep=" ")))
+  phDescription <- sprintf("%s post-hoc test with %s p-value adjustment for output %s", ph$tags$scope, ph$tags$method, ph$tags$target)
+  e$historic <- c(e$historic, list(paste("Subset of experiment based on the results of the", phDescription,sep=" ")))
   
   e
 }

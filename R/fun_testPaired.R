@@ -10,7 +10,7 @@
 #' @param rankOrder The optimization strategy, can be either maximizing "max"
 #' or minimizing "min" the target output variable.
 #' @param alpha The significance level used for the whole testing procedure.
-#' @return an testWilcoxon object
+#' @return a testPaired object
 #' 
 #' 
 #' @examples
@@ -59,7 +59,7 @@ testPaired <- function(e , output, rankOrder = "max", alpha = 0.05){
   #a single array when only one column data.frame is the result of the subseting.
   data <- data[,-1, drop=F]
   
-  # Check if it only exists two methods (in that case, a wilcoxon test would be performed instead)
+  # Check if it only exists two methods
   if( nrow(data) !=2 )
     stop(.callErrorMessage("wilcoxonNMethodsError"))
   
@@ -94,14 +94,14 @@ testPaired <- function(e , output, rankOrder = "max", alpha = 0.05){
   #The method names
   methodNames <- rownames(data)
   
-  w <- .testWilcoxon(bestMethod  = bestMethodName, 
-                     worstMethod = worstMethodName, 
-                     statistic   = wilcoxon$statistic, 
-                     pvalue      = wilcoxon$pvalue, 
-                     alpha       = alpha,
-                     target      = output,
-                     objetive    = .mapId2Name[[rankOrder]], 
-                     tags        = e$tags)
+  w <- .testPaired(bestMethod  = bestMethodName, 
+                   worstMethod = worstMethodName, 
+                   statistic   = wilcoxon$statistic, 
+                   pvalue      = wilcoxon$pvalue, 
+                   alpha       = alpha,
+                   target      = output,
+                   objetive    = .mapId2Name[[rankOrder]], 
+                   tags        = e$tags)
   
   w
 }
