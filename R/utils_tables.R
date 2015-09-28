@@ -106,7 +106,7 @@
   strTables <- funMatrix2Str(allMatrix)
   
   # Finally, we build the entire latex table
-  res <- "<table>\n<tr>\n"
+  res <- "<table class=\"table table-hover\">\n<tr>\n"
   if(length(tables)==1)
     res <- paste0(res, paste0(sprintf("<th style=\"text-align:right\">%s</th>",cnames),collapse = ""), "</tr>\n")
   else{

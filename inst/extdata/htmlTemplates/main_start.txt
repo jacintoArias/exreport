@@ -27,32 +27,50 @@ title, date
             window.getSelection().addRange(range);
         }
     }
+
+    function downloadFig(id, ext) {
+      var name = './img/'.concat(id).concat(ext);
+      window.open(name);
+    }
+
+    function showCode(id) {
+      if (document.getElementById(id.concat('_check')).checked) {
+          document.getElementById(id.concat('_hidden')).style.display  = 'block';
+      } else {
+          document.getElementById(id.concat('_hidden')).style.display  = 'none';
+      }
+    }
+
 </script>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="assets/style.css">
     <link href="assets/prism.css" rel="stylesheet" />
-    
+    <link href="assets/bootstrap.min.css" rel="stylesheet" />
+
     <title>{{title}}</title>
 </head>
 
 <body>
 
-<div id="header-wrap">
-    <div id="header-container">
-        <h5><a href="http://exreport.jarias.es">exreport - beta 0.1</a></h5>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://exreport.jarias.es">Generated with exreport - beta 0.1</a>
     </div>
-</div>
-
-<div class="spanner"></div>
+  </div>
+</nav>
 
 <div id="main-wrap">
 
     <div class="container">
-    
-        <center><h1>{{title}}</h1></center>
-        <center><h3>{{date}}</h3></center>
-        <br>
-        <br>
-        <hr>
-        <br>
+
+        <div class="row">
+             <div class="col-md-12 text-center">
+               <h1>{{title}}</h1>
+               <h3>{{date}}</h3>
+               <br>
+               <hr>
+               <br>
+               <br>
+             </div>
+        </div>
