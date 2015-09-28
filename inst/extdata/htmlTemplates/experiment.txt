@@ -6,7 +6,9 @@ title, methods, problems, parameters, outputs, history
 
 -->
 
-<div class="experiment">
+<div class="row">
+  <div class="col-md-12">
+
 <a id="{{title}}"></a>
     <center><h2>Experiment: {{title}}</h2></center>
     <ul>
@@ -15,12 +17,13 @@ title, methods, problems, parameters, outputs, history
         <li><strong>Problems:</strong> {{problems}}</li>
         <li><strong>Parameters:</strong>
         {{parameters}}
-        </li>      
+        </li>
         <li><strong>Outputs:</strong> {{outputs}}</li>
     </ul>
     <h5>History:</h5>
         {{history}}
     </br>
     </br>
-    </br>
+    <hr>
+    </div>
 </div>

@@ -4,19 +4,24 @@ Parameters:
 r_version
 
 -->
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center" style="background-color:black;">
+        <span class="text-center" style="color: #999;">
+          <br>
+          <h5>exreport, Copyright 2015 by Jacinto Arias and Javier Cozar</h5>
+          Generated using {{r_version}}
+          <br>
+          <br>
+        </span>
         </div>
     </div>
-    
-    <div class="spanner"></div>
-    
-    <div id="footer-wrap">
-        <div id="footer-container">
-            <h5>exreport, Copyright 2015 by Jacinto Arias and Javier Cozar</h5>
-            Generated using {{r_version}}
-        </div>
-    </div>
-    
+
+    <script src="./assets/jquery.js"></script>
     <script src="./assets/prism.js"></script>
-    
+    <script src="./assets/bootstrap.min.js"></script>
+
 </body>
 </html>
