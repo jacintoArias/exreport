@@ -1,0 +1,269 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Machine Learning Weka Aditional Analytics</title>
+</head>
+
+<body>
+
+<h3>Introduction</h3>
+
+<p>
+In this example we make use of the wekaExperiment dataset that is packaged with
+exreport. This dataset represents a series of experiment in which several Machine
+Learning classifiers are compared by using a set of public datasets (UCI repository)
+as benchmark. The performance measures are the classification accuracy and the
+training time and have been obtained from a 10-fold cross-validation.
+</p>
+
+<p>
+The <i>wekaExperiment</i> contains a variable for the method and dataset and two
+# variables for the respective outputs. The datasets contains two parameters, 
+# the mentioned fold of the cross-validation for each entry and an additional 
+# boolean parameter to indicate if feature selection has been performed or not
+# in the execution. 
+</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(exreport)</span>
+<span class="hl kwd">colnames</span><span class="hl std">(wekaExperiment)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;method&quot;           &quot;problem&quot;          &quot;featureSelection&quot;
+## [4] &quot;fold&quot;             &quot;accuracy&quot;         &quot;trainingTime&quot;
+</pre></div>
+</div></div>
+
+
+<h3>Loading the experiment</h3>
+
+<p>
+We will load our experimentation into an experiment object.
+</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expCreate</span><span class="hl std">(wekaExperiment,</span> <span class="hl kwc">name</span><span class="hl std">=</span><span class="hl str">&quot;weka&quot;</span><span class="hl std">,</span> <span class="hl kwc">parameters</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;fold&quot;</span><span class="hl std">))</span>
+<span class="hl kwd">summary</span><span class="hl std">(experiment)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 1 ) Experiment weka loaded from a data set.
+## 
+## #Experiment name: weka
+## 
+## #method: J48, NaiveBayes, OneR, RandomForest
+## 
+## #problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+## 
+## #parameters:
+## *) featureSelection [no,yes]
+## *) fold [0,1,2,3,4,5,6,7,8,9]
+## 
+## #outputs: accuracy, trainingTime
+</pre></div>
+</div></div>
+
+
+<h3>Data preprocessing</h3>
+
+<p>
+Before proceeding with any kind of analysis we must preprocess our results.
+First of all, we will agregate the result of the 10-fold cross validation
+using the mean function.
+After that, we will instantiate the methods with the available parameters.
+</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReduce</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;fold&quot;</span><span class="hl std">,</span> <span class="hl kwc">FUN</span> <span class="hl std">= mean)</span>
+<span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment,</span> <span class="hl kwc">removeUnary</span> <span class="hl std">= T)</span>
+<span class="hl kwd">summary</span><span class="hl std">(experiment)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 1 ) Experiment weka loaded from a data set.
+## 2 ) Parameters 'fold'' have been removed using the function 'mean'
+## 3 ) Methods has been instanciated with the parameters: featureSelection
+## 
+## #Experiment name: weka
+## 
+## #method: J48,no, NaiveBayes,no, OneR,no, RandomForest,no, J48,yes, NaiveBayes,yes, OneR,yes, RandomForest,yes
+## 
+## #problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+## 
+## #parameters:
+## *) featureSelection [no,yes] (instantiated)
+## 
+## #outputs: accuracy, trainingTime
+</pre></div>
+</div></div>
+
+
+<h3>Evaluation</h3>
+
+<p>
+Our experiment is now ready to be evaluated using statistical tests. In this
+case we have more than two methods, so we will choose a multiple comparison test.
+We want to compare all pairs of methods, for that we will perform a
+<i>testMultiplePairwise</i> test, including a Friedman test followed by a post-hoc
+test using the Holm procedure. As the target variable is the accuracy,
+the test will measure maximization.
+</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">testAccuracyPairwise</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">testMultiplePairwise</span><span class="hl std">(experiment,</span><span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;max&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(testAccuracyPairwise)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## ---------------------------------------------------------------------
+## Friedman test, objetive maximize output variable accuracy. Obtained p-value: 4.1679e-08
+## Chi squared with 7 degrees of freedom statistic: 47.6500
+## Test rejected: p-value: 4.1679e-08 &lt; 0.0500
+## ---------------------------------------------------------------------
+## Pairwise post hoc test for output accuracy
+## Adjust method: Shaffer
+## 
+## p-values:
+##                  J48,no RandomForest,yes   J48,yes NaiveBayes,no
+## RandomForest,no       1                1 0.4309044    0.06025137
+## J48,no               NA                1 1.0000000    0.45981358
+## RandomForest,yes     NA               NA 1.0000000    1.00000000
+## J48,yes              NA               NA        NA    1.00000000
+## NaiveBayes,no        NA               NA        NA            NA
+## NaiveBayes,yes       NA               NA        NA            NA
+## OneR,no              NA               NA        NA            NA
+##                  NaiveBayes,yes      OneR,no     OneR,yes
+## RandomForest,no      0.01395224 4.125442e-05 6.205344e-06
+## J48,no               0.17266188 1.668243e-03 3.376488e-04
+## RandomForest,yes     0.61839883 1.529973e-02 4.012438e-03
+## J48,yes              1.00000000 1.822777e-01 6.476731e-02
+## NaiveBayes,no        1.00000000 8.818142e-01 4.462741e-01
+## NaiveBayes,yes               NA 1.000000e+00 9.581391e-01
+## OneR,no                      NA           NA 1.000000e+00
+## ---------------------------------------------------------------------
+</pre></div>
+</div></div>
+
+<h3>Visualization</h3>
+
+<p>
+Now we generate a tabular summary for the pairwise test. We get two tables, one
+for the p-values, and other one for the metric <i>win/tie/loss</i>.
+</p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">table1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularTestPairwise</span><span class="hl std">(testAccuracyPairwise,</span> <span class="hl str">&quot;pvalue&quot;</span><span class="hl std">)</span>
+<span class="hl std">table1</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $testPairwise
+##             method J48,no RandomForest,yes   J48,yes NaiveBayes,no
+## 1  RandomForest,no      1                1 0.4309044    0.06025137
+## 2           J48,no     NA                1 1.0000000    0.45981358
+## 3 RandomForest,yes     NA               NA 1.0000000    1.00000000
+## 4          J48,yes     NA               NA        NA    1.00000000
+## 5    NaiveBayes,no     NA               NA        NA            NA
+## 6   NaiveBayes,yes     NA               NA        NA            NA
+## 7          OneR,no     NA               NA        NA            NA
+##   NaiveBayes,yes      OneR,no     OneR,yes
+## 1     0.01395224 4.125442e-05 6.205344e-06
+## 2     0.17266188 1.668243e-03 3.376488e-04
+## 3     0.61839883 1.529973e-02 4.012438e-03
+## 4     1.00000000 1.822777e-01 6.476731e-02
+## 5     1.00000000 8.818142e-01 4.462741e-01
+## 6             NA 1.000000e+00 9.581391e-01
+## 7             NA           NA 1.000000e+00
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">table2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularTestPairwise</span><span class="hl std">(testAccuracyPairwise,</span> <span class="hl str">&quot;wtl&quot;</span><span class="hl std">)</span>
+<span class="hl std">table2</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $testPairwise
+##             method J48,no RandomForest,yes J48,yes NaiveBayes,no
+## 1  RandomForest,no  9/0/6           12/1/2  13/0/2        11/0/4
+## 2           J48,no   &lt;NA&gt;            9/0/6  10/1/4        10/0/5
+## 3 RandomForest,yes   &lt;NA&gt;             &lt;NA&gt;  10/0/5        10/0/5
+## 4          J48,yes   &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;        10/0/5
+## 5    NaiveBayes,no   &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;          &lt;NA&gt;
+## 6   NaiveBayes,yes   &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;          &lt;NA&gt;
+## 7          OneR,no   &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;          &lt;NA&gt;
+##   NaiveBayes,yes OneR,no OneR,yes
+## 1         12/0/3  15/0/0   15/0/0
+## 2         11/0/4  15/0/0   15/0/0
+## 3         12/0/3  14/0/1   14/0/1
+## 4          9/0/6  13/0/2   14/0/1
+## 5          9/1/5   9/0/6   10/0/5
+## 6           &lt;NA&gt;  10/0/5   10/0/5
+## 7           &lt;NA&gt;    &lt;NA&gt;   3/12/0
+</pre></div>
+</div></div>
+
+
+<h3>Communicating</h3>
+
+<p>
+We create an exreport object and add into it the desired elements.
+After that, we will generate the report in html format and open it.
+</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Create the exreport object</span>
+<span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreport</span><span class="hl std">(</span><span class="hl str">&quot;Machine Learning Weka Aditional Analytics&quot;</span><span class="hl std">)</span>
+<span class="hl com"># Add the elements</span>
+<span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment,</span>
+                                   <span class="hl std">testAccuracyPairwise, table1, table2))</span>
+<span class="hl com"># Render the report in HTML format:</span>
+<span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;html&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">= T)</span>
+<span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;html&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">= T)</span>
+</pre></div>
+</div></div>
+
+</body>
+</html>

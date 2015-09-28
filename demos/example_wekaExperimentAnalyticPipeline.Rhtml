@@ -1,0 +1,162 @@
+<html>
+
+<head>
+<title>Machine Learning Weka Pipeline Analytics</title>
+</head>
+
+<body>
+
+<h3>Introduction</h3>
+
+<p>
+In this example we make use of the wekaExperiment dataset that is packaged with
+exreport. This dataset represents a series of experiment in which several Machine
+Learning classifiers are compared by using a set of public datasets (UCI repository)
+as benchmark. The performance measures are the classification accuracy and the
+training time and have been obtained from a 10-fold cross-validation.
+</p>
+
+<p>
+The <i>wekaExperiment</i> contains a variable for the method and dataset and two
+# variables for the respective outputs. The datasets contains two parameters, 
+# the mentioned fold of the cross-validation for each entry and an additional 
+# boolean parameter to indicate if feature selection has been performed or not
+# in the execution. 
+</p>
+
+<!--begin.rcode
+library(exreport)
+colnames(wekaExperiment)
+end.rcode-->
+
+
+<h3>Loading the experiment</h3>
+
+<p>
+We will load our experimentation into an experiment object.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expCreate(wekaExperiment, name="weka", parameters=c("fold"))
+summary(experiment)
+end.rcode-->
+
+
+<h3>Data preprocessing</h3>
+
+<p>
+Suppose we want to rename some methods. We can do that using expRename.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expRename(experiment, name="weka extension 2",
+                        list(method = list("NaiveBayes"="NBayes",
+                                           "RandomForest"="RndFrst"),
+                             featureSelection=list("no"="F", "yes"="T")))
+summary(experiment)
+end.rcode-->
+
+<p>
+Before proceeding with any kind of analysis we must preprocess our results.
+First of all, we will agregate the result of the 10-fold cross validation
+using the mean function.
+After that, we will instantiate the methods with the available parameters.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expReduce(experiment, "fold", FUN = mean)
+experiment <- expInstantiate(experiment, removeUnary = T)
+summary(experiment)
+end.rcode-->
+
+
+
+<h3>Visualization</h3>
+
+<p>
+We visualize the experiment results using the <i>plotExpSummary</i> function.
+</p>
+<!--begin.rcode fig.width=7, fig.height=6
+plot1 <- plotExpSummary(experiment, "accuracy", columns = 3)
+plot1
+end.rcode-->
+
+<p>
+Possibly, we want a different order for the methods or problems.
+Suppose we want to compare results for methods when feature selecction
+is applied or not, so we want "J48,yes" after "J48,no" and so on.
+In that case, we reorder the experiment and then obtain the plot.
+</p>
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expReorder(experiment, list(method=c("J48,F", "J48,T",
+                                                   "NBayes,F","NBayes,T",
+                                                   "OneR,F","OneR,T",
+                                                   "RndFrst,F","RndFrst,T")))
+plot2 <- plotExpSummary(experiment, "accuracy", columns = 3)
+plot2
+end.rcode-->
+
+
+<h3>Evaluation</h3>
+
+<p>
+Our experiment is now ready to be validated by using statistical tests.
+We want to make a double test pipeline. First, we want to obtain a ranking among
+the methods and decide which one is the best one, based on accuracy. The alpha 
+value used is 0.32. This value has been chosen just for didactic reasons, in 
+order to get only one method not statistically different from the best one.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+testAccuracy    <- testMultipleControl(experiment, "accuracy", "max", alpha = 0.32)
+summary(testAccuracy)
+
+# Now we generate a tabular summary for the pairwise test. 
+tableAccuracy <- tabularTestSummary(testAccuracy, "pvalue")
+tableAccuracy
+end.rcode-->
+
+<p>
+After that, for all those methods which are not statistically different from
+the best one, we will perform a second test (again, based in rankings) but in
+this case based on training time (therefore the test will measure minimization).
+If we try a multiple test comparison it will rise an error, as only two methos
+are in the experiment2. For that reason, we need to apply a paired test.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+# Here we extract the instances from the methods which are not statistically
+# different from the best one
+experiment2  <-expExtract(testAccuracy)
+summary(experiment2)
+
+# The multiple test rise an error as only two methods are in experiment2
+testTime <- testMultipleControl(experiment2, "trainingTime", "min")
+
+# We must perform a paired test (a wilcoxon signed rank test)
+testTime <- testPaired(experiment2, "trainingTime", "min")
+summary(testTime)
+
+end.rcode-->
+
+<h3>Communication</h3>
+<p>
+We create an exreport object and add into it the desired elements.
+After that, we will generate the report in html and pdf format.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+# Create the exreport object
+report <- exreport("Machine Learning Weka Pipeline Analytics")
+# Add the elements
+report <- exreportAdd(report, list(experiment, plot1, plot2, testAccuracy,
+                                   tableAccuracy, experiment2, testTime))
+# Render the report in HTML format:
+exreportRender(report, target = "html", visualize = T)
+# Render the report in PDF format:
+exreportRender(report, target = "pdf", visualize = T)
+end.rcode-->
+
+
+</body>
+</html>
