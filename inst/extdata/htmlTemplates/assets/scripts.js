@@ -1,5 +1,5 @@
 {
-  
+
     function selectText(containerid) {
         if (window.getSelection) {
           if (window.getSelection().empty) {  // Chrome
@@ -33,5 +33,4 @@
           document.getElementById(id.concat('_hidden')).style.display  = 'none';
       }
     }
-
 }

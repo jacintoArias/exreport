@@ -8,21 +8,23 @@ title, context, scope, method, alpha, htmlTable, id, latexTable
 <div class="row">
   <div class="col-md-12">
 
-    <center><h2>{{title}}</h2></center>
+    <div class="text-center">
+      <h2>{{title}}</h2>
+      From experiment: <a href="#{{context}}">{{context}}</a>
+    </div>
+
     <ul>
-        <li>Experiment source: <a href="#{{context}}">{{context}}</a></li>
         <li>Test: {{scope}} post-hoc test</li>
         <li>Adjust Method: {{method}}</li>
         <li>&alpha; = {{alpha}}</li>
         <li>Boldfaced results represent non-rejected hipotheses</li>
     </ul>
-    <center></center>
     </br>
     </br>
 
-    <center>
-    {{htmlTable}}
-    </center>
+    <div class="text-center">
+      {{htmlTable}}
+    </div>
 
     </br>
     </br>

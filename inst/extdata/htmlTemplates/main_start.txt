@@ -13,7 +13,7 @@ title, date
     <title>{{title}}</title>
 </head>
 
-<body>
+<body style="background-color: #eee;">
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -23,12 +23,12 @@ title, date
   </div>
 </nav>
 
-<div id="main-wrap">
-
-    <div class="container">
+    <div class="container" style="background-color: #fff; padding:50px;">
 
         <div class="row">
              <div class="col-md-12 text-center">
+               <br>
+               <br>
                <h1>{{title}}</h1>
                <h3>{{date}}</h3>
                <br>

@@ -7,16 +7,25 @@ r_version
 
     </div>
 
+    <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 text-center" style="background-color:black;">
-        <span class="text-center" style="color: #999;">
-          <br>
-          <h5>exreport, Copyright 2015 by Jacinto Arias and Javier Cozar</h5>
-          Generated using {{r_version}}
-          <br>
-          <br>
-        </span>
-        </div>
+    <div class="col-md-12 text-center">
+    <br>
+    <br>
+    </div>
+    </div>
+
+      <div class="row">
+          <div class="col-md-12 text-center" style="background-color:black;">
+          <span class="text-center" style="color: #999;">
+            <br>
+            <h5>exreport, Copyright 2015 by Jacinto Arias and Javier Cozar</h5>
+            Generated using {{r_version}}
+            <br>
+            <br>
+          </span>
+          </div>
+      </div>
     </div>
 
     <script src="./assets/jquery.js"></script>

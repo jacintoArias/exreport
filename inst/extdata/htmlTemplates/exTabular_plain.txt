@@ -8,14 +8,17 @@ title, context, htmlTable, id, latexTable
 <div class="row">
   <div class="col-md-12">
 
-    <center><h2>{{title}}</h2></center>
-    <center>From experiment: <a href="#{{context}}">{{context}}</a></center>
+    <div class="text-center">
+      <h2>{{title}}</h2>
+      From experiment: <a href="#{{context}}">{{context}}</a>
+    </div>
+
     </br>
     </br>
 
-    <center>
+    <div class="text-centered">
     {{htmlTable}}
-    </center>
+    </div>
 
     </br>
     </br>
