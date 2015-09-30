@@ -172,7 +172,7 @@
 
 
   # Finally, we build the entire latex table
-  res <- "\\begin{tabular}{l"
+  res <- "\\exTable{\\begin{tabular}{l"
   res <- paste0(res, paste0(rep("r",ncol(allMatrix)-1), collapse=""), "}\n")
   if(length(tables)==1)
     res <- paste0(res, "\\hline\n", paste(cnames, collapse = " & "), "\\\\\n\\hline\n")
@@ -185,7 +185,7 @@
   
   res <- paste0(res,paste0(strTables, collapse = ""))
   
-  res <- paste0(res,"\\hline\n\\end{tabular}\n")
+  res <- paste0(res,"\\hline\n\\end{tabular}}\n")
   res
 }
 
