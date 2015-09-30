@@ -1,6 +1,4 @@
 
-\begin{minipage}{\textwidth}
-
 \exTitle{{{title}}}
 
 \begin{center}
@@ -25,6 +23,4 @@ Friedman test for output {{target}}
 \item Outcome for $\alpha$ = {{alpha}}: $H_0$ \textbf{{{outcome}}}
 \end{itemize}
 
-\end{minipage}
-\bigskip
-\bigskip 
+\newpage

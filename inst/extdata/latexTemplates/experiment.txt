@@ -5,7 +5,6 @@
 % title, methods, problems, parameters, outputs, history
 %
 
-\begin{minipage}{\textwidth}
 
 \exTitle{Experiment: {{title}}}
 \label{{{title}}}
@@ -19,9 +18,9 @@
 \end{itemize}
 \bigskip 
 
-\exTitle{History:}
+\exSubtitle{History:}
+\begin{small}
 {{history}}
+\end{small}
 
-\end{minipage}
-\bigskip 
-\bigskip 
+\newpage
