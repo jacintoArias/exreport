@@ -7,6 +7,8 @@ title, date
 <html>
 
 <head>
+    <meta charset="UTF-8">
+
     <link href="assets/prism.css" rel="stylesheet" />
     <link href="assets/bootstrap.min.css" rel="stylesheet" />
 

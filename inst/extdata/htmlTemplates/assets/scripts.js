@@ -33,4 +33,20 @@
           document.getElementById(id.concat('_hidden')).style.display  = 'none';
       }
     }
+
+    function checkTables() {
+
+      $('.table').each(function() {
+        tableScroll  = $(this).get(0).scrollWidth;
+        tableWidth = $(this).parent().width();
+
+        if (tableScroll > tableWidth) {
+          alertMsg = '<div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>  <strong>Warning!</strong> This table is wider than the document and needs to be scrolled. Use the parameter "tableSplit" for better readability.</div>'
+          $(this).parent().parent().append(alertMsg);
+        }
+      });
+    }
+
+    $(document).ready(checkTables());
+
 }

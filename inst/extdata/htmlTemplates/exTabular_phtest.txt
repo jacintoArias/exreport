@@ -22,8 +22,10 @@ title, context, scope, method, alpha, htmlTable, id, latexTable
     </br>
     </br>
 
-    <div class="text-center">
-      {{htmlTable}}
+    <div>
+      <div class="table-responsive">
+        {{htmlTable}}
+      </div>
     </div>
 
     </br>
