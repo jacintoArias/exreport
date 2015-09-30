@@ -74,9 +74,18 @@ end.rcode-->
 <h3>Visualization</h3>
 
 <p>
-We visualize the experiment results using the <i>plotExpSummary</i> function.
+We visualize the experiment results using the <i>tabularExpSummary</i> and the
+<i>plotExpSummary</i> functions.
 </p>
 <!--begin.rcode fig.width=7, fig.height=6
+# We want to visualize the two outputs at once. Bold values represent the best
+# one by problem. The best is the maximum in the case of accuracy, and the
+# minimum in the case of trainingTime. Also, we split the table in 5 and rotate
+# it to get methods in rows and problems in columns
+table1 <- tabularExpSummary(experiment, outputs = c("accuracy","trainingTime"),
+                            boldfaceColumns = c("max","min"), format = "f",
+                            digits = 4, tableSplit = 3, rowsAsMethod = F)
+table1
 plot1 <- plotExpSummary(experiment, "accuracy", columns = 3)
 plot1
 end.rcode-->
@@ -149,8 +158,8 @@ After that, we will generate the report in html and pdf format.
 # Create the exreport object
 report <- exreport("Machine Learning Weka Pipeline Analytics")
 # Add the elements
-report <- exreportAdd(report, list(experiment, plot1, plot2, testAccuracy,
-                                   tableAccuracy, experiment2, testTime))
+report <- exreportAdd(report, list(experiment, table1, plot1, plot2, 
+                          testAccuracy, tableAccuracy, experiment2, testTime))
 # Render the report in HTML format:
 exreportRender(report, target = "html", visualize = T)
 # Render the report in PDF format:

@@ -184,9 +184,87 @@ After that, we will instantiate the methods with the available parameters.
 <h3>Visualization</h3>
 
 <p>
-We visualize the experiment results using the <i>plotExpSummary</i> function.
+We visualize the experiment results using the <i>tabularExpSummary</i> and the
+<i>plotExpSummary</i> functions.
 </p>
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">plot1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl kwc">columns</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># We want to visualize the two outputs at once. Bold values represent the best</span>
+<span class="hl com"># one by problem. The best is the maximum in the case of accuracy, and the</span>
+<span class="hl com"># minimum in the case of trainingTime. Also, we split the table in 5 and rotate</span>
+<span class="hl com"># it to get methods in rows and problems in columns</span>
+<span class="hl std">table1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularExpSummary</span><span class="hl std">(experiment,</span> <span class="hl kwc">outputs</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span><span class="hl str">&quot;trainingTime&quot;</span><span class="hl std">),</span>
+                            <span class="hl kwc">boldfaceColumns</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;max&quot;</span><span class="hl std">,</span><span class="hl str">&quot;min&quot;</span><span class="hl std">),</span> <span class="hl kwc">format</span> <span class="hl std">=</span> <span class="hl str">&quot;f&quot;</span><span class="hl std">,</span>
+                            <span class="hl kwc">digits</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">tableSplit</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">rowsAsMethod</span> <span class="hl std">= F)</span>
+<span class="hl std">table1</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $accuracy
+##            problem    J48,F NBayes,F   OneR,F RndFrst,F    J48,T NBayes,T
+## 1           anneal 98.77529 86.52808 83.63296  99.10737 96.21723 85.86641
+## 2        audiology 75.29644 68.65612 46.56128  71.77864 76.12649 68.26088
+## 3    balance-scale 75.71431 87.84692 36.35432  79.70305 75.71431 87.84692
+## 4              car 77.88614 73.13517 70.00806  81.87796 73.25617 70.69801
+## 5            glass 66.88312 44.50215 53.83119  77.61906 70.17317 45.02163
+## 6       horsecolic 85.32283 78.23575 81.51653  84.21172 81.23876 81.80182
+## 7      hypothyroid 99.41671 95.41417 96.34148  99.31061 97.26951 94.80443
+## 8       ionosphere 87.47619 79.46825 78.34128  93.74604 86.92857 86.89683
+## 9  liver-disorders 61.81512 49.30252 53.04202  64.09245 50.23529 38.31932
+## 10           lymph 77.04761 82.47619 74.28571  79.14285 75.71428 77.00000
+## 11   primary-tumor 40.70410 50.73084 25.32977  40.69518 40.69519 50.13368
+## 12         soybean 82.40196 88.41646 24.91261  84.75062 82.98593 86.51535
+## 13         vehicle 73.15546 44.43136 52.60504  73.04341 67.35714 47.74370
+## 14            vote 96.99789 89.65643 95.61838  96.53805 96.31078 94.69873
+## 15           vowel 52.22223 59.69700 26.36361  64.64650 53.13134 55.65658
+##      OneR,T RndFrst,T
+## 1  83.63296  97.66293
+## 2  46.56128  69.92095
+## 3  36.35432  79.70305
+## 4  70.00806  75.68492
+## 5  53.83119  78.05194
+## 6  81.51653  83.13815
+## 7  96.34148  96.47432
+## 8  77.48414  92.89683
+## 9  48.78992  48.16808
+## 10 74.28571  79.00000
+## 11 25.32977  40.39215
+## 12 19.36061  84.62489
+## 13 52.60504  70.07703
+## 14 95.61838  96.08350
+## 15 26.36361  66.16164
+## 
+## $trainingTime
+##            problem   J48,F NBayes,F  OneR,F RndFrst,F   J48,T NBayes,T
+## 1           anneal 0.03192  0.00989 0.00804   0.03578 0.01523  0.00337
+## 2        audiology 0.01859  0.00545 0.00444   0.04138 0.00916  0.00187
+## 3    balance-scale 0.01816  0.00747 0.00543   0.03633 0.01555  0.00369
+## 4              car 0.01390  0.00566 0.00495   0.03135 0.00856  0.00216
+## 5            glass 0.01732  0.00645 0.00533   0.03442 0.01375  0.00286
+## 6       horsecolic 0.02094  0.00699 0.00601   0.05186 0.01048  0.00228
+## 7      hypothyroid 0.03759  0.01392 0.01628   0.12246 0.01731  0.00497
+## 8       ionosphere 0.02819  0.00964 0.00859   0.04177 0.01309  0.00366
+## 9  liver-disorders 0.01540  0.00726 0.00550   0.03254 0.00461  0.00208
+## 10           lymph 0.01232  0.00576 0.00551   0.02421 0.00746  0.00239
+## 11   primary-tumor 0.02089  0.00548 0.00459   0.04773 0.01376  0.00199
+## 12         soybean 0.02143  0.00619 0.00504   0.06331 0.01458  0.00223
+## 13         vehicle 0.04034  0.01100 0.00901   0.06925 0.02382  0.00423
+## 14            vote 0.01129  0.00505 0.00484   0.02949 0.00480  0.00175
+## 15           vowel 0.05533  0.01046 0.00845   0.09166 0.03901  0.00395
+##     OneR,T RndFrst,T
+## 1  0.00240   0.02728
+## 2  0.00152   0.02503
+## 3  0.00196   0.03203
+## 4  0.00171   0.02661
+## 5  0.00157   0.02599
+## 6  0.00151   0.03557
+## 7  0.00361   0.11542
+## 8  0.00204   0.02864
+## 9  0.00091   0.02203
+## 10 0.00159   0.01703
+## 11 0.00157   0.03375
+## 12 0.00214   0.04459
+## 13 0.00243   0.05731
+## 14 0.00143   0.01748
+## 15 0.00184   0.09745
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">plot1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl kwc">columns</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span>
 <span class="hl std">plot1</span>
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
@@ -318,8 +396,8 @@ After that, we will generate the report in html and pdf format.
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Create the exreport object</span>
 <span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreport</span><span class="hl std">(</span><span class="hl str">&quot;Machine Learning Weka Pipeline Analytics&quot;</span><span class="hl std">)</span>
 <span class="hl com"># Add the elements</span>
-<span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment, plot1, plot2, testAccuracy,</span>
-                                   <span class="hl std">tableAccuracy, experiment2, testTime))</span>
+<span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment, table1, plot1, plot2,</span>
+                          <span class="hl std">testAccuracy, tableAccuracy, experiment2, testTime))</span>
 <span class="hl com"># Render the report in HTML format:</span>
 <span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;html&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">= T)</span>
 <span class="hl com"># Render the report in PDF format:</span>
