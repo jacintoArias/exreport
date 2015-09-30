@@ -80,7 +80,7 @@
   }
   
   
-  # Function to translate from a matrix of strings to a single string in tabular latex syntax
+  # Function to translate from a matrix of strings to a single string in tabular HTML syntax
   funMatrix2Str <- function(m){
     apply(m, 1, FUN=function(x){
       sprintf("<tr>\n%s%s\n</tr>\n",sprintf("<td style=\"text-align:left\">%s</td>",x[1]), paste0(sprintf("<td style=\"text-align:right\">%s</td>",x[-1]),collapse = ""))
@@ -102,13 +102,13 @@
   }
   allMatrix <- allMatrix[,c(1,colIndices)]
   
-  # Now we translate from matrix to tabular latex syntax
+  # Now we translate from matrix to tabular HTML syntax
   strTables <- funMatrix2Str(allMatrix)
   
   # Finally, we build the entire latex table
   res <- "<table>\n<tr>\n"
   if(length(tables)==1)
-    res <- paste0(res, paste0(sprintf("<th style=\"text-align:right\">%s</th>",cnames),collapse = ""), "</tr>\n")
+    res <- paste0(res, "<tr>\n<th style=\"text-align:left\">",cnames[1],"</th>", paste0(sprintf("<th style=\"text-align:right\">%s</th>",cnames),collapse = ""), "</tr>\n")
   else{
     res <- paste0(res, "<th></th>", paste0(sprintf("<th style=\"text-align:center\" colspan=\"%d\">%s</th>",length(tables),cnames[-1]),collapse = ""), "</tr>\n")
     #Ahora los outputs
