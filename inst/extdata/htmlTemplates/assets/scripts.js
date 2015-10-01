@@ -26,14 +26,6 @@
       window.open(name);
     }
 
-    function showCode(id) {
-      if (document.getElementById(id.concat('_check')).checked) {
-          document.getElementById(id.concat('_hidden')).style.display  = 'block';
-      } else {
-          document.getElementById(id.concat('_hidden')).style.display  = 'none';
-      }
-    }
-
     function checkTables() {
 
       $('.table').each(function() {

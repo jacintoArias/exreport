@@ -23,19 +23,19 @@ title, context, htmlTable, id, latexTable
     </div>
 
     </br>
-    </br>
 
-    <input type="checkbox" name="Show Latex Code" id="{{id}}_check" onclick="showCode('{{id}}')">
-    <span style="font-size: 14px;">Show LaTeX Code</span>
+    <button class="btn btn-primary" type="button" data-toggle="collapse"
+     data-target="#{{id}}_hidden" aria-expanded="false" aria-controls="collapseExample">
+      Show/Hide LaTeX Code
+    </button>
     </br>
     </br>
-    <div id="{{id}}_hidden" style="display: none;">
+    <div class="collapse" id="{{id}}_hidden">
+      <pre id="{{id}}_code">{{latexTable}}</pre>
+    </br>
       <button class="btn btn-success btn-sm" onclick="selectText('{{id}}_code')">
         Select Code
       </button>
-      </br>
-      </br>
-      <pre id="{{id}}_code">{{latexTable}}</pre>
     </div>
 
     <br>
