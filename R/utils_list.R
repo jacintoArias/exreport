@@ -20,7 +20,7 @@
   }
   s
 }
-.nestedList2String <- function(l, numbered=T){
+.nestedList2String <- function(l, numbered=TRUE){
   # A toString method por nested lists.
   x <- .createDepthStructure(l)
   s <- ""
@@ -31,7 +31,7 @@
   s
 }
 
-.nestedList2HTML <- function(l, numbered=T){
+.nestedList2HTML <- function(l, numbered=TRUE){
   # A toString method por nested lists.
   x <- .createDepthStructure(l)
   depth <- 0

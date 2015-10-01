@@ -103,7 +103,7 @@ it is unary:
 </p>
 
 <!--begin.rcode fig.width=7, fig.height=6
-experiment <- expInstantiate(experiment, removeUnary = T)
+experiment <- expInstantiate(experiment, removeUnary = TRUE)
 end.rcode-->
 
 
@@ -267,9 +267,9 @@ can optionally specify a folder in which the report will be saved for future use
 
 <!--begin.rcode fig.width=7, fig.height=6
 # Render the report in HTML format:
-exreportRender(report, target = "HTML", visualize = T)
+exreportRender(report, target = "HTML", visualize = TRUE)
 # Render the report in pdf format:
-exreportRender(report, target = "PDF", visualize = T)
+exreportRender(report, target = "PDF", visualize = TRUE)
 end.rcode-->
 
 </body>

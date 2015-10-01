@@ -17,7 +17,7 @@
 #' # it to apply the test:
 #' experiment <- expCreate(wekaExperiment, name="test", parameter="fold")
 #' experiment <- expReduce(experiment, "fold", mean)
-#' experiment <- expInstantiate(experiment, removeUnary=T)
+#' experiment <- expInstantiate(experiment, removeUnary=TRUE)
 #' 
 #' # Then we perform a a testMultiplePairwise test procedure
 #' test <- testMultiplePairwise(experiment, "accuracy", "max")
@@ -46,7 +46,7 @@ tabularTestPairwise <- function(ph, value="pvalue", charForNAs = "-")  {
   # we assume that if the all the elements from the row r share the presentation (i.e. bf) 
   if (ncol(mValues) > 1)
   {
-    aux = data.frame(values=rep("", nrow(mValues)), stringsAsFactors = F)
+    aux = data.frame(values=rep("", nrow(mValues)), stringsAsFactors = FALSE)
     for (i in 1:nrow(mValues)){
       values <- unlist(mValues[i,])
       format <- unlist(mFormat[i,])

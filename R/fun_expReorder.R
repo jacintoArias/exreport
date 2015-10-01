@@ -19,14 +19,14 @@
 #'
 #' @examples
 #' # We load the wekaExperiment problem as an experiment and then change the order
-#' of the values for the parameter featureSelection and for one valoue for the method.
+#' # of the values for the parameter featureSelection and for one valoue for the method.
 #' 
 #' experiment <- expCreate(wekaExperiment, name="test", parameter="fold")
 #' expReorder(experiment, list(featureSelection = c("yes","no"),
 #'                            method=c("OneR")))
 #'                            
 
-expReorder  <- function(e, elements, placeRestAtEnd = T){
+expReorder  <- function(e, elements, placeRestAtEnd = TRUE){
   # PARAMETER VALIDATION:
   # Check if parameters are correct
   if (!is.experiment(e))

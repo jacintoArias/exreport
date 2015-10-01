@@ -30,9 +30,9 @@
 #' 
 #' # Now we instantiate the experiment by the featureSelection parameter and
 #' # remove the unary fold parameter
-#' expInstantiate(experiment, removeUnary=T)
+#' expInstantiate(experiment, removeUnary=TRUE)
 #' 
-expInstantiate <- function(e, parameters = NULL, removeUnary=T) {
+expInstantiate <- function(e, parameters = NULL, removeUnary=TRUE) {
   # PARAMETER VALIDATION:
   # Check if parameters are correct
   if (!is.experiment(e))
@@ -72,11 +72,11 @@ expInstantiate <- function(e, parameters = NULL, removeUnary=T) {
   }
   
   # Update the data.frame
-  e1$data[[e1$method]] <- interaction(e1$data[,c(e1$method,parameters),drop=F],
+  e1$data[[e1$method]] <- interaction(e1$data[,c(e1$method,parameters),drop=FALSE],
                                       sep = ",",
-                                      drop=T)
+                                      drop=TRUE)
   
-  e1$data <- e1$data[,!(colnames(e1$data) %in% parameters),drop=F]
+  e1$data <- e1$data[,!(colnames(e1$data) %in% parameters),drop=FALSE]
   
   # Append this operation in the historic
   e1$historic <- c(e1$historic, 

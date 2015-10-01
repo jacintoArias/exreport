@@ -50,7 +50,7 @@ toString.experiment <- function (x, ...) {
   if (length(x$configuration) != 0) 
     params <- c(params, x$configuration)
   
-    result <- paste0(result, .nestedList2String(params, numbered=F))
+    result <- paste0(result, .nestedList2String(params, numbered=FALSE))
   
   result <- paste0(result, sprintf("\n#outputs: %s\n", paste(x[["outputs"]], collapse = ', ') ))
 }

@@ -65,7 +65,7 @@ After that, we will instantiate the methods with the available parameters.
 
 <!--begin.rcode fig.width=7, fig.height=6
 experiment <- expReduce(experiment, "fold", FUN = mean)
-experiment <- expInstantiate(experiment, removeUnary = T)
+experiment <- expInstantiate(experiment, removeUnary = TRUE)
 summary(experiment)
 end.rcode-->
 
@@ -84,7 +84,7 @@ We visualize the experiment results using the <i>tabularExpSummary</i> and the
 # it to get methods in rows and problems in columns
 table1 <- tabularExpSummary(experiment, outputs = c("accuracy","trainingTime"),
                             boldfaceColumns = c("max","min"), format = "f",
-                            digits = 4, tableSplit = 3, rowsAsMethod = F)
+                            digits = 4, tableSplit = 3, rowsAsMethod = FALSE)
 table1
 plot1 <- plotExpSummary(experiment, "accuracy", columns = 3)
 plot1
@@ -161,9 +161,9 @@ report <- exreport("Machine Learning Weka Pipeline Analytics")
 report <- exreportAdd(report, list(experiment, table1, plot1, plot2, 
                           testAccuracy, tableAccuracy, experiment2, testTime))
 # Render the report in HTML format:
-exreportRender(report, target = "html", visualize = T)
+exreportRender(report, target = "html", visualize = TRUE)
 # Render the report in PDF format:
-exreportRender(report, target = "pdf", visualize = T)
+exreportRender(report, target = "pdf", visualize = TRUE)
 end.rcode-->
 
 

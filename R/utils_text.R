@@ -26,7 +26,7 @@
   vars[isNull] <- paste0("{{",names(vars)[isNull],"}}")
   
   # We extract the occurrences of each variable in the text and where they are
-  indicesByVars <- sapply(names(vars), simplify = F, FUN =function(v){ 
+  indicesByVars <- sapply(names(vars), simplify = FALSE, FUN =function(v){ 
     res <- gregexpr(sprintf("\\{\\{%s\\}\\}",v), text)[[1]]  # Find indices of matches
     attr(res,"name") <- v # We assign the name of the variable to the element (we will need it later)
     res

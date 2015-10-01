@@ -67,7 +67,7 @@ expReduce  <- function(e, parameters = NULL, FUN=mean){
   # Only the aggregated columns and outputs are of interest
   e1$data <- aggregate(e1$data,
                        by=by,
-                       FUN=extendedFUN)[,c(names(by),e1$outputs), drop=F]
+                       FUN=extendedFUN)[,c(names(by),e1$outputs), drop=FALSE]
   
   #Append this operation in the historic
   e1$historic <- c(e1$historic, 

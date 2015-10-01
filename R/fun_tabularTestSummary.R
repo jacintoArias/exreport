@@ -16,7 +16,7 @@
 #' # it to apply the test:
 #' experiment <- expCreate(wekaExperiment, name="test", parameter="fold")
 #' experiment <- expReduce(experiment, "fold", mean)
-#' experiment <- expInstantiate(experiment, removeUnary=T)
+#' experiment <- expInstantiate(experiment, removeUnary=TRUE)
 #' 
 #' # Then we perform a a testMultiplePairwise test procedure
 #' test <- testMultipleControl(experiment, "accuracy", "min")
@@ -50,8 +50,8 @@ tabularTestSummary <- function(ph, columns=c("pvalue"))  {
   }
   # Order in cascade
   correct_order <- .orderCascade(df, decreasing = decreasingOrder)
-  df  <- df[correct_order,,drop=F]
-  format  <- format[correct_order,,drop=F]
+  df  <- df[correct_order,,drop=FALSE]
+  format  <- format[correct_order,,drop=FALSE]
   
   # For convenience, we deal with "method" and "method1" and "method2" names for columns
   # of names data.frame. But now, to generate the table, we use the real value (definded by the user).

@@ -53,7 +53,7 @@ After that, we will instantiate the methods with the available parameters.
 
 <!--begin.rcode fig.width=7, fig.height=6
 experiment <- expReduce(experiment, "fold", FUN = mean)
-experiment <- expInstantiate(experiment, removeUnary = T)
+experiment <- expInstantiate(experiment, removeUnary = TRUE)
 summary(experiment)
 end.rcode-->
 
@@ -103,7 +103,7 @@ report <- exreport("Machine Learning Weka Aditional Analytics")
 report <- exreportAdd(report, list(experiment, 
                                    testAccuracyPairwise, table1, table2))
 # Render the report in HTML format:
-exreportRender(report, target = "html", visualize = T)
+exreportRender(report, target = "html", visualize = TRUE)
 end.rcode-->
 
 </body>

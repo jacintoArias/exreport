@@ -163,7 +163,7 @@
   #We obtain the chi-square statistic. At least k is equal to 1, so diviion by zero is avoided.
   chisqStatistic <- 12 * n / ( k * (k+1) ) * ( sum(friedmanRanks^2) - ( k * (k+1)^2 ) / 4 )
   friedmanDegreeOfFreedom     <- k-1
-  friedmanPValue              <- pchisq(chisqStatistic, friedmanDegreeOfFreedom, lower.tail=F)
+  friedmanPValue              <- pchisq(chisqStatistic, friedmanDegreeOfFreedom, lower.tail=FALSE)
   results <- list(
     "statistic"           = chisqStatistic,
     "degreesOfFreedom"    = friedmanDegreeOfFreedom,
@@ -197,7 +197,7 @@
   imanDavenStatistic          <- ( (n-1) * chisqStatistic ) / ( n * (k-1) - chisqStatistic )
   imanDavenDegreeOfFreedom_1  <- k-1
   imanDavenDegreeOfFreedom_2  <- (k-1) * (n-1)
-  imanDavenPValue             <- pf(imanDavenStatistic, imanDavenDegreeOfFreedom_1, imanDavenDegreeOfFreedom_2, lower.tail=F)
+  imanDavenPValue             <- pf(imanDavenStatistic, imanDavenDegreeOfFreedom_1, imanDavenDegreeOfFreedom_2, lower.tail=FALSE)
   results <- list(
     "statistic"           = imanDavenStatistic,
     "degreesOfFreedom1"   = imanDavenDegreeOfFreedom_1,
@@ -241,9 +241,9 @@
   z <- c()
   for (i in 1:k){
     z[i]             <- abs( ( friedmanRanks[i] - friedmanRanks[controlIdx] ) / criticalDiff )
-    p[i]             <- 2 * pnorm( z[i], lower.tail=F )
+    p[i]             <- 2 * pnorm( z[i], lower.tail=FALSE)
   }
-  #The p-value in the position controlIdx is equal to pnorm( 0, lower.tail=F ) --> It must be NA
+  #The p-value in the position controlIdx is equal to pnorm( 0, lower.tail=FALSE ) --> It must be NA
   p[controlIdx]      <- NA
   
   results <- list(
@@ -297,7 +297,7 @@
       met1[counter]         <- algorithmNames[i]
       met2[counter]         <- algorithmNames[j]
       z[counter]            <- abs( ( friedmanRanks[j] - friedmanRanks[i] ) / criticalDiff )
-      p[counter]            <- 2 * pnorm( z[counter], lower.tail=F )
+      p[counter]            <- 2 * pnorm( z[counter], lower.tail=FALSE)
       counter               <- counter + 1
     }
   }

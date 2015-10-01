@@ -126,10 +126,10 @@
   numColsFirstTable <- maxCol-1 - numCols*(element$tableSplit-1)
   endIndex <- colIndex+numColsFirstTable-1
   auxTables <- lapply(tables, FUN = function(tab){
-    cbind(colHeader,tab[,colIndex:endIndex,drop=F])
+    cbind(colHeader,tab[,colIndex:endIndex,drop=FALSE])
   })
   auxFormats <- lapply(formats, FUN = function(tab){
-    cbind(colFormatHeader,tab[,colIndex:endIndex,drop=F])
+    cbind(colFormatHeader,tab[,colIndex:endIndex,drop=FALSE])
   })
   
   if(target=="html")
@@ -146,10 +146,10 @@
   {
     endIndex <- colIndex+numCols-1
     auxTables <- lapply(tables, FUN = function(tab){
-      cbind(colHeader,tab[,colIndex:endIndex,drop=F])
+      cbind(colHeader,tab[,colIndex:endIndex,drop=FALSE])
     })
     auxFormats <- lapply(formats, FUN = function(tab){
-      cbind(colFormatHeader,tab[,colIndex:endIndex,drop=F])
+      cbind(colFormatHeader,tab[,colIndex:endIndex,drop=FALSE])
     })
     if(target=="html")
       htmlTable  <- paste0(htmlTable, "\n<br/><br/>\n", .formatDataFrame(tables = auxTables, formats = auxFormats, src = "html"))

@@ -17,7 +17,7 @@
 #' experiment <- expCreate(wekaExperiment, name="test", parameter="fold")
 #' experiment <- expReduce(experiment, "fold", mean)
 #' experiment <- expSubset(experiment, list(featureSelection = "yes"))
-#' experiment <- expInstantiate(experiment, removeUnary=T)
+#' experiment <- expInstantiate(experiment, removeUnary=TRUE)
 #' 
 #' # Then we perform a Friedman test included ina a testMultipleControl 
 #' # test procedure
@@ -54,7 +54,7 @@ plotRankDistribution <- function(testMultiple) {
   }
 
   means <- cbind(means, color)
-  means <- means[with(means, order(value)),,drop=F]
+  means <- means[with(means, order(value)),,drop=FALSE]
   
   p <- ggplot(da, aes(x=reorder(method, value), value))
   p <- p + geom_boxplot(fill = as.character(means$color))

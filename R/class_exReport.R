@@ -8,10 +8,10 @@ print.exReport <- function (x, ...) {
 }
 
 #' @export
-summary.exReport <- function (x, ...) {
-  print(paste0("Report (",length(x$content),") elements. Title: ", x$title))
+summary.exReport <- function (object, ...) {
+  print(paste0("Report (",length(object$content),") elements. Title: ", object$title))
   print("----------------------------------------")
-  print(x$content)
+  print(object$content)
 }
 
 #Constructor

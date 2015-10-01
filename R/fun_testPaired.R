@@ -20,7 +20,7 @@
 #' experiment <- expSubset(experiment, list(method = c("J48", "NaiveBayes")))
 #' experiment <- expSubset(experiment, list(featureSelection = c("no")))
 #' experiment <- expReduce(experiment, "fold", mean)
-#' experiment <- expInstantiate(experiment, removeUnary=T)
+#' experiment <- expInstantiate(experiment, removeUnary=TRUE)
 #' 
 #' # Then we perform a Wilcoxon test procedure
 #' test <- testPaired(experiment, "accuracy", "max")
@@ -55,9 +55,9 @@ testPaired <- function(e , output, rankOrder = "max", alpha = 0.05){
   data <- reshape2::dcast(data, paste(e$method,"~",e$problem),value.var = output)
   #First column is now the rownames (and then is removed).
   rownames(data) <- data[,1]
-  #The parameter drop = F avoid to auto-convert the data.frame into
+  #The parameter drop = FALSE avoid to auto-convert the data.frame into
   #a single array when only one column data.frame is the result of the subseting.
-  data <- data[,-1, drop=F]
+  data <- data[,-1, drop=FALSE]
   
   # Check if it only exists two methods
   if( nrow(data) !=2 )

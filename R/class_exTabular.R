@@ -8,10 +8,10 @@ print.exTabular <- function (x, ...) {
 }
 
 #' @export
-summary.exTabular <- function (x, ...) {
-  print(x$tags$title)
+summary.exTabular <- function (object, ...) {
+  print(object$tags$title)
   print("---------------------------------")
-  print(x$tables)
+  print(object$tables)
 }
 
 #Anonymous constructor

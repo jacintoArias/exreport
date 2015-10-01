@@ -10,7 +10,7 @@
   numericDf <- df[colOfInterest]
   numericDecreasing <- decreasing[colOfInterest]
   # Get the ordered indices
-  ordering <- do.call(function(...) order(...,na.last = FALSE), lapply(numericDf*matrix(rep(numericDecreasing*-2+1,nrow(numericDf)),nrow = nrow(numericDf),byrow = T),FUN = identity))
+  ordering <- do.call(function(...) order(...,na.last = FALSE), lapply(numericDf*matrix(rep(numericDecreasing*-2+1,nrow(numericDf)),nrow = nrow(numericDf),byrow = TRUE),FUN = identity))
 }
 
 
@@ -29,7 +29,7 @@
   # Get the indices of the ordered rows
   s <- do.call("order",dat)
   # As we use the ordered dat, for each set of duplicated rows, the first occurrence is TRUE and the laters are FALSE
-  nonDup <- !duplicated(dat[s, ,drop=F])
+  nonDup <- !duplicated(dat[s, ,drop=FALSE])
   # Get the index of the non duplicated (or original) elements (elements equal to TRUE)
   origInd <- s[nonDup]
   # cumsum applies the cumulative sum for the nonDup (casting logical to numeric, so 0 and 1).
@@ -90,7 +90,7 @@
   # For each table, we apply the funTranslateFormat function
   auxFormats <- lapply(formats, FUN = funTranslateFormat)
   # For each pair table-format, we apply the funApplyFormat function
-  auxMatrix <- mapply(FUN = funApplyFormat, tables, auxFormats, SIMPLIFY = F)
+  auxMatrix <- mapply(FUN = funApplyFormat, tables, auxFormats, SIMPLIFY = FALSE)
   
   # Now we have final HTML tables for individual outputs. We have to combine them into a single one.
   # We first calculate the desired indices for the matrix when combine all of them into a single one.
@@ -98,7 +98,7 @@
   allMatrix <- auxMatrix[[1]]
   if(length(auxMatrix)>1){
     for(i in 2:length(auxMatrix))
-      allMatrix <- cbind(allMatrix,auxMatrix[[i]][,-1,drop=F])
+      allMatrix <- cbind(allMatrix,auxMatrix[[i]][,-1,drop=FALSE])
   }
   allMatrix <- allMatrix[,c(1,colIndices)]
   
@@ -155,7 +155,7 @@
   # For each table, we apply the funTranslateFormat function
   auxFormats <- lapply(formats, FUN = funTranslateFormat)
   # For each pair table-format, we apply the funApplyFormat function
-  auxMatrix <- mapply(FUN = funApplyFormat, tables, auxFormats, SIMPLIFY = F)
+  auxMatrix <- mapply(FUN = funApplyFormat, tables, auxFormats, SIMPLIFY = FALSE)
   
   # Now we have final latex tables for individual outputs. We have to combine them into a single one.
   # We first calculate the desired indices for the matrix when combine all of them into a single one.
@@ -163,7 +163,7 @@
   allMatrix <- auxMatrix[[1]]
   if(length(auxMatrix)>1){
     for(i in 2:length(auxMatrix))
-      allMatrix <- cbind(allMatrix,auxMatrix[[i]][,-1,drop=F])
+      allMatrix <- cbind(allMatrix,auxMatrix[[i]][,-1,drop=FALSE])
   }
   allMatrix <- allMatrix[,c(1,colIndices)]
   
@@ -201,7 +201,7 @@
     newTable <- newTable[,-1]
     newTable <- t(newTable)
     #Now set the rownames as the first column
-    newTable <- data.frame(rownames(newTable),newTable,stringsAsFactors = F)
+    newTable <- data.frame(rownames(newTable),newTable,stringsAsFactors = FALSE)
     rownames(newTable)<-NULL
     #Now set as colnames the new firstColName and fc
     colnames(newTable) <- c(firstColName,as.character(fc))
@@ -216,7 +216,7 @@
     newFormat <- newFormat[,-1]
     newFormat <- t(newFormat)
     #Now set as the first column all %s
-    newFormat <- data.frame(rep("%s",nrow(newFormat)),newFormat,stringsAsFactors = F)
+    newFormat <- data.frame(rep("%s",nrow(newFormat)),newFormat,stringsAsFactors = FALSE)
     rownames(newFormat)<-NULL
     colnames(newFormat) <- colnames(newTables[[i]])
     newFormats[[names(formats)[i]]] <- newFormat
