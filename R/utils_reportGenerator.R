@@ -31,10 +31,18 @@
   methods     <- paste(unique(element$data[[element$method]]), collapse = ', ')
   problems    <- paste(unique(element$data[[element$problem]]), collapse = ', ')
   
-  parameters <- "none"
+  parameters <- ""
   
-  if (length(element[["parameters"]]) != 0)
-    parameters  <- paste(element[["parameters"]], collapse = ', ')
+  # Print the parameters list if any
+  params <- c()
+  if (length(element$parameters) != 0) 
+    for (p in element$parameters)
+      params <- c(params, paste0(p, ' [', paste0(levels(element$data[[p]]), collapse = ","), ']'))
+  
+  if (length(element$configuration) != 0) 
+    params <- c(params, element$configuration)
+  
+  parameters <- .nestedList2HTML(params, numbered=F)
   
   outputs     <- paste(element[["outputs"]], collapse = ', ')
   

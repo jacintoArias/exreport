@@ -106,9 +106,9 @@
   strTables <- funMatrix2Str(allMatrix)
   
   # Finally, we build the entire latex table
-  res <- "<table>\n<tr>\n"
+  res <- "<table class=\"table table-hover\">\n<tr>\n"
   if(length(tables)==1)
-    res <- paste0(res, paste0(sprintf("<th style=\"text-align:right\">%s</th>",cnames),collapse = ""), "</tr>\n")
+    res <- paste0(res, paste0("<th style=\"text-align:left\">%s</th>",cnames[1], sprintf("<th style=\"text-align:right\">%s</th>",cnames[-1]),collapse = ""), "</tr>\n")
   else{
     res <- paste0(res, "<th></th>", paste0(sprintf("<th style=\"text-align:center\" colspan=\"%d\">%s</th>",length(tables),cnames[-1]),collapse = ""), "</tr>\n")
     #Ahora los outputs

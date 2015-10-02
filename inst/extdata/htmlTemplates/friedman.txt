@@ -1,6 +1,19 @@
-<div class="friedman">
-    <center><h2>{{title}}</h2></center>
-    <center>From experiment: <a href="#{{context}}">{{context}}</a></center>
+
+<!--
+Parameters:
+
+title, context, target, objetive, distribution, statistic, pvalue, alpha, outcome
+
+-->
+
+
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="text-center">
+      <h2>{{title}}</h2>
+      From experiment: <a href="#{{context}}">{{context}}</a>
+    </div>
     </br>
 
     </br>
@@ -14,8 +27,11 @@
         <li>Strategy for ranks: {{objetive}}</li>
         <li>Computed Chi squared statistic with {{distribution}} degrees of freedom: {{statistic}}</li>
         <li>Computed p-value: {{pvalue}}</li>
-        <li>Outcome for &alpha; = {{alpha}}: H<sub>0</sub> <strong>{{outcome}}</strong> </li>
+        <li>Outcome for &alpha; = {{alpha}}: H<sub>0</sub> <span class="label label-info">{{outcome}}</span></li>
     </ul>
     </br>
     </br>
+    <hr>
+
+    </div>
 </div>

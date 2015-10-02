@@ -5,44 +5,51 @@ Parameters:
 title, context, scope, method, alpha, htmlTable, id, latexTable
 
 -->
-<div class="mlTable">
+<div class="row">
+  <div class="col-md-12">
 
-    <center><h2>{{title}}</h2></center>
+    <div class="text-center">
+      <h2>{{title}}</h2>
+      From experiment: <a href="#{{context}}">{{context}}</a>
+    </div>
+
     <ul>
-        <li>Experiment source: <a href="#{{context}}">{{context}}</a></li>   
-        <li>Test: {{scope}} post-hoc test</li>   
-        <li>Adjust Method: {{method}}</li>   
-        <li>&alpha; = {{alpha}}</li>      
+        <li>Test: {{scope}} post-hoc test</li>
+        <li>Adjust Method: {{method}}</li>
+        <li>&alpha; = {{alpha}}</li>
         <li>Boldfaced results represent non-rejected hipotheses</li>
     </ul>
-    <center></center>
     </br>
     </br>
-    
-    <center>
-    {{htmlTable}}
-    </center>
-    
-    </br>
-    </br>
-        
-    <input type="checkbox" name="Show Latex Code" id="{{id}}_check"    
-    onclick="    
-    if (document.getElementById('{{id}}_check').checked) {
-        document.getElementById('{{id}}').style.display  = 'block';
-    } else {
-        document.getElementById('{{id}}').style.display  = 'none';
-    }">
-    <span style="font-size: 14px;">Show LaTeX Code</span>
-    </br>
-    </br>
-    
-    <div id="{{id}}" class="latexCode" style="display:none;">
-        <input type="button" value="Select All" onclick="selectText('{{id}}_code')"/>
-        <pre><code id="{{id}}_code"class="language-latex">{{latexTable}}</code></pre>
+
+    <div>
+      <div class="table-responsive">
+        {{htmlTable}}
+      </div>
     </div>
+
     </br>
+
+    <button class="btn btn-primary" type="button" data-toggle="collapse"
+     data-target="#{{id}}_hidden" aria-expanded="false" aria-controls="collapseExample">
+      Show/Hide LaTeX Code
+    </button>
+    </br>
+    </br>
+    <div class="collapse" id="{{id}}_hidden">
+      <pre id="{{id}}_code">{{latexTable}}</pre>
+    </br>
+      <button class="btn btn-success btn-sm" onclick="selectText('{{id}}_code')">
+        Select Code
+      </button>
+    </div>
+
+    <br>
+
+
+    <br>
+    <br>
     <hr>
-    </br>
-    </br>
+
+    </div>
 </div>
