@@ -42,7 +42,10 @@
   if (length(element$configuration) != 0) 
     params <- c(params, element$configuration)
   
-  parameters <- .nestedList2HTML(params, numbered=F)
+  if(target == "html")
+    parameters <- .nestedList2HTML(params, numbered=F)
+  else
+    parameters <- .nestedList2Latex(params)
   
   outputs     <- paste(element[["outputs"]], collapse = ', ')
   
