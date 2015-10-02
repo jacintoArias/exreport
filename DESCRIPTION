@@ -8,5 +8,5 @@ Imports:
   reshape2,
   ggplot2,
   tools
-License: GPL3
+License: GPL-3
 LazyData: true

@@ -5,7 +5,6 @@
 % title, target, bestMethod, worstMethod, objetive, statistic, pvalue, alpha, outcome
 %
 
-\begin{minipage}{\textwidth}
 
 \exTitle{{{title}}}
 
@@ -30,7 +29,4 @@ Wilcoxon Signed Rank test for output {{target}}
 \item Outcome for $\alpha$ = {{alpha}}: $H_0$ \textbf{{{outcome}}}
 \end{itemize}
 
-\end{minipage}
-\bigskip
-\bigskip 
-
+\newpage

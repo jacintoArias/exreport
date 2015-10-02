@@ -10,7 +10,7 @@
 #'
 #' @export
 #' @param e The experiment to be subsetted
-#' @param colums A named list containing the variables to be filtered and the
+#' @param columns A named list containing the variables to be filtered and the
 #' valid values.
 #' @param invertSelection If the filtering must match the inversion of the 
 #' specified conditions.
@@ -25,14 +25,14 @@
 #' e
 #' 
 #' # We can filter the experiment to remove a given problem
-#' e <- expSubset(e, list(problem = "iris"), invertSelection=T)
+#' e <- expSubset(e, list(problem = "iris"), invertSelection=TRUE)
 #' e
 #' 
 #' # We can subset the experiment to obtain a specific parameter configuration
 #' e <- expSubset(e, list("featureSelection" = "no"))
 #' e
 #' 
-expSubset <- function(e, columns, invertSelection=F){
+expSubset <- function(e, columns, invertSelection=FALSE){
 
   
   # PARAMETER VALIDATION:
@@ -67,7 +67,7 @@ expSubset <- function(e, columns, invertSelection=F){
     subset <- !subset
   
   # Now we subset the new columns to the data.frame
-  result$data <- result$data[subset,,drop=F]
+  result$data <- result$data[subset,,drop=FALSE]
   
   # We append this operation in the historic
   pairNames <- paste(pnames,valueNames,sep=":")

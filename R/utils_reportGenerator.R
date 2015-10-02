@@ -12,8 +12,8 @@
   sourceFile <- system.file("extdata",sprintf("latexTemplates/%s.txt", name) , package="exreport")
   template <- readChar(sourceFile, file.info(sourceFile)$size)  
   template <- .replaceVarsForContent(template,params)
-  #for ( var in names(params))
-  #  template <- gsub( sprintf("$%s", var), params[[var]], template, fixed=TRUE)
+  # For latex code, we need to replace single and double quotes for `' and ``"
+  template <- .sanitizeLatexCode(template)
   
   template
 }
@@ -61,11 +61,9 @@
   
   if(target == "html")
     content <- .loadHTMLTemplate("experiment", templateParams)
-  else{
+  else
     content <- .loadLatexTemplate("experiment", templateParams)
-    # For latex code, we need to replace single and double quotes for `' and ``"
-    content <- .replaceQuotesForLatex(content)
-  }
+  
   cat( content, file = file)
 }
 
@@ -82,11 +80,9 @@
                       element$tags)
   if(target=="html")
     content <- .loadHTMLTemplate("friedman", templateParams)
-  else{
+  else
     content <- .loadLatexTemplate("friedman", templateParams)
-    # For latex code, we need to replace single and double quotes for `' and ``"
-    content <- .replaceQuotesForLatex(content)
-  }
+  
   cat( content, file = file)
 }
 
@@ -98,11 +94,9 @@
                       bestMethod = element$bestMethod)
   if(target=="html")
     content <- .loadHTMLTemplate("wilcoxon", templateParams)
-  else{
+  else
     content <- .loadLatexTemplate("wilcoxon", templateParams)
-    # For latex code, we need to replace single and double quotes for `' and ``"
-    content <- .replaceQuotesForLatex(content)
-  }
+    
   cat( content, file = file)
 }
 
@@ -140,29 +134,39 @@
   numColsFirstTable <- maxCol-1 - numCols*(element$tableSplit-1)
   endIndex <- colIndex+numColsFirstTable-1
   auxTables <- lapply(tables, FUN = function(tab){
-    cbind(colHeader,tab[,colIndex:endIndex,drop=F])
+    cbind(colHeader,tab[,colIndex:endIndex,drop=FALSE])
   })
   auxFormats <- lapply(formats, FUN = function(tab){
-    cbind(colFormatHeader,tab[,colIndex:endIndex,drop=F])
+    cbind(colFormatHeader,tab[,colIndex:endIndex,drop=FALSE])
   })
   
   if(target=="html")
     htmlTable  <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "html")
+  
   latexTable <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "latex")
+  if(target=="pdf")
+    # In this case, we append the code for centering and scaling the table
+    latexTable <- paste0("\\exTable{",latexTable,"}")
+  
   colIndex <- colIndex + numColsFirstTable
   
   while (colIndex <= maxCol)
   {
     endIndex <- colIndex+numCols-1
     auxTables <- lapply(tables, FUN = function(tab){
-      cbind(colHeader,tab[,colIndex:endIndex,drop=F])
+      cbind(colHeader,tab[,colIndex:endIndex,drop=FALSE])
     })
     auxFormats <- lapply(formats, FUN = function(tab){
-      cbind(colFormatHeader,tab[,colIndex:endIndex,drop=F])
+      cbind(colFormatHeader,tab[,colIndex:endIndex,drop=FALSE])
     })
     if(target=="html")
       htmlTable  <- paste0(htmlTable, "\n<br/><br/>\n", .formatDataFrame(tables = auxTables, formats = auxFormats, src = "html"))
-    latexTable <- paste0(latexTable, "\n\n", .formatDataFrame(tables = auxTables, formats = auxFormats, src = "latex"))
+    
+    newLatexTable <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "latex")
+    if(target=="pdf")
+      # In this case, we append the code for centering and scaling the table
+      newLatexTable <- paste0("\\exTable{",newLatexTable,"}")
+    latexTable <- paste0(latexTable, "\n\n", newLatexTable)
     
     colIndex <- colIndex + numCols
   }
@@ -189,8 +193,6 @@
       content <- .loadLatexTemplate("exTabular_plain", templateParams)
     else if (element$tableType=="phtest")
       content <- .loadLatexTemplate("exTabular_phtest", templateParams)
-    # For latex code, we need to replace single and double quotes for `' and ``"
-    content <- .replaceQuotesForLatex(content)
   }
   cat( content, file = file )
 }
@@ -226,12 +228,8 @@
   
   if(target=="html")
     content <- .loadHTMLTemplate("exPlot", templateParams)
-  else{
+  else
     content <- .loadLatexTemplate("exPlot", templateParams)
-    # For latex code, we need to replace single and double quotes for `' and ``"
-    content <- .replaceQuotesForLatex(content)
-  }
   
   cat( content, file = file)
-  
 }

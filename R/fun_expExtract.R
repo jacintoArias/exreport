@@ -14,7 +14,7 @@
 #' # it to apply the test:
 #' experiment <- expCreate(wekaExperiment, name="test", parameter="fold")
 #' experiment <- expReduce(experiment, "fold", mean)
-#' experiment <- expInstantiate(experiment, removeUnary=T)
+#' experiment <- expInstantiate(experiment, removeUnary=TRUE)
 #' 
 #' # Then we perform a testMultiplePairwise test procedure
 #' test <- testMultipleControl(experiment, "trainingTime", "min")
@@ -40,7 +40,7 @@ expExtract <- function(ph){
   remaining <- ph$names[ph$pvalue>=ph$tags$alpha | is.na(ph$pvalue),]
   
   # As well as in expInstantiate, we mix the parameters and the method (to compare names)
-  e$data <- e$data[interaction(e$data[,c(e$method,e$parameters)],sep = ",",drop=T) %in% remaining,,drop=F]
+  e$data <- e$data[interaction(e$data[,c(e$method,e$parameters)],sep = ",",drop=TRUE) %in% remaining,,drop=FALSE]
   
   #Append this operation in the historic
   phDescription <- sprintf("%s post-hoc test with %s p-value adjustment for output %s", ph$tags$scope, ph$tags$method, ph$tags$target)

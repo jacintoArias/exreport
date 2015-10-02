@@ -37,8 +37,8 @@ expRemoveDuplicated <- function(e, tol = 1E-9){
     stop(.callErrorMessage("wrongParameterError", "e", "experiment"))
   
   # Separate data.frame in input and output part to avoid problems with numeric precission
-  input <- e$data[,c(e$method,e$problem,e$parameters),drop=F]
-  output <- e$data[,e$outputs,drop=F]
+  input <- e$data[,c(e$method,e$problem,e$parameters),drop=FALSE]
+  output <- e$data[,e$outputs,drop=FALSE]
   all <- e$data
   df <- list("input" = input, "output" = output, "all" = all)
   indexDuplicates <- .duplicates(df$input)
@@ -62,7 +62,7 @@ expRemoveDuplicated <- function(e, tol = 1E-9){
       }
     }
     # Now, we remove not unique rows, all at once, and raise the warning
-    df$all <- df$all[-1*rowsToRemove,,drop=F]
+    df$all <- df$all[-1*rowsToRemove,,drop=FALSE]
     warning(sprintf("%d duplicated rows has been removed", length(rowsToRemove)))
   }
   result      <- e

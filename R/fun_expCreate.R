@@ -36,7 +36,7 @@
 #' parameters="fold", 
 #' name="Test Experiment")
 #' 
-expCreate <- function(data, methods="method", problems="problem", parameters = c(), respectOrder = F, name, tol = 1E-9) {
+expCreate <- function(data, methods="method", problems="problem", parameters = c(), respectOrder = FALSE, name, tol = 1E-9) {
   # PARAMETER VALIDATION:
   # Check if parameters are correct
   if (!is.data.frame(data))
@@ -120,7 +120,7 @@ expCreate <- function(data, methods="method", problems="problem", parameters = c
   # Check if rows are duplicated, but do not revome them.
   dup <- expGetDuplicated(e,tol=tol)
   if(nrow(dup$data)>0)
-    warning("you can get the duplicates through the function expGetDuplicated",call. = F)  
+    warning("you can get the duplicates through the function expGetDuplicated",call. = FALSE)  
   
   e
 }
@@ -168,9 +168,9 @@ expCreate <- function(data, methods="method", problems="problem", parameters = c
 #' 
 #' # Optionally we can set a fixed value for parameters, and ordered by appearance:
 #' expCreateFromTable(df, output="accuracy", name="weka", 
-#' parameters=list(featureSelection = "no"), respectOrder=T)
+#' parameters=list(featureSelection = "no"), respectOrder=TRUE)
 #' 
-expCreateFromTable <- function(data, output, name, parameters=list(), respectOrder = F) {
+expCreateFromTable <- function(data, output, name, parameters=list(), respectOrder = FALSE) {
   # PARAMETER VALIDATION:
   # Check if parameters are correct
   if (!is.data.frame(data))

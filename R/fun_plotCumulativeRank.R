@@ -19,7 +19,7 @@
 #' experiment <- expCreate(wekaExperiment, name="test", parameter="fold")
 #' experiment <- expReduce(experiment, "fold", mean)
 #' experiment <- expSubset(experiment, list(featureSelection = "no"))
-#' experiment <- expInstantiate(experiment, removeUnary=T)
+#' experiment <- expInstantiate(experiment, removeUnary=TRUE)
 #' 
 #' # Then we perform a Friedman test included ina a testMultipleControl 
 #' # test procedure

@@ -9,18 +9,18 @@ print.testMultipleControl <- function (x, ...) {
 }
 
 #' @export
-summary.testMultipleControl <- function (x, ...) {
+summary.testMultipleControl <- function (object, ...) {
   cat("---------------------------------------------------------------------\n")
-  summary(x$friedman)
+  summary(object$friedman)
   cat("---------------------------------------------------------------------\n")
-  cat(sprintf("Control post hoc test for output %s\n", x$tags$target))
-  cat(sprintf("Multiple %s tests\n", x$tags$method2))
-  cat(sprintf("Adjust method: %s\n", x$tags$method))
-  cat(sprintf("alpha = %.4f\n", x$alpha))
+  cat(sprintf("Control post hoc test for output %s\n", object$tags$target))
+  cat(sprintf("Multiple %s tests\n", object$tags$method2))
+  cat(sprintf("Adjust method: %s\n", object$tags$method))
+  cat(sprintf("alpha = %.4f\n", object$alpha))
   cat("\n")
-  cat(sprintf("Control method: %s\n", x$control))
+  cat(sprintf("Control method: %s\n", object$control))
   cat("p-values:\n")
-  d <- cbind(m=x$names,d=x$pvalues)
+  d <- cbind(m=object$names,d=object$pvalues)
   d <- d[with(d, order(-d)),]
   for (r in 1:nrow(d)-1)
     cat(sprintf("%15s\t%.4f\n", d[r,1], d[r,2]))
