@@ -6,9 +6,7 @@ title, target, bestMethod, worstMethod, objetive, statistic, pvalue, alpha, outc
 
 -->
 
-<div class="row">
-  <div class="col-md-12">
-
+    <section id="{{id}}_hook">
     <div class="text-center">
     <h2>{{title}}</h2>
     From experiment: <a href="#{{context}}">{{context}}</a>
@@ -30,7 +28,5 @@ title, target, bestMethod, worstMethod, objetive, statistic, pvalue, alpha, outc
 
     </br>
     </br>
+    </section>
     <hr>
-
-    </div>
-</div>

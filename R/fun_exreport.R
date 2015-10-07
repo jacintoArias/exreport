@@ -137,7 +137,21 @@ exreportRender <- function(rep, destination=NULL, target="html", safeMode=TRUE, 
   }
   
   # Add the ending
-  template <- .loadHTMLTemplate( "main_end", list(r_version = R.version.string) )
+  
+  # first, generate the index
+  indexString <- ""
+  counter <- 1
+  pattern <- '<li><a href="#elem_%d_hook"><strong>%s:</strong>%s</a></li>'
+  for ( element in rep$content ) {
+    indexString <- paste(indexString, sprintf(pattern, 
+                                        counter,
+                                        class(element)[1], 
+                                        element$tags$context), 
+                   sep="\n")
+    counter <- counter + 1
+  }
+  
+  template <- .loadHTMLTemplate( "main_end", list(r_version = R.version.string, index = indexString) )
   cat( template, file = f )
   
   close(f)

@@ -9,13 +9,12 @@ title, date
 <head>
     <meta charset="UTF-8">
 
-    <link href="assets/prism.css" rel="stylesheet" />
     <link href="assets/bootstrap.min.css" rel="stylesheet" />
 
     <title>{{title}}</title>
 </head>
 
-<body style="background-color: #eee;">
+<body data-spy="scroll" data-target="#side-nav">
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -25,17 +24,23 @@ title, date
   </div>
 </nav>
 
-    <div class="container" style="background-color: #fff; padding:50px;">
+    <div class="container">
+
 
         <div class="row">
-             <div class="col-md-12 text-center">
+
+             <div class="col-md-1"></div>
+
+             <div class="col-md-10 document">
+              <div class="document-content">
+
                <br>
                <br>
-               <h1>{{title}}</h1>
-               <h3>{{date}}</h3>
+               <div class="text-center">
+                 <h1>{{title}}</h1>
+                 <h3>{{date}}</h3>
+               </div>
                <br>
                <hr>
                <br>
                <br>
-             </div>
-        </div>

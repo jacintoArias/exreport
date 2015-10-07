@@ -5,9 +5,7 @@ Parameters:
 title, context, scope, method, alpha, htmlTable, id, latexTable
 
 -->
-<div class="row">
-  <div class="col-md-12">
-
+    <section id="{{id}}_hook">
     <div class="text-center">
       <h2>{{title}}</h2>
       From experiment: <a href="#{{context}}">{{context}}</a>
@@ -43,13 +41,7 @@ title, context, scope, method, alpha, htmlTable, id, latexTable
         Select Code
       </button>
     </div>
-
-    <br>
-
-
     <br>
     <br>
+    </section>
     <hr>
-
-    </div>
-</div>
