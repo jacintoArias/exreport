@@ -1,0 +1,110 @@
+<html>
+
+<head>
+<title>Machine Learning Weka Aditional Analytics</title>
+</head>
+
+<body>
+
+<h3>Introduction</h3>
+
+<p>
+In this example we make use of the wekaExperiment dataset that is packaged with
+exreport. This dataset represents a series of experiment in which several Machine
+Learning classifiers are compared by using a set of public datasets (UCI repository)
+as benchmark. The performance measures are the classification accuracy and the
+training time and have been obtained from a 10-fold cross-validation.
+</p>
+
+<p>
+The <i>wekaExperiment</i> contains a variable for the method and dataset and two
+# variables for the respective outputs. The datasets contains two parameters, 
+# the mentioned fold of the cross-validation for each entry and an additional 
+# boolean parameter to indicate if feature selection has been performed or not
+# in the execution. 
+</p>
+
+<!--begin.rcode
+library(exreport)
+colnames(wekaExperiment)
+end.rcode-->
+
+
+<h3>Loading the experiment</h3>
+
+<p>
+We will load our experimentation into an experiment object.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expCreate(wekaExperiment, name="weka", parameters=c("fold"))
+summary(experiment)
+end.rcode-->
+
+
+<h3>Data preprocessing</h3>
+
+<p>
+Before proceeding with any kind of analysis we must preprocess our results.
+First of all, we will agregate the result of the 10-fold cross validation
+using the mean function.
+After that, we will instantiate the methods with the available parameters.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment <- expReduce(experiment, "fold", FUN = mean)
+experiment <- expInstantiate(experiment, removeUnary = TRUE)
+summary(experiment)
+end.rcode-->
+
+
+<h3>Evaluation</h3>
+
+<p>
+Our experiment is now ready to be evaluated using statistical tests. In this
+case we have more than two methods, so we will choose a multiple comparison test.
+We want to compare all pairs of methods, for that we will perform a
+<i>testMultiplePairwise</i> test, including a Friedman test followed by a post-hoc
+test using the Holm procedure. As the target variable is the accuracy,
+the test will measure maximization.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+testAccuracyPairwise <- testMultiplePairwise(experiment,"accuracy", "max")
+summary(testAccuracyPairwise)
+end.rcode-->
+
+<h3>Visualization</h3>
+
+<p>
+Now we generate a tabular summary for the pairwise test. We get two tables, one
+for the p-values, and other one for the metric <i>win/tie/loss</i>.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+table1 <- tabularTestPairwise(testAccuracyPairwise, "pvalue")
+table1
+table2 <- tabularTestPairwise(testAccuracyPairwise, "wtl")
+table2
+end.rcode-->
+
+
+<h3>Communicating</h3>
+
+<p>
+We create an exreport object and add into it the desired elements.
+After that, we will generate the report in html format and open it.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+# Create the exreport object
+report <- exreport("Machine Learning Weka Aditional Analytics")
+# Add the elements
+report <- exreportAdd(report, list(experiment, 
+                                   testAccuracyPairwise, table1, table2))
+# Render the report in HTML format:
+exreportRender(report, target = "html", visualize = TRUE)
+end.rcode-->
+
+</body>
+</html>

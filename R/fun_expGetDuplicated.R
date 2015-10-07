@@ -36,8 +36,8 @@ expGetDuplicated <- function(e, tol = 1E-9){
   
   # Separate data.frame in input and output part to avoid problems with 
   # numeric precission
-  input  <- e$data[,c(e$method,e$problem,e$parameters),drop=F]
-  output <- e$data[,e$outputs,drop=F]
+  input  <- e$data[,c(e$method,e$problem,e$parameters),drop=FALSE]
+  output <- e$data[,e$outputs,drop=FALSE]
   all    <- e$data
   df <- list("input" = input, "output" = output, "all" = all)
   
@@ -70,7 +70,7 @@ expGetDuplicated <- function(e, tol = 1E-9){
   }
   # Now, we create the data.frame with the duplicates
   originalOfDuplicated <- unique(indexDuplicates[!is.na(indexDuplicates)])
-  df$all <- df$all[c(originalOfDuplicated,duplicatedRows),,drop=F]
+  df$all <- df$all[c(originalOfDuplicated,duplicatedRows),,drop=FALSE]
   
   result      <- e
   result$data <- df$all

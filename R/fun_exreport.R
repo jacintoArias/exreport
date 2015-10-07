@@ -21,7 +21,8 @@ exreport <- function(title) {
 #' exreport document.
 #'
 #' @export
-#' @param rep a reportable object or a list of them
+#' @param rep an exreport object in which the elem will be added
+#' @param elem a reportable object or a list of them
 #' @return an extended exreport document
 #' 
 #' 
@@ -34,7 +35,7 @@ exreport <- function(title) {
 #' experiment <- expCreate(wekaExperiment, name="test-exp", parameter="fold")
 #' 
 #' # Add this object to the document
-#' exreportAdd(exreport, experiment)
+#' exreportAdd(report, experiment)
 #' 
 exreportAdd <- function(rep, elem) {
   

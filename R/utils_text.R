@@ -26,7 +26,7 @@
   vars[isNull] <- paste0("{{",names(vars)[isNull],"}}")
   
   # We extract the occurrences of each variable in the text and where they are
-  indicesByVars <- sapply(names(vars), simplify = F, FUN =function(v){ 
+  indicesByVars <- sapply(names(vars), simplify = FALSE, FUN =function(v){ 
     res <- gregexpr(sprintf("\\{\\{%s\\}\\}",v), text)[[1]]  # Find indices of matches
     attr(res,"name") <- v # We assign the name of the variable to the element (we will need it later)
     res
@@ -67,13 +67,20 @@
   #do.call(function(...) sprintf(formatedString,...), vars[names])
 }
 
-.replaceQuotesForLatex <- function(text){
+.sanitizeLatexCode <- function(text){
+  newText <- text
+  
   # Single and double quotes in latex are represented by `' and ``". Because
   # we represent that internally as '' and "", we need to change them when they
   # are use for latex code
-  
-  newText <- gsub("'([^']*)'","`\\1'",text)
+  newText <- gsub("'([^']*)'","`\\1'",newText)
   newText <- gsub("\\\"(([^\\][^\"])*)\\\"","``\\1\\\"",newText)
+  
+  # > and < symbols are used as arrows. For that, we transform -> into 
+  # $\rightarrow$ and <- into $\leftarrow$
+  newText <- gsub("<-","$\\\\leftarrow$",newText)
+  newText <- gsub("->","$\\\\rightarrow$",newText)
+  
   newText
 }
 

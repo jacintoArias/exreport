@@ -17,7 +17,7 @@
   pv     <- data.frame(pvalue = x$pvalues)
   format <- data.frame(pvalue = ifelse(pv$pvalue>=x$tags$alpha,"b%.4e","%.4e"))
   
-  metric <- .phMetric(pv, format=format, decreasingOrder = T)
+  metric <- .phMetric(pv, format=format, decreasingOrder = TRUE)
   
   metric
 }
@@ -44,11 +44,11 @@
   if( is.testMultipleControl(x) )
     strNames <- data.frame(method1 = rep(as.character(x$control), nrow(names)),
                            method2 = as.character(names[,"method"]),
-                           stringsAsFactors = F)
+                           stringsAsFactors = FALSE)
   else
     strNames <- data.frame(method1 = as.character(names[,"method1"]),
                            method2 = as.character(names[,"method2"]),
-                           stringsAsFactors = F)
+                           stringsAsFactors = FALSE)
   
   win     <- c()
   tie     <- c()
@@ -69,8 +69,8 @@
   }
   
   dat <- data.frame(win = win, tie = tie, loss = loss)
-  format <- data.frame(matrix("%d",nrow = k, ncol=3),stringsAsFactors = F)
-  metric <- .phMetric(dat, format=format, decreasingOrder = c(T,T,F))
+  format <- data.frame(matrix("%d",nrow = k, ncol=3),stringsAsFactors = FALSE)
+  metric <- .phMetric(dat, format=format, decreasingOrder = c(TRUE,TRUE,FALSE))
   metric
 }
 
@@ -90,7 +90,7 @@
   
   # There is always a correspondence between x$ranks an x$names 
   dat <- data.frame(rank = rowMeans(x$friedman$ranks))
-  format <- data.frame(matrix("%.2f",nrow = nrow(dat), ncol=1),stringsAsFactors = F)
-  res <- .phMetric(dat, format=format, decreasingOrder = F)
+  format <- data.frame(matrix("%.2f",nrow = nrow(dat), ncol=1),stringsAsFactors = FALSE)
+  res <- .phMetric(dat, format=format, decreasingOrder = FALSE)
   res
 }

@@ -49,9 +49,9 @@ expConcat <- function(e1, e2, name=NULL, tol = 1E-9){
   
   # Remove uncommon outputs (if it is the case we raise a warning).
   data1           <- e1$data
-  subsetE1        <- data1[,c(e1$method,e1$problem,e1$parameters,intersection), drop=F]
+  subsetE1        <- data1[,c(e1$method,e1$problem,e1$parameters,intersection), drop=FALSE]
   data2           <- e2$data
-  subsetE2        <- data2[,c(e2$method,e2$problem,e2$parameters,intersection), drop=F]
+  subsetE2        <- data2[,c(e2$method,e2$problem,e2$parameters,intersection), drop=FALSE]
   if( ncol(subsetE1)!= ncol(e1$data) ||  ncol(subsetE2)!= ncol(e2$data)) {
     data1 <- subsetE1
     data2 <- subsetE2

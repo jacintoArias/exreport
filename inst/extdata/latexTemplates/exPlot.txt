@@ -5,7 +5,6 @@
 % title, htmlTable, id, latexTable
 %
 
-\begin{minipage}{\textwidth}
 
 \exTitle{{{title}}}
 \bigskip
@@ -22,6 +21,4 @@ From experiment: \hyperref[{{context}}] { \textbf{ {{context}} } }
 \bigskip
 \hrule
 
-\end{minipage}
-\bigskip
-\bigskip
+\newpage

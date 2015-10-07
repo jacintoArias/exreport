@@ -9,9 +9,9 @@ print.exPlot <- function (x, ...) {
 }
 
 #' @export
-summary.exPlot <- function (x, ...) {
-  print(x$tags$title)
-  print(x$plot)
+summary.exPlot <- function (object, ...) {
+  print(object$tags$title)
+  print(object$plot)
 }
 
 #Anonymous constructor

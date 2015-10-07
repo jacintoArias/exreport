@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title>Title</title>
+<title>Machine Learning Weka Basic</title>
 </head>
 
 <body>
@@ -103,7 +103,7 @@ it is unary:
 </p>
 
 <!--begin.rcode fig.width=7, fig.height=6
-experiment <- expInstantiate(experiment, removeUnary = T)
+experiment <- expInstantiate(experiment, removeUnary = TRUE)
 end.rcode-->
 
 
@@ -252,7 +252,8 @@ table into to pieces when rendering.
 
 <!--begin.rcode fig.width=7, fig.height=6
 # We create the table:
-table2 <- tabularExpSummary(experiment, "accuracy", digits=4, format="f", boldfaceColumns="max", tableSplit=2)
+table2 <- tabularExpSummary(experiment, "accuracy", digits=4,
+                            format="f", boldfaceColumns="max", tableSplit=2)
 # And add it to the report:
 report <- exreportAdd(report, table2)
 end.rcode-->
@@ -265,8 +266,10 @@ can optionally specify a folder in which the report will be saved for future use
 </p>
 
 <!--begin.rcode fig.width=7, fig.height=6
-# Render the report:
-exreportRender(report, target = "HTML", visualize = T)
+# Render the report in HTML format:
+exreportRender(report, target = "HTML", visualize = TRUE)
+# Render the report in pdf format:
+exreportRender(report, target = "PDF", visualize = TRUE)
 end.rcode-->
 
 </body>

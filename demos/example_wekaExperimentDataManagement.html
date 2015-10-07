@@ -1,0 +1,310 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Machine Learning Weka Data Management</title>
+</head>
+
+<body>
+
+<h3>Introduction</h3>
+
+<p>
+In this example we make use of the wekaExperiment dataset that is packaged with
+exreport. This dataset represents a series of experiment in which several Machine
+Learning classifiers are compared by using a set of public datasets (UCI repository)
+as benchmark. The performance measures are the classification accuracy and the
+training time and have been obtained from a 10-fold cross-validation.
+</p>
+
+<p>
+The <i>wekaExperiment</i> contains a variable for the method and dataset and two
+# variables for the respective outputs. The datasets contains two parameters, 
+# the mentioned fold of the cross-validation for each entry and an additional 
+# boolean parameter to indicate if feature selection has been performed or not
+# in the execution. 
+</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(exreport)</span>
+<span class="hl kwd">colnames</span><span class="hl std">(wekaExperiment)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;method&quot;           &quot;problem&quot;          &quot;featureSelection&quot;
+## [4] &quot;fold&quot;             &quot;accuracy&quot;         &quot;trainingTime&quot;
+</pre></div>
+</div></div>
+
+
+<h3>Initial experimentation</h3>
+
+<p>
+In this example we simulate an extension in our experimentation using more
+datasets and values for input parameters. In order to do that, we assume that
+first we only use 5 datasets, and fold = 0. Also, we do not take into account
+the feature selection, so it is not a parameter for us (but its value is "no").
+After that, we extend the experimentation using 10 more datasets, ten folds
+(from 0 to 9) and two featureSelection  values ("yes" and "no").
+</p>
+
+<p>
+We use data from the wekaExperiment for the first experimentation and the later
+extension. Therefore, the first experimentation is a subset of the data stored
+in wekaExperiment.
+</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">problems</span>   <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;anneal&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;audiology&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;balance-scale&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;car&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;glass&quot;</span><span class="hl std">)</span>
+<span class="hl std">firstWekaExperiment</span> <span class="hl kwb">&lt;-</span> <span class="hl std">wekaExperiment[wekaExperiment</span><span class="hl opt">$</span><span class="hl std">problem</span> <span class="hl opt">%in%</span> <span class="hl std">problems</span> <span class="hl opt">&amp;</span>
+                                      <span class="hl std">wekaExperiment</span><span class="hl opt">$</span><span class="hl std">featureSelection</span><span class="hl opt">==</span><span class="hl str">&quot;no&quot;</span> <span class="hl opt">&amp;</span>
+                                      <span class="hl std">wekaExperiment</span><span class="hl opt">$</span><span class="hl std">fold</span><span class="hl opt">==</span><span class="hl num">0</span><span class="hl std">,]</span>
+</pre></div>
+</div></div>
+
+<p>
+It is common that experiment results are in tabular representation (the methods
+in rows, the problems in columns and the value in the i-j position represents
+the output of the method i for the problem j). In this case, we will use that
+representation and load the experiment for that (using the data in experiment).
+As we have two outputs (accuracy and trainingTime) we need two tables.
+Note that this is only a didactic example, as we already have the experiment
+object that we want in the experiment variable.
+</p
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">accuracy</span> <span class="hl kwb">&lt;-</span> <span class="hl std">reshape2</span><span class="hl opt">::</span><span class="hl kwd">dcast</span><span class="hl std">(firstWekaExperiment, method</span> <span class="hl opt">~</span> <span class="hl std">problem,</span>
+                            <span class="hl kwc">value.var</span><span class="hl std">=</span><span class="hl str">&quot;accuracy&quot;</span><span class="hl std">)</span>
+<span class="hl std">accuracy</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##         method  anneal audiology balance-scale      car   glass
+## 1          J48 97.7778   86.9565       74.6032  74.5665 50.0000
+## 2   NaiveBayes 84.4444   82.6087       84.1270  66.4740 40.9091
+## 3         OneR 87.7778   47.8261       38.0952 100.0000 50.0000
+## 4 RandomForest 96.6667   69.5652       80.9524  79.7688 81.8182
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">time</span>     <span class="hl kwb">&lt;-</span> <span class="hl std">reshape2</span><span class="hl opt">::</span><span class="hl kwd">dcast</span><span class="hl std">(firstWekaExperiment, method</span> <span class="hl opt">~</span> <span class="hl std">problem,</span>
+                            <span class="hl kwc">value.var</span><span class="hl std">=</span><span class="hl str">&quot;trainingTime&quot;</span><span class="hl std">)</span>
+<span class="hl std">time</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##         method anneal audiology balance-scale    car  glass
+## 1          J48 0.1360    0.0853        0.0964 0.0700 0.0847
+## 2   NaiveBayes 0.0626    0.0411        0.0454 0.0432 0.0393
+## 3         OneR 0.0530    0.0358        0.0358 0.0348 0.0332
+## 4 RandomForest 0.1404    0.1418        0.1487 0.1557 0.1297
+</pre></div>
+</div></div>
+
+
+<p>
+At this point we have two tabular data, representing the outputs for 4 methods
+and 5 datasets, using the fold value 0 (and no feature selection parameter is
+used, although we know its value is "no").
+Now, we load two experiments and combine them into a single one.
+</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experimentAcc</span>  <span class="hl kwb">&lt;-</span> <span class="hl kwd">expCreateFromTable</span><span class="hl std">(accuracy,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;wekaAccuracy&quot;</span><span class="hl std">,</span>
+                                     <span class="hl kwc">parameters</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">fold</span><span class="hl std">=</span><span class="hl num">0</span><span class="hl std">))</span>
+<span class="hl std">experimentTime</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expCreateFromTable</span><span class="hl std">(time,</span> <span class="hl str">&quot;trainingTime&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;wekaTrainingTime&quot;</span><span class="hl std">,</span>
+                                     <span class="hl kwc">parameters</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">fold</span><span class="hl std">=</span><span class="hl num">0</span><span class="hl std">))</span>
+<span class="hl std">experiment</span>     <span class="hl kwb">&lt;-</span> <span class="hl kwd">expCombine</span><span class="hl std">(experimentAcc, experimentTime,</span> <span class="hl kwc">name</span> <span class="hl std">=</span> <span class="hl str">&quot;weka&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(experiment)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 1 ) Description for experiment wekaAccuracy
+## 	2 ) Experiment wekaAccuracy loaded from a data set.
+## 	3 ) New parameters have been added with default values: fold:0
+## 4 ) Description for experiment wekaTrainingTime
+## 	5 ) Experiment wekaTrainingTime loaded from a data set.
+## 	6 ) New parameters have been added with default values: fold:0
+## 7 ) Experiment weka created from combining two experiments: wekaAccuracy and wekaTrainingTime.
+## 
+## #Experiment name: weka
+## 
+## #method: J48, NaiveBayes, OneR, RandomForest
+## 
+## #problem: anneal, audiology, balance-scale, car, glass
+## 
+## #parameters:
+## *) fold [0]
+## 
+## #outputs: accuracy, trainingTime
+</pre></div>
+</div></div>
+
+
+<h3>Extending the experimentation</h3>
+
+<p>
+Now, we want to extend the experimentation using 15 datasets, 10 folds (from 0
+to 9) and two values for the parameter featureSelection ("yes" and "no").
+However, suppose during the experimentation an error occurred, and for the fold 0 and
+the dataset "anneal" the results were not obtained. For that, we want to
+combine both experiments into a single one, and remove the duplicated instances.
+</p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Due to an error, the instance for problem==&quot;anneal&quot; and fold==0</span>
+<span class="hl std">wekaExperiment2</span>         <span class="hl kwb">&lt;-</span> <span class="hl std">wekaExperiment[wekaExperiment</span><span class="hl opt">$</span><span class="hl std">problem</span><span class="hl opt">!=</span><span class="hl str">&quot;anneal&quot;</span> <span class="hl opt">|</span>
+                                            <span class="hl std">wekaExperiment</span><span class="hl opt">$</span><span class="hl std">fold</span><span class="hl opt">!=</span><span class="hl num">0</span><span class="hl std">,]</span>
+<span class="hl std">experimentExt</span>           <span class="hl kwb">&lt;-</span> <span class="hl kwd">expCreate</span><span class="hl std">(wekaExperiment2,</span> <span class="hl kwc">name</span><span class="hl std">=</span><span class="hl str">&quot;weka extension&quot;</span><span class="hl std">,</span>
+                                     <span class="hl kwc">parameters</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;featureSelection&quot;</span><span class="hl std">,</span><span class="hl str">&quot;fold&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div></div>
+
+<p>
+Right now, the concatenation of the two experiments will rise an error. This
+is because the first experiment has not featureSelection parameter
+</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(experiment)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 1 ) Description for experiment wekaAccuracy
+## 	2 ) Experiment wekaAccuracy loaded from a data set.
+## 	3 ) New parameters have been added with default values: fold:0
+## 4 ) Description for experiment wekaTrainingTime
+## 	5 ) Experiment wekaTrainingTime loaded from a data set.
+## 	6 ) New parameters have been added with default values: fold:0
+## 7 ) Experiment weka created from combining two experiments: wekaAccuracy and wekaTrainingTime.
+## 
+## #Experiment name: weka
+## 
+## #method: J48, NaiveBayes, OneR, RandomForest
+## 
+## #problem: anneal, audiology, balance-scale, car, glass
+## 
+## #parameters:
+## *) fold [0]
+## 
+## #outputs: accuracy, trainingTime
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">expConcat</span><span class="hl std">(experiment, experimentExt)</span> <span class="hl com"># An error is rised</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in expConcat(experiment, experimentExt): Error: The parameter of the given experiments differ
+</pre></div>
+</div></div>
+
+<p>
+Even if the experiment does not have the featureSelection parameter, we know its
+value is "no" (we just did not take into account that variable before).
+Therefore, we need to extend the experiment adding this variable.
+</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expExtend</span><span class="hl std">(experiment,</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">featureSelection</span><span class="hl std">=</span><span class="hl str">&quot;no&quot;</span><span class="hl std">))</span>
+<span class="hl kwd">summary</span><span class="hl std">(experiment)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 1 ) Description for experiment wekaAccuracy
+## 	2 ) Experiment wekaAccuracy loaded from a data set.
+## 	3 ) New parameters have been added with default values: fold:0
+## 4 ) Description for experiment wekaTrainingTime
+## 	5 ) Experiment wekaTrainingTime loaded from a data set.
+## 	6 ) New parameters have been added with default values: fold:0
+## 7 ) Experiment weka created from combining two experiments: wekaAccuracy and wekaTrainingTime.
+## 8 ) New parameters have been added with default values: featureSelection:no
+## 
+## #Experiment name: weka
+## 
+## #method: J48, NaiveBayes, OneR, RandomForest
+## 
+## #problem: anneal, audiology, balance-scale, car, glass
+## 
+## #parameters:
+## *) fold [0]
+## *) featureSelection [no]
+## 
+## #outputs: accuracy, trainingTime
+</pre></div>
+</div></div>
+
+<p>
+Now we can concat the two experiments. Notice that there will be duplicated
+instances (a warning is rised with that information).
+You can print the duplicated instances (together with the originals).
+Also, as the outputs are the same for those duplicated instances which have
+the same configuration (method, problem and input parameters) we can remove them.
+</p>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Now we can concat the two experiments (and there are duplicated instances).</span>
+<span class="hl std">experimentExt</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expConcat</span><span class="hl std">(experiment, experimentExt)</span> <span class="hl com"># A warning is rised</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning in expGetDuplicated(e, tol = tol): 16 duplicated rows. 
+##                       0 differ in the outputs (using a tolerance of 1.0000e-09 to compare the outputs)
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># We can print the duplicated instances</span>
+<span class="hl kwd">head</span><span class="hl std">(</span><span class="hl kwd">expGetDuplicated</span><span class="hl std">(experimentExt)</span><span class="hl opt">$</span><span class="hl std">data)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning in expGetDuplicated(experimentExt): 16 duplicated rows. 
+##                       0 differ in the outputs (using a tolerance of 1.0000e-09 to compare the outputs)
+</pre></div>
+<div class="output"><pre class="knitr r">##        method       problem fold accuracy trainingTime featureSelection
+## 9  NaiveBayes           car    0  66.4740       0.0432               no
+## 7  NaiveBayes     audiology    0  82.6087       0.0411               no
+## 10 NaiveBayes         glass    0  40.9091       0.0393               no
+## 8  NaiveBayes balance-scale    0  84.1270       0.0454               no
+## 4         J48           car    0  74.5665       0.0700               no
+## 2         J48     audiology    0  86.9565       0.0853               no
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Now we remove them.</span>
+<span class="hl std">experimentExt</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expRemoveDuplicated</span><span class="hl std">(experimentExt)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning in expRemoveDuplicated(experimentExt): 16 duplicated rows has been
+## removed
+</pre></div>
+</div></div>
+
+</body>
+</html>

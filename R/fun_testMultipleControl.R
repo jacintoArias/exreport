@@ -23,7 +23,7 @@
 #' experiment <- expCreate(wekaExperiment, name="test", parameter="fold")
 #' experiment <- expReduce(experiment, "fold", mean)
 #' experiment <- expSubset(experiment, list(featureSelection = "yes"))
-#' experiment <- expInstantiate(experiment, removeUnary=T)
+#' experiment <- expInstantiate(experiment, removeUnary=TRUE)
 #' 
 #' # Then we perform a testMultiplePairwise test procedure
 #' test <- testMultipleControl(experiment, "accuracy", "max")

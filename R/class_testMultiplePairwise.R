@@ -9,17 +9,17 @@ print.testMultiplePairwise <- function (x, ...) {
 }
 
 #' @export
-summary.testMultiplePairwise <- function (x, ...) {
+summary.testMultiplePairwise <- function (object, ...) {
   cat("---------------------------------------------------------------------\n")
-  summary(x$friedman)
+  summary(object$friedman)
   cat("---------------------------------------------------------------------\n")
-  cat(sprintf("Pairwise post hoc test for output %s\n", x$tags$target))
-  cat(sprintf("Adjust method: %s\n", x$tags$method))
-  cat(sprintf("alpha = %.4f\n", x$alpha))
+  cat(sprintf("Pairwise post hoc test for output %s\n", object$tags$target))
+  cat(sprintf("Adjust method: %s\n", object$tags$method))
+  cat(sprintf("alpha = %.4f\n", object$alpha))
   cat("\n")
   cat("p-values:\n")
-  d <- cbind(x$names, p=x$pvalue)
-  means <- rowMeans(x$friedman$ranks)
+  d <- cbind(object$names, p=object$pvalue)
+  means <- rowMeans(object$friedman$ranks)
   means <- means[order(means)]
   t <- reshape2::dcast(d, method1~method2, value.var="p")
   me <- t[,1]

@@ -38,7 +38,7 @@
 #' # Generate the default table:
 #' tabularExpSummary(experiment, "accuracy")
 #' 
-tabularExpSummary <- function(exp, outputs, boldfaceColumns="none", format="f", digits=4, tableSplit=1, rowsAsMethod=T) {
+tabularExpSummary <- function(exp, outputs, boldfaceColumns="none", format="f", digits=4, tableSplit=1, rowsAsMethod=TRUE) {
   
   if( !is.experiment(exp) )
     stop(.callErrorMessage("wrongParameterError", "exp", "experiment"))
@@ -95,14 +95,14 @@ tabularExpSummary <- function(exp, outputs, boldfaceColumns="none", format="f", 
     if(i>length(digits))
       idig <- length(digits)
       
-    frank <- function(...) { max(...,na.rm = T) }
+    frank <- function(...) { max(...,na.rm = TRUE) }
     mode  <- "eq"
     if (boldfaceColumns[ibf] == "min")
-      frank <- function(...) { min(...,na.rm = T) }
+      frank <- function(...) { min(...,na.rm = TRUE) }
     else if (boldfaceColumns[ibf] == "none")
       mode <- "none"
     
-    tableFormat <- apply(table[,-1,drop=F],2,FUN = function(v){
+    tableFormat <- apply(table[,-1,drop=FALSE],2,FUN = function(v){
       if(mode!="none"){
         #In that case we specify the number of digits
         if(format[i] %in% c("f","e","E","g","G","a","A"))
