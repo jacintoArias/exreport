@@ -15,9 +15,13 @@ summary.exPlot <- function (object, ...) {
 }
 
 #Anonymous constructor
-.exPlot <- function(ggplot2Obj, title, tags){
+.exPlot <- function(ggplot2Obj, target=NULL, title,  alias = "plot", tags){
   
-  newTags <- .metaTags(title = title)
+  if (!is.null(target))
+    newTags <- .metaTags(title = title, target = target, alias = alias)
+  else
+    newTags <- .metaTags(title = title, alias = alias)
+  
   tags <- .updateTags(tags, newTags)
   
   plo <- list(

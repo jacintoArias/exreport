@@ -105,6 +105,6 @@ plotExpSummary <- function(exp, output, columns=0, freeScale=FALSE, fun=identity
     
   title <- sprintf("Results for output \"%s\"", output)
   
-  res <- .exPlot(p, title = title, exp$tags)
+  res <- .exPlot(p, target = toString(output), title = title, alias = "ExpSummaryPlot", tags = exp$tags)
   res
 }

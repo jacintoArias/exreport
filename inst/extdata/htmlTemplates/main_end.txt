@@ -7,7 +7,7 @@ r_version, index
           </div>
         </div> <!-- End Col -->
 
-        <div class="col-md-1" id="side-nav">
+        <div class="col-md-1 visible-lg" id="side-nav">
             <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="50">
               {{index}}
             </ul>

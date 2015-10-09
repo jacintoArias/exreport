@@ -68,6 +68,6 @@ plotCumulativeRank <- function(testMultiple, grayscale=FALSE) {
   
   title <- sprintf("Cumulative Ranking for Var %s", friedman$tags$target)
   
-  res <- .exPlot(p, title = title, testMultiple$tags)
+  res <- .exPlot(p, title = title, alias = "CumulativeRank", tags = testMultiple$tags)
   res
 }

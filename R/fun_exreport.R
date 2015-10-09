@@ -146,8 +146,10 @@ exreportRender <- function(rep, destination=NULL, target="html", safeMode=TRUE, 
   for ( element in rep$content ) {
     indexString <- paste(indexString, sprintf(pattern, 
                                         counter,
-                                        class(element)[1], 
-                                        element$tags$context), 
+                                        element$tags$alias, 
+                                        ifelse(!is.null(element$tags$target),
+                                               element$tags$target,
+                                               element$tags$context)), 
                    sep="\n")
     counter <- counter + 1
   }

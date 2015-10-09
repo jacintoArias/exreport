@@ -35,7 +35,8 @@ summary.testMultiplePairwise <- function (object, ...) {
   newTags <- .metaTags(alpha   = alpha,
                        target  = target,
                        scope   = scope,
-                       method  = method)
+                       method  = method,
+                       alias   = "TestMultiplePairwise")
   tags <- .updateTags(tags, newTags)
   
   #Build the superclass object

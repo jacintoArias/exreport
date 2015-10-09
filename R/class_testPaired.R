@@ -29,7 +29,8 @@ summary.testPaired <- function (object, ...) {
                        alpha      = alpha,
                        statistic  = statistic,
                        pvalue     = pvalue,
-                       outcome    = outcome)
+                       outcome    = outcome,
+                       alias      = "TestWilcoxon")
   tags <- .updateTags(tags, newTags)
   
   w <- list(

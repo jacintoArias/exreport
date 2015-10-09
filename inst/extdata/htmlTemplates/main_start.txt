@@ -14,7 +14,7 @@ title, date
     <title>{{title}}</title>
 </head>
 
-<body data-spy="scroll" data-target="#side-nav">
+<body data-spy="scroll" data-target="#side-nav" data-offset="350">
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -29,7 +29,7 @@ title, date
 
         <div class="row">
 
-             <div class="col-md-1"></div>
+             <div class="col-xs-1 visible-lg visible-md"></div>
 
              <div class="col-md-10 document">
               <div class="document-content">

@@ -10,6 +10,7 @@
 
 #side-nav {
   font-size:12px;
+  white-space: nowrap;
 }
 
 .affix {
@@ -38,6 +39,7 @@
       -moz-border-radius: 0 !important;
            border-radius: 0 !important;
  }
+
  .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
    background-color: transparent;
    color: #428bca;

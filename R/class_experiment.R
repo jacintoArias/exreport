@@ -1,7 +1,7 @@
 
 .experiment <- function(data, method, problem, params, outs, name, historic){
   
-  tags <- .metaTags(title = name, context = name)
+  tags <- .metaTags(title = name, context = name, alias = "experiment")
   
   result <- list( "data" = data,
                   "method" = method,

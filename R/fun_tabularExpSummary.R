@@ -130,10 +130,12 @@ tabularExpSummary <- function(exp, outputs, boldfaceColumns="none", format="f", 
   title <- sprintf("Detailed results for output(s) %s", paste0("\"",outputs,"\"", collapse = ", "))  
   
   tab <- .exTabular(tables = tables, 
+                    target = toString(outputs),
                     formats=formats, 
                     tableSplit=tableSplit, 
                     tableType="plain", 
-                    title = title, 
+                    title = title,
+                    alias = "ExpSummaryTable",
                     tags = exp$tags)
   
   if(!rowsAsMethod)

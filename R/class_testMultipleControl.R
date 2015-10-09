@@ -33,7 +33,8 @@ summary.testMultipleControl <- function (object, ...) {
   newTags <- .metaTags(alpha   = alpha,
                        target  = target,
                        scope   = scope,
-                       method  = method)
+                       method  = method,
+                       alias   = "TestMultipleControl")
   tags <- .updateTags(tags, newTags)
   
   

@@ -77,6 +77,7 @@ tabularTestSummary <- function(ph, columns=c("pvalue"))  {
                     tableSplit=1, 
                     tableType=tableType, 
                     title = title, 
+                    alias = "TestSummaryTable",
                     tags = ph$tags)
   tab
 }

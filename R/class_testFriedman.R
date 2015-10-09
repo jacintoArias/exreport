@@ -36,7 +36,8 @@ summary.testFriedman <- function (x, ...) {
                        alpha        = alpha,
                        target       = target,
                        title        = title,
-                       outcome      = outcome)
+                       outcome      = outcome,
+                       alias        = "FriedmanTest")
   
   tags <- .updateTags(tags, newTags)
   

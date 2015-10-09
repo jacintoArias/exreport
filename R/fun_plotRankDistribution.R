@@ -67,6 +67,6 @@ plotRankDistribution <- function(testMultiple) {
   
   title <- sprintf("Distribution of ranks for output \"%s\"", testMultiple$tags$target)
   
-  res <- .exPlot(p, title = title, testMultiple$tags)
+  res <- .exPlot(p, title = title, alias = "RankDistributionPlot", tags = testMultiple$tags)
   res
 }
