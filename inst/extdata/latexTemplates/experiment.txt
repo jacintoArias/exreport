@@ -6,7 +6,7 @@
 %
 
 
-\exTitle{Experiment: {{title}}}
+\mychapter{Experiment: {{title}}}
 \label{{{title}}}
 \bigskip 
 
@@ -22,5 +22,3 @@
 \begin{small}
 {{history}}
 \end{small}
-
-\newpage

@@ -6,7 +6,7 @@
 %
 
 
-\exTitle{{{title}}}
+\mychapter{{{title}}}
 
 \begin{center}
 From experiment: \hyperref[{{context}}] { \textbf{ {{context}} } }
@@ -29,4 +29,3 @@ Wilcoxon Signed Rank test for output {{target}}
 \item Outcome for $\alpha$ = {{alpha}}: $H_0$ \textbf{{{outcome}}}
 \end{itemize}
 
-\newpage

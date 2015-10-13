@@ -6,7 +6,7 @@
 %
 
 
-\exTitle{{{title}}}
+\mychapter{{{title}}}
 \bigskip
 
 \begin{center}
@@ -20,5 +20,3 @@ From experiment: \hyperref[{{context}}] { \textbf{ {{context}} } }
 \bigskip
 \bigskip
 \hrule
-
-\newpage
