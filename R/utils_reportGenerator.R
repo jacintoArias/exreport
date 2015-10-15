@@ -125,37 +125,20 @@
   maxCol <- ncol(tables[[1]])
   colIndex <- 2
   
-  if (element$tableSplit <= 1)
-    numCols <- maxCol
-  else
-    numCols <- round( (maxCol - 1) / element$tableSplit)
+  if (element$tableSplit < 1)
+    tableFolds <- 1
   
-  # The first iteration is out of the loop just for formating reasons
-  # The first table has different number of columns (the rest will have the
-  # same numbre, so this first one is filled with the rest)
-  # floor((maxCol-1)/colIndex) is the number of tables minus the first one
-  numColsFirstTable <- maxCol-1 - numCols*(element$tableSplit-1)
-  endIndex <- colIndex+numColsFirstTable-1
-  auxTables <- lapply(tables, FUN = function(tab){
-    cbind(colHeader,tab[,colIndex:endIndex,drop=FALSE])
-  })
-  auxFormats <- lapply(formats, FUN = function(tab){
-    cbind(colFormatHeader,tab[,colIndex:endIndex,drop=FALSE])
-  })
+  # Just to tell how many tables still need to be created
+  tableFolds <- element$tableSplit
   
-  if(target=="html")
-    htmlTable  <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "html")
-  
-  latexTable <- .formatDataFrame(tables = auxTables, formats = auxFormats, src = "latex")
-  if(target=="pdf")
-    # In this case, we append the code for centering and scaling the table
-    latexTable <- paste0("\\exTable{",latexTable,"}")
-  
-  colIndex <- colIndex + numColsFirstTable
+  htmlTable  <- ""
+  latexTable <- ""
   
   while (colIndex <= maxCol)
   {
-    endIndex <- colIndex+numCols-1
+    # The number of columns of the actual table (not including the first one)
+    numColsTable <- round( (maxCol-colIndex+1) / tableFolds )
+    endIndex <- colIndex+numColsTable-1
     auxTables <- lapply(tables, FUN = function(tab){
       cbind(colHeader,tab[,colIndex:endIndex,drop=FALSE])
     })
@@ -171,7 +154,8 @@
       newLatexTable <- paste0("\\exTable{",newLatexTable,"}")
     latexTable <- paste0(latexTable, "\n\n", newLatexTable)
     
-    colIndex <- colIndex + numCols
+    colIndex   <- colIndex + numColsTable
+    tableFolds <- tableFolds - 1
   }
   
   if(target=="html"){
