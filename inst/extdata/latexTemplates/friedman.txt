@@ -1,5 +1,5 @@
 
-\exTitle{{{title}}}
+\mychapter{{{title}}}
 
 \begin{center}
 From experiment: \hyperref[{{context}}] { \textbf{ {{context}} } }
@@ -22,5 +22,3 @@ Friedman test for output {{target}}
 \item Computed p-value: {{pvalue}}
 \item Outcome for $\alpha$ = {{alpha}}: $H_0$ \textbf{{{outcome}}}
 \end{itemize}
-
-\newpage

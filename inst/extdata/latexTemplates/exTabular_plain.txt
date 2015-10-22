@@ -6,7 +6,7 @@
 %
 
 
-\exTitle{{{title}}}
+\mychapter{{{title}}}
 \begin{center}
 Experiment source: \hyperref[{{context}}] { \textbf{ {{context}} } }
 \end{center}
@@ -19,4 +19,3 @@ Experiment source: \hyperref[{{context}}] { \textbf{ {{context}} } }
 \bigskip
 \hrule
 
-\newpage
