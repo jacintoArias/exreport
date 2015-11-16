@@ -103,7 +103,7 @@ report <- exreport("Machine Learning Weka Aditional Analytics")
 report <- exreportAdd(report, list(experiment, 
                                    testAccuracyPairwise, table1, table2))
 # Render the report in HTML format:
-exreportRender(report, target = "html", visualize = TRUE)
+exreportRender(report, target = "html", visualize = TRUE, safeMode=F)
 end.rcode-->
 
 </body>

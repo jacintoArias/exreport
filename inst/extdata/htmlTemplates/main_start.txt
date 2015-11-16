@@ -19,7 +19,7 @@ title, date
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="http://exreport.jarias.es">Generated with exreport - beta 0.1</a>
+      <a class="navbar-brand" href="http://exreport.jarias.es">Generated with exreport - beta 0.4</a>
     </div>
   </div>
 </nav>

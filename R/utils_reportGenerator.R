@@ -72,7 +72,7 @@
 
 .print2exreport.testMultiple <- function(element, id, file, path, target) {
   
-  # TODO: ¡Make proper function!
+  # TODO: Make proper function
   
   .print2exreport(element$friedman, id, file, path, target)
 }

@@ -131,11 +131,11 @@ After that, we will instantiate the methods with the available parameters.
 </p>
 
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReduce</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;fold&quot;</span><span class="hl std">,</span> <span class="hl kwc">FUN</span> <span class="hl std">= mean)</span>
-<span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment,</span> <span class="hl kwc">removeUnary</span> <span class="hl std">= T)</span>
+<span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment,</span> <span class="hl kwc">removeUnary</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
 <span class="hl kwd">summary</span><span class="hl std">(experiment)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 1 ) Experiment weka loaded from a data set.
-## 2 ) Parameters 'fold'' have been removed using the function 'mean'
+## 2 ) Parameters 'fold' have been removed using the function 'mean'
 ## 3 ) Methods has been instanciated with the parameters: featureSelection
 ## 
 ## #Experiment name: weka
@@ -260,8 +260,7 @@ After that, we will generate the report in html format and open it.
 <span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment,</span>
                                    <span class="hl std">testAccuracyPairwise, table1, table2))</span>
 <span class="hl com"># Render the report in HTML format:</span>
-<span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;html&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">= T)</span>
-<span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;html&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">= T)</span>
+<span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;html&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl kwc">safeMode</span><span class="hl std">=F)</span>
 </pre></div>
 </div></div>
 

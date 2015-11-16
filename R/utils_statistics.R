@@ -14,7 +14,7 @@
   n <- length(p)
   o <- order(p)
   ro <- order(o)
-  # n = k · (k-1) / 2 --> solve the quadratic equation
+  # n = k * (k-1) / 2 --> solve the quadratic equation
   k <- (1+sqrt(1+8*n))/2
   t <- .shafferS(k)
   lT <- length(t)

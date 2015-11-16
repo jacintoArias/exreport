@@ -11,7 +11,7 @@
 
 \begin{flushright}
 \begin{large}
-\href{http://exreport.jarias.es}{exreport - beta 0.1.4}
+\href{http://exreport.jarias.es}{exreport - beta 0.4}
 
 \end{large}
 \end{flushright}
