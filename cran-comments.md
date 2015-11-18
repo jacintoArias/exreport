@@ -1,6 +1,11 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Imported used base packages that were not included in the NAMESPACE file
+
 ## Test environments
 * MAC OS X 10, R 3.1.2
-* ubuntu 14.04, R 3.2.2
+* Ubuntu 14.04, R 3.2.2
 * Windows 10, R 3.2.2
 
 ## R CMD check results
@@ -24,4 +29,4 @@ There was 2 NOTE:
   data.frame columns names that are incorporated into the call enviroment.
 
 ## Downstream dependencies
-  There are currently no downstream dependencies for this package.
+  We did not run checks on downstream dependencies, because there were no behaviour modifying changes to the code.
