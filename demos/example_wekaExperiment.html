@@ -86,10 +86,12 @@ parameter to indicate if feature selection has been performed or not in the exec
 </p>
 
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(exreport)</span>
-<span class="hl kwd">colnames</span><span class="hl std">(wekaExperiment)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;method&quot;           &quot;problem&quot;          &quot;featureSelection&quot;
-## [4] &quot;fold&quot;             &quot;accuracy&quot;         &quot;trainingTime&quot;
+<div class="error"><pre class="knitr r">## Error in library(exreport): there is no package called 'exreport'
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">colnames</span><span class="hl std">(wekaExperiment)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in is.data.frame(x): object 'wekaExperiment' not found
 </pre></div>
 </div></div>
 
@@ -106,6 +108,8 @@ must indicate that the numeric variable "fold" is in fact a parameter.
 
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expCreate</span><span class="hl std">(wekaExperiment,</span> <span class="hl kwc">name</span><span class="hl std">=</span><span class="hl str">&quot;weka&quot;</span><span class="hl std">,</span> <span class="hl kwc">parameters</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;fold&quot;</span><span class="hl std">))</span>
 </pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expCreate&quot;
+</pre></div>
 </div></div>
 
 <p>
@@ -116,30 +120,12 @@ access the raw data of the experiment by obtaining the coresponding parameter:
 
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(experiment)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 1 ) Experiment weka loaded from a data set.
-## 
-## #Experiment name: weka
-## 
-## #method: J48, NaiveBayes, OneR, RandomForest
-## 
-## #problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
-## 
-## #parameters:
-## *) featureSelection [no,yes]
-## *) fold [0,1,2,3,4,5,6,7,8,9]
-## 
-## #outputs: accuracy, trainingTime
+<div class="error"><pre class="knitr r">## Error in summary(experiment): object 'experiment' not found
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># Print a few lines of random raw data</span>
 <span class="hl kwd">head</span><span class="hl std">(experiment</span><span class="hl opt">$</span><span class="hl std">data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##       method     problem featureSelection fold accuracy trainingTime
-## 1 NaiveBayes hypothyroid               no    0  94.9735       0.0824
-## 2 NaiveBayes hypothyroid               no    1  93.6508       0.0177
-## 3 NaiveBayes hypothyroid               no    2  93.6340       0.0065
-## 4 NaiveBayes hypothyroid               no    3  94.9602       0.0059
-## 5 NaiveBayes hypothyroid               no    4  95.2255       0.0045
-## 6 NaiveBayes hypothyroid               no    5  95.7560       0.0045
+<div class="error"><pre class="knitr r">## Error in head(experiment$data): object 'experiment' not found
 </pre></div>
 </div></div>
 
@@ -153,17 +139,7 @@ there are not repeated entries that would disrupt the analysis:
 
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">expGetDuplicated</span><span class="hl std">(experiment)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## #Experiment name: weka
-## 
-## #method: J48, NaiveBayes, OneR, RandomForest
-## 
-## #problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
-## 
-## #parameters:
-## *) featureSelection [no,yes]
-## *) fold [0,1,2,3,4,5,6,7,8,9]
-## 
-## #outputs: accuracy, trainingTime
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expGetDuplicated&quot;
 </pre></div>
 </div></div>
 
@@ -179,16 +155,13 @@ reduce the fold parameter by using the mean function:
 </p>
 
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReduce</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;fold&quot;</span><span class="hl std">,</span> <span class="hl kwc">FUN</span> <span class="hl std">= mean)</span>
-<span class="hl com"># Print a few lines of random raw data</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expReduce&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Print a few lines of random raw data</span>
 <span class="hl kwd">head</span><span class="hl std">(experiment</span><span class="hl opt">$</span><span class="hl std">data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##         method   problem featureSelection accuracy trainingTime
-## 1          J48    anneal               no 98.77529      0.03192
-## 2   NaiveBayes    anneal               no 86.52808      0.00989
-## 3         OneR    anneal               no 83.63296      0.00804
-## 4 RandomForest    anneal               no 99.10737      0.03578
-## 5          J48 audiology               no 75.29644      0.01859
-## 6   NaiveBayes audiology               no 68.65612      0.00545
+<div class="error"><pre class="knitr r">## Error in head(experiment$data): object 'experiment' not found
 </pre></div>
 </div></div>
 
@@ -202,6 +175,8 @@ performed when this parameter is set to <i>"no"</i>, so we perform a subset oper
 
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expSubset</span><span class="hl std">(experiment,</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">featureSelection</span> <span class="hl std">=</span> <span class="hl str">&quot;no&quot;</span><span class="hl std">))</span>
 </pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expSubset&quot;
+</pre></div>
 </div></div>
 
 <p>
@@ -211,6 +186,8 @@ it is unary:
 </p>
 
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment,</span> <span class="hl kwc">removeUnary</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expInstantiate&quot;
 </pre></div>
 </div></div>
 
@@ -227,22 +204,12 @@ the accuracy, the test will measure maximization.
 </p>
 
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">testAccuracy</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">testMultipleControl</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;max&quot;</span><span class="hl std">)</span>
-<span class="hl kwd">summary</span><span class="hl std">(testAccuracy)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## ---------------------------------------------------------------------
-## Friedman test, objetive maximize output variable accuracy. Obtained p-value: 1.1365e-04
-## Chi squared with 3 degrees of freedom statistic: 20.8400
-## Test rejected: p-value: 1.1365e-04 &lt; 0.0500
-## ---------------------------------------------------------------------
-## Control post hoc test for output accuracy
-## Adjust method: Holm
-## 
-## Control method: RandomForest
-## p-values:
-##             J48	0.5716
-##      NaiveBayes	0.0324
-##            OneR	0.0001
-## ---------------------------------------------------------------------
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;testMultipleControl&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(testAccuracy)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in summary(testAccuracy): object 'testAccuracy' not found
 </pre></div>
 </div></div>
 
@@ -267,10 +234,12 @@ a perfect built in function to achieve this:
 </p>
 
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">plot1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">)</span>
-<span class="hl std">plot1</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div><div class="rcode">
-<div class="output"><pre class="knitr r">## [1] &quot;Results for output \&quot;accuracy\&quot;&quot;
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;plotExpSummary&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">plot1</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): object 'plot1' not found
 </pre></div>
 </div></div>
 
@@ -281,10 +250,12 @@ be parametrized, in this case, we will split the plot by methods.
 </p>
 
 <div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">plot1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl kwc">columns</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span>
-<span class="hl std">plot1</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
-<div class="output"><pre class="knitr r">## [1] &quot;Results for output \&quot;accuracy\&quot;&quot;
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;plotExpSummary&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">plot1</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): object 'plot1' not found
 </pre></div>
 </div></div>
 
@@ -295,10 +266,12 @@ for that we have another built in function.
 </p>
 
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">plot2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotCumulativeRank</span><span class="hl std">(testAccuracy)</span>
-<span class="hl std">plot2</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div><div class="rcode">
-<div class="output"><pre class="knitr r">## [1] &quot;Cumulative Ranking for Var accuracy&quot;
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;plotCumulativeRank&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">plot2</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): object 'plot2' not found
 </pre></div>
 </div></div>
 
@@ -310,14 +283,12 @@ tabular summary for the test, in which we specify the different metric we need.
 </p>
 
 <div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">table1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularTestSummary</span><span class="hl std">(testAccuracy,</span> <span class="hl kwc">columns</span> <span class="hl std">=</span>  <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;pvalue&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;rank&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;wtl&quot;</span><span class="hl std">))</span>
-<span class="hl std">table1</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## $testMultiple
-##                    method       pvalue     rank win tie loss
-## RandomForest RandomForest           NA 1.666667  NA  NA   NA
-## J48                   J48 0.5716076450 1.933333   9   0    6
-## NaiveBayes     NaiveBayes 0.0324190828 2.800000  11   0    4
-## OneR                 OneR 0.0001232936 3.600000  15   0    0
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;tabularTestSummary&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">table1</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): object 'table1' not found
 </pre></div>
 </div></div>
 
@@ -328,10 +299,12 @@ comparing the ranks distributions as well as the status of the test hypotheses.
 </p>
 
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">plot3</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotRankDistribution</span><span class="hl std">(testAccuracy)</span>
-<span class="hl std">plot3</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div><div class="rcode">
-<div class="output"><pre class="knitr r">## [1] &quot;Distribution of ranks for output \&quot;accuracy\&quot;&quot;
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;plotRankDistribution&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">plot3</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): object 'plot3' not found
 </pre></div>
 </div></div>
 
@@ -356,6 +329,8 @@ We start by initializing the report object:
 
 <div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreport</span><span class="hl std">(</span><span class="hl str">&quot;Your wekaExperiment example report&quot;</span><span class="hl std">)</span>
 </pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreport&quot;
+</pre></div>
 </div></div>
 
 <p>
@@ -367,10 +342,18 @@ the operations performed with them.
 
 <div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Add the experiment object for reference:</span>
 <span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report, experiment)</span>
-<span class="hl com"># Now add the test:</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreportAdd&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Now add the test:</span>
 <span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report, testAccuracy)</span>
-<span class="hl com"># Finally you can add the different tables and plots.</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreportAdd&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Finally you can add the different tables and plots.</span>
 <span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(plot1,plot2,table1,plot3))</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreportAdd&quot;
 </pre></div>
 </div></div>
 
@@ -395,8 +378,13 @@ table into to pieces when rendering.
 <div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># We create the table:</span>
 <span class="hl std">table2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularExpSummary</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;accuracy&quot;</span><span class="hl std">,</span> <span class="hl kwc">digits</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">,</span>
                             <span class="hl kwc">format</span><span class="hl std">=</span><span class="hl str">&quot;f&quot;</span><span class="hl std">,</span> <span class="hl kwc">boldfaceColumns</span><span class="hl std">=</span><span class="hl str">&quot;max&quot;</span><span class="hl std">,</span> <span class="hl kwc">tableSplit</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
-<span class="hl com"># And add it to the report:</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;tabularExpSummary&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># And add it to the report:</span>
 <span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report, table2)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreportAdd&quot;
 </pre></div>
 </div></div>
 
@@ -409,8 +397,13 @@ can optionally specify a folder in which the report will be saved for future use
 
 <div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Render the report in HTML format:</span>
 <span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;HTML&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
-<span class="hl com"># Render the report in pdf format:</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreportRender&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Render the report in pdf format:</span>
 <span class="hl kwd">exreportRender</span><span class="hl std">(report,</span> <span class="hl kwc">target</span> <span class="hl std">=</span> <span class="hl str">&quot;PDF&quot;</span><span class="hl std">,</span> <span class="hl kwc">visualize</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreportRender&quot;
 </pre></div>
 </div></div>
 
