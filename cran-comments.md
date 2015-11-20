@@ -1,8 +1,8 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Avoided the use of data frame column names as variables (as it is usually done in aes
-  environment of the package ggplot2. Instead, we specify them as string values.
+* Followed the suggestions by email and added some importFroms
+  in order to import some functions from other packages.
 
 ## Test environments
 * MAC OS X 10, R 3.1.2
