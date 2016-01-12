@@ -3,3 +3,4 @@
 ^cran-comments.md
 ^demos
 ^test
+^.travis.yml
