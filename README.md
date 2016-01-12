@@ -1,4 +1,7 @@
 # exreport 
+
+[![Build Status](https://travis-ci.org/jacintoArias/exreport.svg?branch=master)](https://travis-ci.org/jacintoArias/exreport)
+[![CRAN Status Badge](http://www.r-pkg.org/badges/version/exreport)](http://cran.r-project.org/web/packages/exreport)
 ### Fast, Reliable and Elegant Reproducible Research
 
 exreport has been conceived to obtain robust and transparent reproducibility when developing scientific publishable results. Describe your experiments and your analysis in an exreport script and reproduce publish-ready descriptive statistics, tables, plots and many more with a single click.
