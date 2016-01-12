@@ -27,7 +27,9 @@
   if (!is.data.frame(dat))
     stop("error, you must provide a data.frame object as 'dat' parameter")
   # Get the indices of the ordered rows
-  s <- do.call("order",lapply(dat,FUN=identity))
+  unamedDat <- dat
+  colnames(unamedDat) <- NULL
+  s <- do.call("order",lapply(unamedDat,FUN=identity))
   # As we use the ordered dat, for each set of duplicated rows, the first occurrence is TRUE and the laters are FALSE
   nonDup <- !duplicated(dat[s, ,drop=FALSE])
   # Get the index of the non duplicated (or original) elements (elements equal to TRUE)
