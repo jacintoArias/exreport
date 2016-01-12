@@ -9,8 +9,14 @@
   colOfInterest <- sapply(df,is.numeric)
   numericDf <- df[colOfInterest]
   numericDecreasing <- decreasing[colOfInterest]
+  # Matrix to make the opposite if decreasing equals TRUE. (each column have
+  # one unique value. +1 if the order is increasing and -1 if it is decreasing). 
+  orderingMatrix <- matrix(rep(numericDecreasing*-2+1,nrow(numericDf)),nrow = nrow(numericDf),byrow = TRUE)
+  reorderedMatrix <- numericDf*orderingMatrix
+  colnames(reorderedMatrix) <- NULL
   # Get the ordered indices
-  ordering <- do.call(function(...) order(...,na.last = FALSE), lapply(numericDf*matrix(rep(numericDecreasing*-2+1,nrow(numericDf)),nrow = nrow(numericDf),byrow = TRUE),FUN = identity))
+  ordering <- do.call(function(...) order(...,na.last = FALSE), lapply(reorderedMatrix,FUN = identity))
+  ordering
 }
 
 
