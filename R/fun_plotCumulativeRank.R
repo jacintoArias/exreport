@@ -50,7 +50,7 @@ plotCumulativeRank <- function(testMultiple, grayscale=FALSE) {
   problemName <- testMultiple$experiment$problem
   colnames(da)[2] <- problemName # Just to print the legend title correctly named.
   
-  p <- ggplot(da, aes(x=continuous, y=value))
+  p <- eval(parse(text = "ggplot(da, aes(x=continuous, y=value))"))
   
   expr <- "p <- p + geom_area(aes(colour = %s, fill= %s), position = 'stack')"
   expr <- sprintf(expr,problemName,problemName)

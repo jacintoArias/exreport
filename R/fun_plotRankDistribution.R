@@ -54,11 +54,11 @@ plotRankDistribution <- function(testMultiple) {
   }
 
   means <- cbind(means, color)
-  means <- means[with(means, order(value)),,drop=FALSE]
+  means <- means[order(means$value),,drop=FALSE]
   
-  p <- ggplot(da, aes(x=reorder(method, value), value))
+  p <- eval(parse(text = "ggplot(da, aes(x=reorder(method, value), value))"))
   p <- p + geom_boxplot(fill = as.character(means$color))
-  p <- p + geom_text(data = means, aes(label = sprintf("%.2f",value), y = value + 0.08), colour="black", fontface="bold", size=4)
+  p <- p + eval(parse(text = "geom_text(data = means, aes(label = sprintf(\"%.2f\",value), y = value + 0.08), colour=\"black\", fontface=\"bold\", size=4)"))
   p <- p + ylab(sprintf("Ranking Distributions for var %s", testMultiple$tags$target))
   p <- p + xlab("")
   p <- p + theme(axis.text.x  = element_text(face="bold", colour="#000000", size=12, angle= 90, hjust = 1))
