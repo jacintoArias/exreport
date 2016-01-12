@@ -3,3 +3,8 @@ sudo: required
 
 warnings_are_errors: true
 
+env:
+  matrix:
+    - RVERSION=oldrel
+    - RVERSION=release
+    - RVERSION=devel
