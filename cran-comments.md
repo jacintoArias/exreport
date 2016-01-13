@@ -1,8 +1,9 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Followed the suggestions by email and added some importFroms
-  in order to import some functions from other packages.
+* Followed the suggestions by email and removed the names
+ of the data.frame used in a do.call function which was
+ used as the args parameter.
 
 ## Test environments
 * MAC OS X 10, R 3.1.2
