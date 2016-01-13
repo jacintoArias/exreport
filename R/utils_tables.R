@@ -9,8 +9,14 @@
   colOfInterest <- sapply(df,is.numeric)
   numericDf <- df[colOfInterest]
   numericDecreasing <- decreasing[colOfInterest]
+  # Matrix to make the opposite if decreasing equals TRUE. (each column have
+  # one unique value. +1 if the order is increasing and -1 if it is decreasing). 
+  orderingMatrix <- matrix(rep(numericDecreasing*-2+1,nrow(numericDf)),nrow = nrow(numericDf),byrow = TRUE)
+  reorderedMatrix <- numericDf*orderingMatrix
+  colnames(reorderedMatrix) <- NULL
   # Get the ordered indices
-  ordering <- do.call(function(...) order(...,na.last = FALSE), lapply(numericDf*matrix(rep(numericDecreasing*-2+1,nrow(numericDf)),nrow = nrow(numericDf),byrow = TRUE),FUN = identity))
+  ordering <- do.call(function(...) order(...,na.last = FALSE), lapply(reorderedMatrix,FUN = identity))
+  ordering
 }
 
 
@@ -27,7 +33,9 @@
   if (!is.data.frame(dat))
     stop("error, you must provide a data.frame object as 'dat' parameter")
   # Get the indices of the ordered rows
-  s <- do.call("order",dat)
+  unamedDat <- dat
+  colnames(unamedDat) <- NULL
+  s <- do.call("order",lapply(unamedDat,FUN=identity))
   # As we use the ordered dat, for each set of duplicated rows, the first occurrence is TRUE and the laters are FALSE
   nonDup <- !duplicated(dat[s, ,drop=FALSE])
   # Get the index of the non duplicated (or original) elements (elements equal to TRUE)
