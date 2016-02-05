@@ -12,6 +12,12 @@ exreport has been conceived to obtain robust and transparent reproducibility whe
 
 * [Exreport Docs](http://exreport.jarias.es/docs)
 
+## Subscribe to our user mailing list:
+
+(We use the group to track the active users of the package so we appreciate it very much if you subscribe)
+
+* [Subscribe to exreport-user group](http://groups.google.com/group/exreport-user/boxsubscribe)
+
 
 ## Install from github via devtools
 
