@@ -35,6 +35,7 @@ plotRankDistribution <- function(testMultiple) {
   da <- reshape2::melt(da, id.vars="method")
   
   means <- aggregate(value ~ method, da, mean)
+  methodNames <- as.character(testMultiple$names[[1]]) # as characters
   
   # The boxes are shaded only if a control post-hoc has been peformed
   if (is.testMultipleControl(testMultiple)) {
@@ -42,18 +43,13 @@ plotRankDistribution <- function(testMultiple) {
     color <- accepted
     color[accepted==TRUE | is.na(accepted)]  <- "white"
     color[accepted==FALSE] <- "grey"
-    # Now color says if the method i in testMultiple$names pass the test or not
-    # (but the index is different from da!) --> We have to reorder
-    disorderedNames <- as.character(means[["method"]]) # as characters
-    orderedNames <- as.character(testMultiple$names[[1]]) # as characters
-    indexNames <- sapply(orderedNames,FUN=function(x) which(disorderedNames==x))
-    #Now we reorder the color array
-    color <- color[indexNames]
+    # We create a data.frame with names and color column, to merge with means
+    color <- data.frame(method=methodNames, color = color)
   } else {
-    color <- rep("white", nrow(means))
+    color <- data.frame(method=methodNames, color = rep("white", nrow(means)))
   }
 
-  means <- cbind(means, color)
+  means <- merge(means, color)
   means <- means[order(means$value),,drop=FALSE]
   
   p <- eval(parse(text = "ggplot(da, aes(x=reorder(method, value), value))"))
