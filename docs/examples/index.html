@@ -1,0 +1,504 @@
+<!--
+Parameters:
+
+title, date
+
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet" />
+
+    <title>Your wekaExperiment example report</title>
+</head>
+
+<body data-spy="scroll" data-target="#side-nav" data-offset="350">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://exreport.jarias.es">Generated with exreport - beta 0.4</a>
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+        <div class="row">
+
+             <div class="col-xs-1 visible-lg visible-md"></div>
+
+             <div class="col-md-10 document">
+              <div class="document-content">
+
+               <br>
+               <br>
+               <div class="text-center">
+                 <h1>Your wekaExperiment example report</h1>
+                 <h3>2015-11-16</h3>
+               </div>
+               <br>
+               <hr>
+               <br>
+               <br>
+
+<!--
+Parameters:
+
+title, methods, problems, parameters, outputs, history
+
+-->
+
+<section id="elem_1_hook">
+<a id="weka"></a>
+    <div class="text-center">
+      <h2>Experiment: weka</h2>
+    </div>
+    <ul>
+    </br>
+        <li><strong>Methods:</strong> J48, NaiveBayes, OneR, RandomForest</li>
+        <li><strong>Problems:</strong> anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel</li>
+        <li><strong>Parameters:</strong>
+        <ul>
+<li>featureSelection [no,yes] (instantiated)</li>
+
+</ul>
+        </li>
+        <li><strong>Outputs:</strong> accuracy, trainingTime</li>
+    </ul>
+    <h5>History:</h5>
+        <ol>
+<li>Experiment weka loaded from a data set.</li>
+<li>Parameters 'fold' have been removed using the function 'mean'</li>
+<li>A set of pairs 'column:[defaultValues]' has been used to subset the experiment: featureSelection:[no]</li>
+<li>Methods has been instanciated with the parameters: featureSelection</li>
+
+</ol>
+    </br>
+    </br>
+</section>
+    <hr>
+
+<!--
+Parameters:
+
+title, methods, problems, parameters, outputs, history
+
+-->
+
+<section id="elem_2_hook">
+<a id="weka"></a>
+    <div class="text-center">
+      <h2>Experiment: weka</h2>
+    </div>
+    <ul>
+    </br>
+        <li><strong>Methods:</strong> NaiveBayes, J48, RandomForest, OneR</li>
+        <li><strong>Problems:</strong> hypothyroid, liver-disorders, vehicle, car, ionosphere, soybean, vote, anneal, lymph, vowel, audiology, glass, primary-tumor, balance-scale, horsecolic</li>
+        <li><strong>Parameters:</strong>
+        <ul>
+<li>featureSelection [no,yes]</li>
+<li>fold [0,1,2,3,4,5,6,7,8,9]</li>
+
+</ul>
+        </li>
+        <li><strong>Outputs:</strong> accuracy, trainingTime</li>
+    </ul>
+    <h5>History:</h5>
+        <ol>
+<li>Experiment weka loaded from a data set.</li>
+
+</ol>
+    </br>
+    </br>
+</section>
+    <hr>
+
+<!--
+Parameters:
+
+title, methods, problems, parameters, outputs, history
+
+-->
+
+<section id="elem_3_hook">
+<a id="weka"></a>
+    <div class="text-center">
+      <h2>Experiment: weka</h2>
+    </div>
+    <ul>
+    </br>
+        <li><strong>Methods:</strong> J48, NaiveBayes, OneR, RandomForest</li>
+        <li><strong>Problems:</strong> anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel</li>
+        <li><strong>Parameters:</strong>
+        <ul>
+<li>nuevoPar [nuevoVal]</li>
+<li>featureSelection [no,yes] (instantiated)</li>
+
+</ul>
+        </li>
+        <li><strong>Outputs:</strong> accuracy, trainingTime</li>
+    </ul>
+    <h5>History:</h5>
+        <ol>
+<li>Experiment weka loaded from a data set.</li>
+<li>Parameters 'fold' have been removed using the function 'mean'</li>
+<li>A set of pairs 'column:[defaultValues]' has been used to subset the experiment: featureSelection:[no]</li>
+<li>Methods has been instanciated with the parameters: featureSelection</li>
+<li>New parameters have been added with default values: nuevoPar:nuevoVal</li>
+
+</ol>
+    </br>
+    </br>
+</section>
+    <hr>
+
+<!--
+Parameters:
+
+title, context, target, objetive, distribution, statistic, pvalue, alpha, outcome
+
+-->
+
+   <section id="elem_4_hook">
+    <div class="text-center">
+      <h2>Friedman Test for output "accuracy"</h2>
+      From experiment: <a href="#weka">weka</a>
+    </div>
+    </br>
+
+    </br>
+    Friedman test for output accuracy </br>
+    <ul>
+        <li>H<sub>0</sub>: all methods being equivalent.</li>
+        <li>H<sub>1</sub>: at least one method is not equivalent.</li>
+    </ul>
+
+    <ul>
+        <li>Strategy for ranks: maximize</li>
+        <li>Computed Chi squared statistic with 3 degrees of freedom: 20.84</li>
+        <li>Computed p-value: 0.000113645596289616</li>
+        <li>Outcome for &alpha; = 0.05: H<sub>0</sub> <span class="label label-info">Rejected</span></li>
+    </ul>
+    </br>
+    </br>
+    </section>
+    <hr>
+
+<!--
+Parameters:
+
+title, htmlTable, id, latexTable
+
+-->
+    <section id="elem_5_hook">
+    <div class="text-center">
+    <h2>Results for output "accuracy"</h2>
+    From experiment: <a href="#weka">weka</a>
+    </div>
+    </br>
+    </br>
+
+    <!-- Single button -->
+    <div class="text-center">
+      <div class="btn-group ">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Download <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="downloadFig('elem_5', '.eps')">EPS format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_5', '.pdf')">PDF format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_5', '.png')">PNG format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_5', '.svg')">SVG format</a></li>
+        </ul>
+      </div>
+      <br>
+      <br>
+      <img  src="./img/elem_5.svg" width="80%"/>
+    </div>
+
+    </br>
+    </br>
+    </section>
+    <hr>
+
+<!--
+Parameters:
+
+title, htmlTable, id, latexTable
+
+-->
+    <section id="elem_6_hook">
+    <div class="text-center">
+    <h2>Cumulative Ranking for Var accuracy</h2>
+    From experiment: <a href="#weka">weka</a>
+    </div>
+    </br>
+    </br>
+
+    <!-- Single button -->
+    <div class="text-center">
+      <div class="btn-group ">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Download <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="downloadFig('elem_6', '.eps')">EPS format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_6', '.pdf')">PDF format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_6', '.png')">PNG format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_6', '.svg')">SVG format</a></li>
+        </ul>
+      </div>
+      <br>
+      <br>
+      <img  src="./img/elem_6.svg" width="80%"/>
+    </div>
+
+    </br>
+    </br>
+    </section>
+    <hr>
+
+<!--
+Parameters:
+
+title, context, scope, method, alpha, htmlTable, id, latexTable
+
+-->
+    <section id="elem_7_hook">
+    <div class="text-center">
+      <h2>Summary of Control post-hoc test for output "accuracy"</h2>
+      From experiment: <a href="#weka">weka</a>
+    </div>
+
+    <ul>
+        <li>Test: Control post-hoc test</li>
+        <li>Adjust Method: Holm</li>
+        <li>&alpha; = 0.05</li>
+        <li>Boldfaced results represent non-rejected hipotheses</li>
+    </ul>
+    </br>
+    </br>
+
+    <div>
+      <div class="table-responsive">
+        
+<br/><br/>
+<table class="table table-hover">
+<tr>
+<tr>
+<th style="text-align:left">method</th><th style="text-align:right">pvalue</th><th style="text-align:right">rank</th><th style="text-align:right">win</th><th style="text-align:right">tie</th><th style="text-align:right">loss</th></tr>
+<tr>
+<td style="text-align:left">RandomForest</td><td style="text-align:right">-</td><td style="text-align:right">1.67</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">-</td>
+</tr>
+<tr>
+<td style="text-align:left">J48</td><td style="text-align:right"><strong>5.7161e-01</strong></td><td style="text-align:right">1.93</td><td style="text-align:right">9</td><td style="text-align:right">0</td><td style="text-align:right">6</td>
+</tr>
+<tr>
+<td style="text-align:left">NaiveBayes</td><td style="text-align:right">3.2419e-02</td><td style="text-align:right">2.80</td><td style="text-align:right">11</td><td style="text-align:right">0</td><td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:left">OneR</td><td style="text-align:right">1.2329e-04</td><td style="text-align:right">3.60</td><td style="text-align:right">15</td><td style="text-align:right">0</td><td style="text-align:right">0</td>
+</tr>
+</table>
+      </div>
+    </div>
+
+    </br>
+
+    <button class="btn btn-primary" type="button" data-toggle="collapse"
+     data-target="#elem_7_hidden" aria-expanded="false" aria-controls="collapseExample">
+      Show/Hide LaTeX Code
+    </button>
+    </br>
+    </br>
+    <div class="collapse" id="elem_7_hidden">
+      <pre id="elem_7_code">
+
+\begin{tabular}{lrrrrr}
+\hline
+method & pvalue & rank & win & tie & loss\\
+\hline
+RandomForest & - & 1.67 & - & - & -\\
+J48 & \bf 5.7161e-01 & 1.93 & 9 & 0 & 6\\
+NaiveBayes & 3.2419e-02 & 2.80 & 11 & 0 & 4\\
+OneR & 1.2329e-04 & 3.60 & 15 & 0 & 0\\
+\hline
+\end{tabular}
+</pre>
+    </br>
+      <button class="btn btn-success btn-sm" onclick="selectText('elem_7_code')">
+        Select Code
+      </button>
+    </div>
+    <br>
+    <br>
+    </section>
+    <hr>
+
+<!--
+Parameters:
+
+title, htmlTable, id, latexTable
+
+-->
+    <section id="elem_8_hook">
+    <div class="text-center">
+    <h2>Distribution of ranks for output "accuracy"</h2>
+    From experiment: <a href="#weka">weka</a>
+    </div>
+    </br>
+    </br>
+
+    <!-- Single button -->
+    <div class="text-center">
+      <div class="btn-group ">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Download <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="downloadFig('elem_8', '.eps')">EPS format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_8', '.pdf')">PDF format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_8', '.png')">PNG format</a></li>
+            <li><a href="#" onclick="downloadFig('elem_8', '.svg')">SVG format</a></li>
+        </ul>
+      </div>
+      <br>
+      <br>
+      <img  src="./img/elem_8.svg" width="80%"/>
+    </div>
+
+    </br>
+    </br>
+    </section>
+    <hr>
+
+<!--
+Parameters:
+
+title, context, htmlTable, id, latexTable
+
+-->
+    <section id="elem_9_hook">
+    <div class="text-center">
+      <h2>Detailed results for output(s) "accuracy"</h2>
+      From experiment: <a href="#weka">weka</a>
+    </div>
+
+    </br>
+    </br>
+
+    <div>
+      <div class="table-responsive">
+        
+<br/><br/>
+<table class="table table-hover">
+<tr>
+<tr>
+<th style="text-align:left">method</th><th style="text-align:right">anneal</th><th style="text-align:right">audiology</th><th style="text-align:right">balance-scale</th><th style="text-align:right">car</th><th style="text-align:right">glass</th><th style="text-align:right">horsecolic</th><th style="text-align:right">hypothyroid</th><th style="text-align:right">ionosphere</th><th style="text-align:right">liver-disorders</th><th style="text-align:right">lymph</th><th style="text-align:right">primary-tumor</th><th style="text-align:right">soybean</th><th style="text-align:right">vehicle</th><th style="text-align:right">vote</th><th style="text-align:right">vowel</th></tr>
+<tr>
+<td style="text-align:left">J48</td><td style="text-align:right">98.7753</td><td style="text-align:right"><strong>75.2964</strong></td><td style="text-align:right">75.7143</td><td style="text-align:right">77.8861</td><td style="text-align:right">66.8831</td><td style="text-align:right"><strong>85.3228</strong></td><td style="text-align:right"><strong>99.4167</strong></td><td style="text-align:right">87.4762</td><td style="text-align:right">61.8151</td><td style="text-align:right">77.0476</td><td style="text-align:right">40.7041</td><td style="text-align:right">82.4020</td><td style="text-align:right"><strong>73.1555</strong></td><td style="text-align:right"><strong>96.9979</strong></td><td style="text-align:right">52.2222</td>
+</tr>
+<tr>
+<td style="text-align:left">NaiveBayes</td><td style="text-align:right">86.5281</td><td style="text-align:right">68.6561</td><td style="text-align:right"><strong>87.8469</strong></td><td style="text-align:right">73.1352</td><td style="text-align:right">44.5022</td><td style="text-align:right">78.2357</td><td style="text-align:right">95.4142</td><td style="text-align:right">79.4682</td><td style="text-align:right">49.3025</td><td style="text-align:right"><strong>82.4762</strong></td><td style="text-align:right"><strong>50.7308</strong></td><td style="text-align:right"><strong>88.4165</strong></td><td style="text-align:right">44.4314</td><td style="text-align:right">89.6564</td><td style="text-align:right">59.6970</td>
+</tr>
+<tr>
+<td style="text-align:left">OneR</td><td style="text-align:right">83.6330</td><td style="text-align:right">46.5613</td><td style="text-align:right">36.3543</td><td style="text-align:right">70.0081</td><td style="text-align:right">53.8312</td><td style="text-align:right">81.5165</td><td style="text-align:right">96.3415</td><td style="text-align:right">78.3413</td><td style="text-align:right">53.0420</td><td style="text-align:right">74.2857</td><td style="text-align:right">25.3298</td><td style="text-align:right">24.9126</td><td style="text-align:right">52.6050</td><td style="text-align:right">95.6184</td><td style="text-align:right">26.3636</td>
+</tr>
+<tr>
+<td style="text-align:left">RandomForest</td><td style="text-align:right"><strong>99.1074</strong></td><td style="text-align:right">71.7786</td><td style="text-align:right">79.7031</td><td style="text-align:right"><strong>81.8780</strong></td><td style="text-align:right"><strong>77.6191</strong></td><td style="text-align:right">84.2117</td><td style="text-align:right">99.3106</td><td style="text-align:right"><strong>93.7460</strong></td><td style="text-align:right"><strong>64.0924</strong></td><td style="text-align:right">79.1428</td><td style="text-align:right">40.6952</td><td style="text-align:right">84.7506</td><td style="text-align:right">73.0434</td><td style="text-align:right">96.5380</td><td style="text-align:right"><strong>64.6465</strong></td>
+</tr>
+</table>
+      </div>
+    </div>
+
+    </br>
+
+    <button class="btn btn-primary" type="button" data-toggle="collapse"
+     data-target="#elem_9_hidden" aria-expanded="false" aria-controls="collapseExample">
+      Show/Hide LaTeX Code
+    </button>
+    </br>
+    </br>
+    <div class="collapse" id="elem_9_hidden">
+      <pre id="elem_9_code">
+
+\begin{tabular}{lrrrrrrrrrrrrrrr}
+\hline
+method & anneal & audiology & balance-scale & car & glass & horsecolic & hypothyroid & ionosphere & liver-disorders & lymph & primary-tumor & soybean & vehicle & vote & vowel\\
+\hline
+J48 & 98.7753 & \bf 75.2964 & 75.7143 & 77.8861 & 66.8831 & \bf 85.3228 & \bf 99.4167 & 87.4762 & 61.8151 & 77.0476 & 40.7041 & 82.4020 & \bf 73.1555 & \bf 96.9979 & 52.2222\\
+NaiveBayes & 86.5281 & 68.6561 & \bf 87.8469 & 73.1352 & 44.5022 & 78.2357 & 95.4142 & 79.4682 & 49.3025 & \bf 82.4762 & \bf 50.7308 & \bf 88.4165 & 44.4314 & 89.6564 & 59.6970\\
+OneR & 83.6330 & 46.5613 & 36.3543 & 70.0081 & 53.8312 & 81.5165 & 96.3415 & 78.3413 & 53.0420 & 74.2857 & 25.3298 & 24.9126 & 52.6050 & 95.6184 & 26.3636\\
+RandomForest & \bf 99.1074 & 71.7786 & 79.7031 & \bf 81.8780 & \bf 77.6191 & 84.2117 & 99.3106 & \bf 93.7460 & \bf 64.0924 & 79.1428 & 40.6952 & 84.7506 & 73.0434 & 96.5380 & \bf 64.6465\\
+\hline
+\end{tabular}
+</pre>
+    </br>
+      <button class="btn btn-success btn-sm" onclick="selectText('elem_9_code')">
+        Select Code
+      </button>
+    </div>
+
+    <br>
+    <br>
+    </section>
+    <hr>
+<!--
+Parameters:
+
+r_version, index
+
+-->
+          </div>
+        </div> <!-- End Col -->
+
+        <div class="col-md-1 visible-lg" id="side-nav">
+            <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="50">
+              
+<li><a href="#elem_1_hook"><strong>experiment:</strong>weka</a></li>
+<li><a href="#elem_2_hook"><strong>experiment:</strong>weka</a></li>
+<li><a href="#elem_3_hook"><strong>experiment:</strong>weka</a></li>
+<li><a href="#elem_4_hook"><strong>TestMultipleControl:</strong>accuracy</a></li>
+<li><a href="#elem_5_hook"><strong>ExpSummaryPlot:</strong>accuracy</a></li>
+<li><a href="#elem_6_hook"><strong>CumulativeRank:</strong>accuracy</a></li>
+<li><a href="#elem_7_hook"><strong>TestSummaryTable:</strong>accuracy</a></li>
+<li><a href="#elem_8_hook"><strong>RankDistributionPlot:</strong>accuracy</a></li>
+<li><a href="#elem_9_hook"><strong>ExpSummaryTable:</strong>accuracy</a></li>
+            </ul>
+        </div>
+
+
+      </div> <!-- End Row -->
+    </div> <!-- End Container -->
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <br>
+          <br>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-12 text-center" style="background-color:black;">
+          <span class="text-center" style="color: #999;">
+            <br>
+            <h5>exreport, Copyright 2015 by Jacinto Arias and Javier Cozar</h5>
+            Generated using R version 3.2.1 (2015-06-18)
+            <br>
+            <br>
+          </span>
+          </div>
+      </div>
+    </div>
+
+    <script src="./assets/jquery.js"></script>
+    <script src="./assets/scripts.js"></script>
+    <script src="./assets/bootstrap.min.js"></script>
+
+</body>
+</html>
