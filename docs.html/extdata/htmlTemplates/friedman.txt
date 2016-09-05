@@ -1,0 +1,32 @@
+
+<!--
+Parameters:
+
+title, context, target, objetive, distribution, statistic, pvalue, alpha, outcome
+
+-->
+
+   <section id="{{id}}_hook">
+    <div class="text-center">
+      <h2>{{title}}</h2>
+      From experiment: <a href="#{{context}}">{{context}}</a>
+    </div>
+    </br>
+
+    </br>
+    Friedman test for output {{target}} </br>
+    <ul>
+        <li>H<sub>0</sub>: all methods being equivalent.</li>
+        <li>H<sub>1</sub>: at least one method is not equivalent.</li>
+    </ul>
+
+    <ul>
+        <li>Strategy for ranks: {{objetive}}</li>
+        <li>Computed Chi squared statistic with {{distribution}} degrees of freedom: {{statistic}}</li>
+        <li>Computed p-value: {{pvalue}}</li>
+        <li>Outcome for &alpha; = {{alpha}}: H<sub>0</sub> <span class="label label-info">{{outcome}}</span></li>
+    </ul>
+    </br>
+    </br>
+    </section>
+    <hr>

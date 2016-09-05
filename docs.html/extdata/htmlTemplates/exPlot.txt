@@ -1,0 +1,37 @@
+
+<!--
+Parameters:
+
+title, htmlTable, id, latexTable
+
+-->
+    <section id="{{id}}_hook">
+    <div class="text-center">
+    <h2>{{title}}</h2>
+    From experiment: <a href="#{{context}}">{{context}}</a>
+    </div>
+    </br>
+    </br>
+
+    <!-- Single button -->
+    <div class="text-center">
+      <div class="btn-group ">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Download <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="downloadFig('{{id}}', '.eps')">EPS format</a></li>
+            <li><a href="#" onclick="downloadFig('{{id}}', '.pdf')">PDF format</a></li>
+            <li><a href="#" onclick="downloadFig('{{id}}', '.png')">PNG format</a></li>
+            <li><a href="#" onclick="downloadFig('{{id}}', '.svg')">SVG format</a></li>
+        </ul>
+      </div>
+      <br>
+      <br>
+      <img  src="./img/{{id}}.svg" width="80%"/>
+    </div>
+
+    </br>
+    </br>
+    </section>
+    <hr>

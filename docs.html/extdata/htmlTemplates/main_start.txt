@@ -1,0 +1,46 @@
+<!--
+Parameters:
+
+title, date
+
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet" />
+
+    <title>{{title}}</title>
+</head>
+
+<body data-spy="scroll" data-target="#side-nav" data-offset="350">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://exreport.jarias.es">Generated with exreport - beta 0.4</a>
+    </div>
+  </div>
+</nav>
+
+    <div class="container">
+
+
+        <div class="row">
+
+             <div class="col-xs-1 visible-lg visible-md"></div>
+
+             <div class="col-md-10 document">
+              <div class="document-content">
+
+               <br>
+               <br>
+               <div class="text-center">
+                 <h1>{{title}}</h1>
+                 <h3>{{date}}</h3>
+               </div>
+               <br>
+               <hr>
+               <br>
+               <br>

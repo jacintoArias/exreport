@@ -1,0 +1,24 @@
+
+\mychapter{{{title}}}
+
+\begin{center}
+From experiment: \hyperref[{{context}}] { \textbf{ {{context}} } }
+\end{center}
+
+\bigskip
+\bigskip
+
+Friedman test for output {{target}}
+\bigskip
+
+
+\begin{itemize}
+\item $H_0$: all methods being equivalent.
+\item $H_1$: at least one method is not equivalent.
+\end{itemize}
+\begin{itemize}
+\item Strategy for ranks: {{objetive}}
+\item Computed Chi squared statistic with {{distribution}} degrees of freedom: {{statistic}}
+\item Computed p-value: {{pvalue}}
+\item Outcome for $\alpha$ = {{alpha}}: $H_0$ \textbf{{{outcome}}}
+\end{itemize}

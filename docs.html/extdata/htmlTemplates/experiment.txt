@@ -1,0 +1,28 @@
+
+<!--
+Parameters:
+
+title, methods, problems, parameters, outputs, history
+
+-->
+
+<section id="{{id}}_hook">
+<a id="{{title}}"></a>
+    <div class="text-center">
+      <h2>Experiment: {{title}}</h2>
+    </div>
+    <ul>
+    </br>
+        <li><strong>Methods:</strong> {{methods}}</li>
+        <li><strong>Problems:</strong> {{problems}}</li>
+        <li><strong>Parameters:</strong>
+        {{parameters}}
+        </li>
+        <li><strong>Outputs:</strong> {{outputs}}</li>
+    </ul>
+    <h5>History:</h5>
+        {{history}}
+    </br>
+    </br>
+</section>
+    <hr>

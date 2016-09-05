@@ -1,0 +1,56 @@
+\newcommand{\mychapter}[1]{
+    \setcounter{section}{0}
+    \stepcounter{chapter}
+    \chapter*{\the\value{chapter} - #1}
+    \addcontentsline{toc}{chapter}{\the\value{chapter} - #1}
+    
+}
+\renewcommand\cftchapdotsep{\cftdotsep}
+
+\newcommand{\exSubtitle}[1]{
+\noindent
+\begin{large}
+\textbf{#1}
+\end{large}
+}
+
+\newcommand{\exPlot}[1]{
+\begin{center}
+	\includegraphics[max width = \textwidth]{./img/#1.eps} 
+\end{center}
+}
+
+\newcommand{\exTable}[1]{
+\begin{center}
+	\begin{adjustbox}{max width=\textwidth}
+	#1
+	\end{adjustbox}
+\end{center}
+}
+
+\newenvironment{exFooter}{\par\vspace*{\fill}}{\clearpage}
+
+%%% We redefine the \@makechapterhead in order to suppress the space between %%%
+%%% the top margin of the page and the title of the chapter. %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\def\@makechapterhead#1{%
+  %%%\vspace*{50\p@}%%% removed!
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 20\p@
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\def\@makeschapterhead#1{%
+  %%%%%\vspace*{50\p@}% %%% removed!
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \Huge \bfseries  #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
