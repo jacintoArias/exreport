@@ -1,0 +1,81 @@
+---
+title: "Combine two experiments with different outputs"
+name: "expCombine"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expCombine.html'>expCombine</a></span><span class="keyword">(</span><span class="symbol">e1</span><span class="keyword">,</span> <span class="symbol">e2</span><span class="keyword">,</span> <span class="argument">name</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>e1</dt>
+      <dd>First experiment to combine.</dd>
+      <dt>e2</dt>
+      <dd>An second experiment to combine, must share the same
+config as e1.</dd>
+      <dt>name</dt>
+      <dd>Optional name for the resulting experiment. If not specified
+the new experiment will be called &quot;e1_name U e2_name&quot;</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+An new experiment with common rows and all columns.
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This fuctions joints two experiments sharing the same configuration
+of methods, problems and parameters but different outputs. The resulting
+experiment includes the common rows for both experiments with all the
+output columns.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># In this example we turn the wekaExperiment into two different experiments,</span>
+<span class="comment"># with different outputs to combine them:</span>
+
+<span class="symbol">df_acc</span>  <span class="assignement">&lt;-</span> <span class="symbol">wekaExperiment</span><span class="keyword">[</span><span class="keyword">,</span>
+           <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"method"</span><span class="keyword">,</span> <span class="string">"problem"</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="string">"featureSelection"</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">)</span><span class="keyword">]</span>
+<span class="symbol">df_time</span> <span class="assignement">&lt;-</span> <span class="symbol">wekaExperiment</span><span class="keyword">[</span><span class="keyword">,</span>
+           <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"method"</span><span class="keyword">,</span> <span class="string">"problem"</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="string">"featureSelection"</span><span class="keyword">,</span> <span class="string">"trainingTime"</span><span class="keyword">)</span><span class="keyword">]</span>
+
+<span class="symbol">exp_acc</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">df_acc</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"acc"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="symbol">exp_time</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">df_time</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"time"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+
+<span class="comment"># With expCombine we can mix the two experiments:</span>
+<span class="functioncall"><a href='expCombine.html'>expCombine</a></span><span class="keyword">(</span><span class="symbol">exp_acc</span><span class="keyword">,</span> <span class="symbol">exp_time</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: acc U time
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) fold [0,1,2,3,4,5,6,7,8,9]
+*) featureSelection [no,yes]
+
+#outputs: accuracy, trainingTime
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expCombine</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

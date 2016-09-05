@@ -1,0 +1,80 @@
+---
+title: "Concatenate rows of matching experiments"
+name: "expConcat"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expConcat.html'>expConcat</a></span><span class="keyword">(</span><span class="symbol">e1</span><span class="keyword">,</span> <span class="symbol">e2</span><span class="keyword">,</span> <span class="argument">name</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">tol</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1e-09</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>e1</dt>
+      <dd>First experiment object to concat.</dd>
+      <dt>e2</dt>
+      <dd>Second experiment object to concat. Must have the same configuration
+than e1.</dd>
+      <dt>name</dt>
+      <dd>Optional name, if not provided the new experiment will be called
+&quot;e1_name + e2_name&quot;</dd>
+      <dt>tol</dt>
+      <dd>Tolerance value for duplicate checking.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+An experiment object having all the rows of e1 and e2
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function concatenates two experiments with the same configuration
+of parameter an outputs. At least one common output must be present,
+the rest of them will be removed from the resulting experiment.
+Different methods and problems can be present.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># In this example we turn the wekaExperiment into two different experiments,</span>
+<span class="comment"># with different parameter values to combine them:</span>
+
+<span class="symbol">df_no</span>  <span class="assignement">&lt;-</span> <span class="symbol">wekaExperiment</span><span class="keyword">[</span><span class="symbol">wekaExperiment</span><span class="keyword">$</span><span class="symbol">featureSelection</span>==<span class="string">"no"</span><span class="keyword">,</span><span class="keyword">]</span>
+<span class="symbol">df_yes</span> <span class="assignement">&lt;-</span> <span class="symbol">wekaExperiment</span><span class="keyword">[</span><span class="symbol">wekaExperiment</span><span class="keyword">$</span><span class="symbol">featureSelection</span>==<span class="string">"yes"</span><span class="keyword">,</span><span class="keyword">]</span>
+
+<span class="symbol">exp_yes</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">df_yes</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"fss-yes"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="symbol">exp_no</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">df_no</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"fss-no"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='expConcat.html'>expConcat</a></span><span class="keyword">(</span><span class="symbol">exp_yes</span><span class="keyword">,</span> <span class="symbol">exp_no</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: fss-yes+fss-no
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no,yes]
+*) fold [0,1,2,3,4,5,6,7,8,9]
+
+#outputs: accuracy, trainingTime
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expConcat</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

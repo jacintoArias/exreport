@@ -21,3 +21,14 @@ url: "http://exreport.jarias.es" # the base hostname & protocol for your site
 # Build settings
 markdown: kramdown
 theme: minima
+
+collections:
+  topics:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: topics
+    values:
+      layout: topic

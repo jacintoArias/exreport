@@ -1,0 +1,70 @@
+---
+title: "Extract statistically equivalent methods from a multiple comparison test"
+name: "expExtract"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expExtract.html'>expExtract</a></span><span class="keyword">(</span><span class="symbol">ph</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>ph</dt>
+      <dd>A testMultipleControl test object</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+an experiment object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This functions generates a new experiment incluing the methods that obtained
+an equivalent performance with statisticall significance in the multiple
+comparison test i.e. those whose hypotheses were not rejected</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># First we create an experiment from the wekaExperiment problem and prepare</span>
+<span class="comment"># it to apply the test:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># Then we perform a testMultiplePairwise test procedure</span>
+<span class="symbol">test</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='testMultipleControl.html'>testMultipleControl</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"trainingTime"</span><span class="keyword">,</span> <span class="string">"min"</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='expExtract.html'>expExtract</a></span><span class="keyword">(</span><span class="symbol">test</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: test
+
+#method: J48,no, NaiveBayes,no, OneR,no, RandomForest,no, J48,yes, NaiveBayes,yes, OneR,yes, RandomForest,yes
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no,yes] (instantiated)
+
+#outputs: accuracy, trainingTime
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expExtract</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

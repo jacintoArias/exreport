@@ -1,0 +1,60 @@
+---
+title: "Add elements to an existing exreport document"
+name: "exreportAdd"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='exreportAdd.html'>exreportAdd</a></span><span class="keyword">(</span><span class="symbol">rep</span><span class="keyword">,</span> <span class="symbol">elem</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>rep</dt>
+      <dd>an exreport object in which the elem will be added</dd>
+      <dt>elem</dt>
+      <dd>a reportable object or a list of them</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+an extended exreport document
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function allows to add one or more reportable objects to an exisiting
+exreport document.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># Create an empty document:</span>
+<span class="symbol">report</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='exreport.html'>exreport</a></span><span class="keyword">(</span><span class="string">"Test document"</span><span class="keyword">)</span>
+
+<span class="comment"># Create a reportable object (an experiment)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test-exp"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+
+<span class="comment"># Add this object to the document</span>
+<span class="functioncall"><a href='exreportAdd.html'>exreportAdd</a></span><span class="keyword">(</span><span class="symbol">report</span><span class="keyword">,</span> <span class="symbol">experiment</span><span class="keyword">)</span></div>
+<div class='output'>[1] &quot;Report (1) elements. Title: Test document&quot;
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>exreportAdd</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

@@ -1,0 +1,95 @@
+---
+title: "Load data and create an exreport experiment"
+name: "expCreate"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">data</span><span class="keyword">,</span> <span class="argument">methods</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"method"</span><span class="keyword">,</span> <span class="argument">problems</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"problem"</span><span class="keyword">,</span>
+  <span class="argument">parameters</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">respectOrder</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="symbol">name</span><span class="keyword">,</span> <span class="argument">tol</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1e-09</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>data</dt>
+      <dd>A data.frame object satisfying the experiment format</dd>
+      <dt>methods</dt>
+      <dd>The name of the variable which contains the methods, by default
+is searches for a column named &quot;method&quot;.</dd>
+      <dt>problems</dt>
+      <dd>The name of the variable which contains the problems, by
+default is searches for a column named &quot;problem&quot;.</dd>
+      <dt>parameters</dt>
+      <dd>A list of the columns names to be identified as parameters.
+By default the remaining categorical columns
+are identified as parameters, so this list is useful only to identify numeric
+columns.</dd>
+      <dt>respectOrder</dt>
+      <dd>A logical parameter which indicates if the order of the
+elements of the method and problem columns must be respected by appearance or
+ordered alphabeticaly. It affects to the look of data representations.</dd>
+      <dt>name</dt>
+      <dd>A string which will identify the experiment in the report.</dd>
+      <dt>tol</dt>
+      <dd>Tolerance factor to identify repeated experiments for duplicated
+rows.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+A new exreport experiment object.
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function loads a data.frame, checks its properties and formats an
+exreport experiment object. The columns of an experiments must contain at
+least two categorical columns to be identified as the method and problem
+variables and a thrid numerical column to be identified as an output variable.
+Additional columns can be added as parameters or additional outputs.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># Creates experiment specifying column names and the numerical variables that</span>
+<span class="comment"># are parameters</span>
+
+<span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span>
+<span class="argument">methods</span><span class="argument">=</span><span class="string">"method"</span><span class="keyword">,</span>
+<span class="argument">problems</span><span class="argument">=</span><span class="string">"problem"</span><span class="keyword">,</span>
+<span class="argument">parameters</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">,</span>
+<span class="argument">name</span><span class="argument">=</span><span class="string">"Test Experiment"</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: Test Experiment
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no,yes]
+*) fold [0,1,2,3,4,5,6,7,8,9]
+
+#outputs: accuracy, trainingTime
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expCreate</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+    <h2>See also</h2>
+      <p>expCreateFromTable</p>
+
+    
+
+
+  </div>
+</div>

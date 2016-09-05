@@ -1,0 +1,114 @@
+---
+title: "Obtains a subset of an experiment matching the given conditions"
+name: "expSubset"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="symbol">columns</span><span class="keyword">,</span> <span class="argument">invertSelection</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>e</dt>
+      <dd>The experiment to be subsetted</dd>
+      <dt>columns</dt>
+      <dd>A named list containing the variables to be filtered and the
+valid values.</dd>
+      <dt>invertSelection</dt>
+      <dd>If the filtering must match the inversion of the
+specified conditions.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+a filtered experiment object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function receives a named list indicating variables and values to filter
+the input experiment.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>The names of the elements in the list correspond with the variables to be
+filtered, indicating either the methos or problem variables as well as
+parameters. The values of the list correspond with the valid states for the
+filtering.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># We create a new experiment from the wekaExperiment problem</span>
+<span class="symbol">e</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">parameters</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"Test Experiment"</span><span class="keyword">)</span>
+
+<span class="comment"># We can filter the experiment to reduce the number of methods.</span>
+<span class="symbol">e</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">method</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"J48"</span><span class="keyword">,</span> <span class="string">"NaiveBayes"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="symbol">e</span></div>
+<div class='output'>#Experiment name: Test Experiment
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no,yes]
+*) fold [0,1,2,3,4,5,6,7,8,9]
+
+#outputs: accuracy, trainingTime
+</div>
+<div class='input'>
+<span class="comment"># We can filter the experiment to remove a given problem</span>
+<span class="symbol">e</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">problem</span> <span class="argument">=</span> <span class="string">"iris"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">invertSelection</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+<span class="symbol">e</span></div>
+<div class='output'>#Experiment name: Test Experiment
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no,yes]
+*) fold [0,1,2,3,4,5,6,7,8,9]
+
+#outputs: accuracy, trainingTime
+</div>
+<div class='input'>
+<span class="comment"># We can subset the experiment to obtain a specific parameter configuration</span>
+<span class="symbol">e</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="string">"featureSelection"</span> <span class="argument">=</span> <span class="string">"no"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="symbol">e</span></div>
+<div class='output'>#Experiment name: Test Experiment
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no,yes]
+*) fold [0,1,2,3,4,5,6,7,8,9]
+
+#outputs: accuracy, trainingTime
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expSubset</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

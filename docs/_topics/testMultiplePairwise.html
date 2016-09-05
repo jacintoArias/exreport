@@ -1,0 +1,85 @@
+---
+title: "Multiple Comparison Statistical Test (Friedman + Pairwise Shaffer PostHoc)"
+name: "testMultiplePairwise"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='testMultiplePairwise.html'>testMultiplePairwise</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="symbol">output</span><span class="keyword">,</span> <span class="argument">rankOrder</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"max"</span><span class="keyword">,</span> <span class="argument">alpha</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.05</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>e</dt>
+      <dd>Input experiment</dd>
+      <dt>output</dt>
+      <dd>The output for which the tet will be performed.</dd>
+      <dt>rankOrder</dt>
+      <dd>The optimization strategy, can be either maximizing &quot;max&quot;
+or minimizing &quot;min&quot; the target output variable.</dd>
+      <dt>alpha</dt>
+      <dd>The significance level used for the whole testing procedure.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+an testMultiplePairwise object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function perfoms a multiple comparison statistical test for the given
+experiment. First of all it performs a Friedman Test over all methods. In the
+case this test is rejected, meaning that significant differences are present
+among the methods a post-hoc test is then executed. For that, each pair of
+methods are compared between each other, and finally a Shaffer familywise
+error correction is applied to the resulting p-values.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># First we create an experiment from the wekaExperiment problem and prepare</span>
+<span class="comment"># it to apply the test:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">featureSelection</span> <span class="argument">=</span> <span class="string">"yes"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># Then we perform a testMultiplePairwise test procedure</span>
+<span class="symbol">test</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='testMultiplePairwise.html'>testMultiplePairwise</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">,</span> <span class="string">"max"</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span><span class="keyword">(</span><span class="symbol">test</span><span class="keyword">)</span></div>
+<div class='output'>---------------------------------------------------------------------
+Friedman test, objetive maximize output variable accuracy. Obtained p-value: 3.3072e-04
+Chi squared with 3 degrees of freedom statistic: 18.6000
+Test rejected: p-value: 3.3072e-04 &lt; 0.0500
+---------------------------------------------------------------------
+Pairwise post hoc test for output accuracy
+Adjust method: Shaffer
+
+p-values:
+                   J48 NaiveBayes         OneR
+RandomForest 0.4061836 0.06483817 0.0002465873
+J48                 NA 0.40618358 0.0148973333
+NaiveBayes          NA         NA 0.2690580653
+---------------------------------------------------------------------
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>testMultiplePairwise</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

@@ -1,0 +1,70 @@
+---
+title: "Extend an experiment by adding new parameters"
+name: "expExtend"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expExtend.html'>expExtend</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="symbol">parameters</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>e</dt>
+      <dd>Input experiment</dd>
+      <dt>parameters</dt>
+      <dd>A list of strings containing the values of the new
+parameters, the name for each one of them will be given by the name of the
+corresponding object in the list.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+A modified exreport experiment object with additional parameters.
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function extends an existing exreport experiment object by adding new
+parameters with fixed values.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># We load the wekaExperiment problem as an experiment and then add a new param</span>
+<span class="comment"># with a default value.</span>
+
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='expExtend.html'>expExtend</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">discretization</span> <span class="argument">=</span> <span class="string">"no"</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: test
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no,yes]
+*) fold [0,1,2,3,4,5,6,7,8,9]
+*) discretization [no]
+
+#outputs: accuracy, trainingTime
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expExtend</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

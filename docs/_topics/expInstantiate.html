@@ -1,0 +1,89 @@
+---
+title: "Instatiate the methods in the experiment for each one of the different
+parameter configurations."
+name: "expInstantiate"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="argument">parameters</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">removeUnary</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>e</dt>
+      <dd>The experiment object to be instantiated</dd>
+      <dt>parameters</dt>
+      <dd>A vector indicating the parameters to be instantiaded.
+If NULL or default all parameters would be considered.</dd>
+      <dt>removeUnary</dt>
+      <dd>Boolean value indicating if the unary parameters will be
+used in an instantiation or if the column can be erased.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+an experiment object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>When performing statistical tests or summarizing an experiment for a given
+output variable there can be different parameter configuration for each
+interaction of method and problem. Once applied the desired transformations
+this function can be used to remove unary parameters from the experiment or to
+instantiate the methods for each configuration.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>If any method is instantiated the cartesian product of the method and the
+selected parameters is performed and included in the resulting experiment as
+the methods variable. The name of the corresponding value will indicate the
+name of the former method and the value of each parameter instantiated.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># Create an experiment from the wekaExperiment</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test-exp"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+
+<span class="comment"># We would like to reduce the fold parameter by its mean value. It becomes an</span>
+<span class="comment"># unary parameter.</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+
+<span class="comment"># Now we instantiate the experiment by the featureSelection parameter and</span>
+<span class="comment"># remove the unary fold parameter</span>
+<span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: test-exp
+
+#method: J48,no, NaiveBayes,no, OneR,no, RandomForest,no, J48,yes, NaiveBayes,yes, OneR,yes, RandomForest,yes
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no,yes] (instantiated)
+
+#outputs: accuracy, trainingTime
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expInstantiate</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

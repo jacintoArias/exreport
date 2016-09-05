@@ -5,7 +5,7 @@
              {% assign navigation_pages = site.html_pages | sort: 'navigation_weight' %}
               {% for p in navigation_pages %}
                 {% if p.navigation_weight %}
-                  <li {% if p.url == page.url | prepend: site.github.url %}class="active"{% endif %} role="presentation"><a href="{{p.url}}">{{p.title}}</a></li>
+                  <li {% if p.url == page.url | prepend: site.github.url %} class="active"{% endif %} role="presentation"><a href="{{p.url}}">{{p.title}}</a></li>
                 {% endif %}
               {% endfor %}
            </ul>

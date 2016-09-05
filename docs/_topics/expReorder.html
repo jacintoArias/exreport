@@ -1,0 +1,78 @@
+---
+title: "Change the order of elements that an experiment contains"
+name: "expReorder"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expReorder.html'>expReorder</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="symbol">elements</span><span class="keyword">,</span> <span class="argument">placeRestAtEnd</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>e</dt>
+      <dd>Input experiment</dd>
+      <dt>elements</dt>
+      <dd>A list of arrays of strings containing the ordered names.
+The name for the parameter, method or problem will be given by the name of the
+corresponding object in the list.
+The names which have not been specified will be placed at the begining or at
+the end (depending on the parameter placeRestAtEnd).
+If a name is not present in the set of parameter values, it will be ignored.</dd>
+      <dt>placeRestAtEnd</dt>
+      <dd>Logical value which indicates if the non specified
+value names have to be placed after the specified ones (TRUE) or before (FALSE).</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+A modified exreport experiment object with some changes on the name of
+the elements.
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function change the order of problems, methods or parameter values that
+an existing experiment object contains. The order affects the look of the
+data representation (as tables and plots).</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># We load the wekaExperiment problem as an experiment and then change the order</span>
+<span class="comment"># of the values for the parameter featureSelection and for one valoue for the method.</span>
+
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='expReorder.html'>expReorder</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">featureSelection</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"yes"</span><span class="keyword">,</span><span class="string">"no"</span><span class="keyword">)</span><span class="keyword">,</span>
+                           <span class="argument">method</span><span class="argument">=</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"OneR"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: test
+
+#method: OneR, J48, NaiveBayes, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [yes,no]
+*) fold [0,1,2,3,4,5,6,7,8,9]
+
+#outputs: accuracy, trainingTime
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expReorder</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>
