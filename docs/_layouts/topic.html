@@ -5,22 +5,22 @@ extra_css:
 ---
 
 <div class="container">
-  <h1>{{page.name}}</h1>
-  <h3>{{page.title}}</h3>
 
-  <h4>Arguments</h4>
-  <ul>
-      {% for arg in page.arguments %}
-        <li>
-          <b>{{arg.name}}</b>
-        </li>
-        {{arg.description}}
-      {% endfor %}
-  </ul>
-
+  <div class="row">
+    <div class="col-md-8 span-4">
+      <h1>{{page.name}}</h1>
+      <h3>{{page.title}}</h3>
+    </div>
+  </div>
+  
   {{content}}
 
-  <hr>
-  <p class="pull-right"><a href="#">Back to top</a></p>
-  <p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+  <div class="row">
+    <div class="col-md-8 span-4">
+      <hr>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+      <p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+    </div>
+  </div>
+
 </div>
