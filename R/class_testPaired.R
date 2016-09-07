@@ -8,7 +8,7 @@ print.testPaired <- function (x, ...) {
 
 summary.testPaired <- function (object, ...) {
   cat( sprintf("Wilcoxon test (%s the output named %s)\n\n", object$tags$objetive,object$tags$target) )
-  cat( sprintf("Statistic distributed according to Wilcoxon Signed Rank: %.4f\n", object$statistic) )
+  cat( sprintf("Statistic distributed according to Wilcoxon Signed Rank: %.4f\n", object$tags$statistic) )
   if(object$tags$pvalue<object$tags$alpha)
     cat( sprintf("%s vs %s. Test rejected: p-value: %.4e < %.4f", object$bestMethod, object$worstMethod, object$tags$pvalue, object$tags$alpha) )
   else
