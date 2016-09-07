@@ -36,8 +36,8 @@
 #'}
 #' @docType data
 #' @keywords problems
-#' @name ILsExperiment
-#' @usage data(ILsExperiment)
+#' @name ILsPaired
+#' @usage data(ILsPaired)
 #' @format A data frame with the data detailed in the Description.
 #'
-"ILsExperiment"
+"ILsPaired"

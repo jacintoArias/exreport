@@ -21,12 +21,16 @@ One of the most interesting characteristics of the ILs is the reusability. It re
 </p>
 
 <p>
-We call an experiment (or an instance of the set of experiments) to an evaluation of an IL (with a specific number of uses) in a specific scenario. To reduce the noise produced by the data acquisition, imperfections in ILs, or different sources, each experiment has been repeated three times. The result for each experiment is measured in the &#37; of CO<sub>2</sub> reduced from the fuel combustion process. The dataset, called <i>ILsComparison</i> is packaged with exreport.
+We call an experiment (or an instance of the set of experiments) to an evaluation of an IL (with a specific number of uses) in a specific scenario. To reduce the noise produced by the data acquisition, imperfections in ILs, or different sources, each experiment has been repeated three times. The result for each experiment is measured in the &#37; of CO<sub>2</sub> reduced from the fuel combustion process. The dataset, called <i>ILsPaired</i> is packaged with exreport.
 </p>
 
 <!--begin.rcode
 library(exreport)
-colnames(ILsExperiment)
+print(colnames(ILsPaired))
+#We show random rows from the experiment. To always show the same data, we fix the seed for the random numbers.
+set.seed(0)
+rows <- sample(dim(ILsPaired)[1],10)
+print(ILsPaired[rows,])
 end.rcode-->
 
 <p>
@@ -45,7 +49,7 @@ We will start by loading the experiment into an exreport object. Notice that we 
 </p>
 
 <!--begin.rcode fig.width=10, fig.height=8
-experiment <- expCreate(ILsExperiment, methods = "IL", problems = "Scenario", name="ILsComparison", parameters=c("Execution","Reused"))
+experiment <- expCreate(ILsPaired, methods = "IL", problems = "Scenario", name="ILsComparison", parameters=c("Execution","Reused"))
 end.rcode-->
 
 
@@ -58,7 +62,14 @@ experiment <- expReduce(experiment, "Execution", FUN = mean)
 end.rcode-->
 
 <p>
-Now we can check the general behaviour of the ILs. For that, we are going to generate a plot IL - CO<sub>2</sub> reduction ordering the ILs by the number of uses. This way we can see the reusability capacity for each IL as well as compare the CO<sub>2</sub> reduction. This plot shows that IL1 have a better capacity of reusability while IL2 is able to absorve more CO<sub>2</sub> in the first use.
+Now we can check the general behaviour of the ILs. For that, we are going to generate a plot <q>IL - CO<sub>2</sub> reduction</q>, ordering the ILs by the number of uses. This way we can see the reusability capacity for each IL as well as compare the CO<sub>2</sub> reduction.
+
+<p>
+First we apply an instantiation to the experiment. This is required for certain operations, which needs to have each experiment without parameters. Lets see the problem and why the instantiation is required. In this case, the experiment is parametrized by the <i>Execution</i> and <i>Reused</i> parameters. If we want to generate a plot where for each problem it shows a specific <i>output</i> for all the methods, then each subplot (one per problem) would be dependant on these parameters. To deal with that issue, the instantiation process append each configuration of the parameters to its method, so the instantiated experiment will have more instantiated methods (the number of methods multiplied by the number of different parameter configurations) and no parameters.
+</p>
+
+<p>
+This plot shows that IL1 have a better capacity of reusability while IL2 is able to absorve more CO<sub>2</sub> in the first use.
 </p>
 
 <!--begin.rcode fig.width=7, fig.height=6
