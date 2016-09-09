@@ -87,22 +87,26 @@ We call an experiment (or an instance of the set of experiments) to an evaluatio
 </p>
 
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(exreport)</span>
+<span class="hl kwd">print</span><span class="hl std">(</span><span class="hl kwd">colnames</span><span class="hl std">(ILsPaired))</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in library(exreport): there is no package called 'exreport'
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">print</span><span class="hl std">(</span><span class="hl kwd">colnames</span><span class="hl std">(ILsPaired))</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in is.data.frame(x): object 'ILsPaired' not found
+<div class="output"><pre class="knitr r">## [1] &quot;IL&quot;        &quot;Scenario&quot;  &quot;Execution&quot; &quot;Reused&quot;    &quot;CO2&quot;
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com">#We show random rows from the experiment. To always show the same data, we fix the seed for the random numbers.</span>
 <span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">)</span>
 <span class="hl std">rows</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">dim</span><span class="hl std">(ILsPaired)[</span><span class="hl num">1</span><span class="hl std">],</span><span class="hl num">10</span><span class="hl std">)</span>
+<span class="hl kwd">print</span><span class="hl std">(ILsPaired[rows,])</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in sample(dim(ILsPaired)[1], 10): object 'ILsPaired' not found
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">print</span><span class="hl std">(ILsPaired[rows,])</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in print(ILsPaired[rows, ]): object 'ILsPaired' not found
+<div class="output"><pre class="knitr r">##      IL   Scenario Execution Reused      CO2
+## 323 IL2 Scenario16         3      1 19.47430
+## 96  IL1 Scenario11         2      2 22.94638
+## 134 IL1 Scenario15         3      1 30.85210
+## 205 IL2 Scenario 3         3      0 49.07596
+## 324 IL2 Scenario16         3      2 13.66631
+## 72  IL1 Scenario 8         3      2 32.42244
+## 319 IL2 Scenario16         2      0 45.20664
+## 334 IL2 Scenario18         1      0 35.18130
+## 233 IL2 Scenario 6         3      1 27.36567
+## 221 IL2 Scenario 5         2      1 15.50187
 </pre></div>
 </div></div>
 
@@ -123,8 +127,6 @@ We will start by loading the experiment into an exreport object. Notice that we 
 
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expCreate</span><span class="hl std">(ILsPaired,</span> <span class="hl kwc">methods</span> <span class="hl std">=</span> <span class="hl str">&quot;IL&quot;</span><span class="hl std">,</span> <span class="hl kwc">problems</span> <span class="hl std">=</span> <span class="hl str">&quot;Scenario&quot;</span><span class="hl std">,</span> <span class="hl kwc">name</span><span class="hl std">=</span><span class="hl str">&quot;ILsComparison&quot;</span><span class="hl std">,</span> <span class="hl kwc">parameters</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Execution&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Reused&quot;</span><span class="hl std">))</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expCreate&quot;
-</pre></div>
 </div></div>
 
 
@@ -133,8 +135,6 @@ Now we preprocess the data by aggregating the result of the three executions und
 </p>
 
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReduce</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;Execution&quot;</span><span class="hl std">,</span> <span class="hl kwc">FUN</span> <span class="hl std">= mean)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expReduce&quot;
 </pre></div>
 </div></div>
 
@@ -150,20 +150,12 @@ This plot shows that IL1 have a better capacity of reusability while IL2 is able
 </p>
 
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">expForPlot</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment)</span>
+<span class="hl std">expForPlot</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReorder</span><span class="hl std">(expForPlot,</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">IL</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;IL1,0&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL1,1&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL1,2&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL2,0&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL2,1&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL2,2&quot;</span><span class="hl std">)))</span>
+<span class="hl std">p</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(expForPlot,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">, T)</span>
+<span class="hl std">p</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expInstantiate&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">expForPlot</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReorder</span><span class="hl std">(expForPlot,</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">IL</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;IL1,0&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL1,1&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL1,2&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL2,0&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL2,1&quot;</span><span class="hl std">,</span><span class="hl str">&quot;IL2,2&quot;</span><span class="hl std">)))</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expReorder&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">p</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(expForPlot,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">, T)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;plotExpSummary&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">p</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): object 'p' not found
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">## [1] &quot;Results for output \&quot;CO2\&quot;&quot;
 </pre></div>
 </div></div>
 
@@ -182,12 +174,7 @@ To carry out this analysis, we need to preprocess our results by selecting only 
 </p>
 
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expSubset</span><span class="hl std">(experiment,</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;Reused&quot;</span><span class="hl std">=</span><span class="hl num">0</span><span class="hl std">))</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expSubset&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">e1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment1)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expInstantiate&quot;
+<span class="hl std">e1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment1)</span>
 </pre></div>
 </div></div>
 
@@ -195,12 +182,10 @@ To carry out this analysis, we need to preprocess our results by selecting only 
 We show the plot of the experiment (IL- CO<sub>2</sub> reduction) but only with the uses equals to 0.
 </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">p1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(e1,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">,</span> <span class="hl num">0</span><span class="hl std">, T)</span>
+<span class="hl std">p1</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;plotExpSummary&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">p1</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): object 'p1' not found
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">## [1] &quot;Results for output \&quot;CO2\&quot;&quot;
 </pre></div>
 </div></div>
 
@@ -209,12 +194,12 @@ Now we carry out a statistical paired test to check which IL is better. We have 
 </p>
 
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">testPaired</span><span class="hl std">(e1,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(t1)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;testPaired&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(t1)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in summary(t1): object 't1' not found
+<div class="output"><pre class="knitr r">##             Length Class    Mode     
+## bestMethod  1      -none-   character
+## worstMethod 1      -none-   character
+## tags        9      metaTags list
 </pre></div>
 </div></div>
 
@@ -230,12 +215,7 @@ To test the performance of the ILs, we are going to use the mean of three consec
 </p>
 
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReduce</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;Reused&quot;</span> <span class="hl std">,</span><span class="hl kwc">FUN</span> <span class="hl std">= mean)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expReduce&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">e2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment2)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;expInstantiate&quot;
+<span class="hl std">e2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment2)</span>
 </pre></div>
 </div></div>
 
@@ -243,12 +223,10 @@ To test the performance of the ILs, we are going to use the mean of three consec
 Similarly, we show the plot of the experiment (IL- CO<sub>2</sub> reduction) after applying the mean to the CO<sub>2</sub> emision reuction for each experiment with 0, 1 and 2 reuses.
 </p>
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">p2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(e2,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">,</span> <span class="hl num">0</span><span class="hl std">, T)</span>
+<span class="hl std">p2</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;plotExpSummary&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">p2</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): object 'p2' not found
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">## [1] &quot;Results for output \&quot;CO2\&quot;&quot;
 </pre></div>
 </div></div>
 
@@ -257,12 +235,12 @@ Now we apply the same statistical comparison. The results show in this case that
 </p>
 
 <div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">testPaired</span><span class="hl std">(e2,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(t2)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;testPaired&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(t2)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in summary(t2): object 't2' not found
+<div class="output"><pre class="knitr r">##             Length Class    Mode     
+## bestMethod  1      -none-   character
+## worstMethod 1      -none-   character
+## tags        9      metaTags list
 </pre></div>
 </div></div>
 
@@ -275,17 +253,9 @@ HTML report, from which we are going to be able to download the figures.
 
 
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreport</span><span class="hl std">(</span><span class="hl str">&quot;Your ILs Comparison example report&quot;</span><span class="hl std">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreport&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment,p,e1,p1,t1,e2,p2,t2))</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreportAdd&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># Render the report in HTML format:</span>
+<span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment,p,e1,p1,t1,e2,p2,t2))</span>
+<span class="hl com"># Render the report in HTML format:</span>
 <span class="hl kwd">exreportRender</span><span class="hl std">(report)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): could not find function &quot;exreportRender&quot;
 </pre></div>
 </div></div>
 

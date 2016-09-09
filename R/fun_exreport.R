@@ -60,6 +60,7 @@ exreportAdd <- function(rep, elem) {
 #' This function renders an existing exreport object to a given file and format.
 #'
 #' @export
+#' @importFrom utils browseURL
 #' @param rep The exreport object to be rendered
 #' @param destination Path to the rendered file. If NULL, it uses a temporary directory
 #' @param target The format of the target rendering. HTML and PDF are allowed.

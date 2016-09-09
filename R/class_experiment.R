@@ -16,7 +16,7 @@
   result
 }
 
-
+#' @importFrom methods is
 is.experiment <- function(x) {
   is(x, "experiment")
 }

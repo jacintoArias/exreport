@@ -1,4 +1,4 @@
-
+#' @importFrom methods is
 is.testMultiplePairwise <- function(x) {
   is(x, "testMultiplePairwise")
 }

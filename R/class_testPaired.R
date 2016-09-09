@@ -1,11 +1,14 @@
+#' @importFrom methods is
 is.testPaired <- function(x) {
   is(x, "testPaired")
 }
 
+#' @export
 print.testPaired <- function (x, ...) {
   cat( sprintf("Wilcoxon test p-value (%s the output named %s), comparing %s versus %s: %.4e", x$tags$objetive, x$tags$target, x$bestMethod, x$worstMethod, x$tags$pvalue) )
 }
 
+#' @export
 summary.testPaired <- function (object, ...) {
   cat( sprintf("Wilcoxon test (%s the output named %s)\n\n", object$tags$objetive,object$tags$target) )
   cat( sprintf("Statistic distributed according to Wilcoxon Signed Rank: %.4f\n", object$tags$statistic) )

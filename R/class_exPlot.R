@@ -1,3 +1,4 @@
+#' @importFrom methods is
 is.exPlot <- function(x) {
   is(x, "exPlot")
 }

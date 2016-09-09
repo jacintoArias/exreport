@@ -1,3 +1,4 @@
+#' @importFrom methods is
 is.phMetric <- function(x) {
   is(x, "phMetric")
 }

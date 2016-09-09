@@ -1,3 +1,4 @@
+#' @importFrom methods is
 is.exReport <- function(x) {
   is(x, "exReport")
 }

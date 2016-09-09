@@ -7,6 +7,7 @@
 #' 
 #'
 #' @export
+#' @importFrom stats aggregate
 #' @param e An input experiment object.
 #' @param parameters The parameter or parameters to be reduced, if NULL or
 #' default all parameters are considered.

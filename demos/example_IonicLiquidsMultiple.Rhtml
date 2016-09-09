@@ -1,0 +1,148 @@
+<html>
+
+<head>
+<title>Comparison of three Ionic Liquids for CO<sub>2</sub> emission reduction.</title>
+</head>
+
+<body>
+
+<h2>Introduction</h2>
+
+<p>
+In this example we will use the same situation exposed in the example <i>Comparison of two Ionic Liquids for CO<sub>2</sub> emission reduction</i>. In contrast, in this case we have three ILs so the statistical analysis is different (we need to apply a multiple comparison instead of a paired comparison). Therefore, we will start directly applying the statistical analysis (for more information refer to the previously mentioned example).
+</p>
+
+
+<!--begin.rcode
+library(exreport)
+experiment <- expCreate(ILsMultiple, methods = "IL", problems = "Scenario", name="ILsComparison", parameters=c("Execution","Reused"))
+end.rcode-->
+
+
+<p>
+Now we preprocess the data by aggregating the result of the three executions under the same conditions. For that, we reduce the <i>Execution</i> parameter by using the mean function:
+</p>
+
+<!--begin.rcode
+experiment <- expReduce(experiment, "Execution", FUN = mean)
+end.rcode-->
+
+<p>
+Now we can check the general behaviour of the ILs. For that, we are going to generate a plot <q>IL - CO<sub>2</sub> reduction</q>, ordering the ILs by the number of uses. This way we can see the reusability capacity for each IL as well as compare the CO<sub>2</sub> reduction. Note that first we need to apply an instantiation to the experiment (as well as in the paired example).
+</p>
+
+<!--begin.rcode fig.width=9, fig.height=6
+expForPlot <- expInstantiate(experiment)
+expForPlot <- expReorder(expForPlot, list(IL=paste0("IL",rep(seq(3),each=3),",",rep(seq(0,2),times=3))))
+p_all <- plotExpSummary(expForPlot, "CO2", 5, T)
+p_all
+end.rcode-->
+
+<p>
+Now we are going to analyse the behaviour when using up to three times the same IL pill for the same scenario. To test the performance of the ILs, we are going to use the mean of three consecutives uses of the same IL pill. For that, we need to reduce the <i>Reused</i> parameter by using the mean function:
+</p>
+
+<!--begin.rcode
+experiment <- expReduce(experiment, "Reused" ,FUN = mean)
+e <- expInstantiate(experiment)
+end.rcode-->
+
+<p>
+We show the plot of the experiment (IL- CO<sub>2</sub> reduction) after applying the mean to the CO<sub>2</sub> emision reuction for each experiment with 0, 1 and 2 reuses.
+</p>
+<!--begin.rcode fig.width=7, fig.height=6
+p1 <- plotExpSummary(e, "CO2", 0, T)
+p1
+end.rcode-->
+
+<p>
+Now we are going to apply a statistical comparison for the three ILs. We have two options:
+<ol>
+<li>Multiple comparison using a control method.</li>
+<li>Multiple comparison using a pairwise comparison.</li>
+</ol>
+</p>
+
+<h3> Statistical comparison using a control method </h3>
+
+<p>
+In this case we apply the statistical comparison using the best ILs (in terms of mean rank) as control. That means that the best ILs will be compared with each other IL. First we have to determine if there exists differences between the three ILs. For that, it is applied the Friedman test, which shows that there exists statistical difference between the three ILs, with a p-value of 2.5991e-02.
+</p>
+
+<!--begin.rcode
+t_control <- testMultipleControl(e, "CO2")
+summary(t_control)
+end.rcode-->
+
+
+<p>
+Then, we can see the ranking distribution using the <i>plotRankDistribution</i> function. The best IL in terms of mean rank is IL1. The black lines inside each box show the mode, while the number tell us the mean.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+p_control <- plotRankDistribution(t_control)
+p_control
+end.rcode-->
+
+<p>
+We can see the results of the statistical comparison in the following table. We show three outputs: the mean rank, the p-value of the statistical comparison and the win/tie/loss metric (number of times the control method wins/ties/losses against the compared method).
+</p>
+
+<p>
+The results show that even if the best method is IL1, there is not statistical difference between IL1 and IL2, but there is between IL1 and IL3.
+</p>
+
+<!--begin.rcode
+tab_control <- tabularTestSummary(t_control, c("rank","pvalue","wtl"))
+tab_control
+end.rcode-->
+
+
+<h3> Statistical test using a pairwise comparison analysis </h3>
+
+<p>
+Now we apply the pairwise comparison. That means we are going to compare each different pair of ILs and compute the p-values with that information. 
+</p>
+
+<p>
+Again, the Friedman test shows there exist statistical difference between the three ILs, with a p-value of 2.5991e-02 (the Friedman test is applied in the same condicions as before). Therefore, the ranking distribution is also the same.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+t_multiple <- testMultiplePairwise(e, "CO2")
+summary(t_multiple)
+p_multiple <- plotRankDistribution(t_multiple)
+p_multiple
+end.rcode-->
+
+We can see the results of the statistical comparison in the following table. We show two tables, each one with a different output: the p-value of the statistical comparison and the win/tie/loss metric.
+
+<!--begin.rcode
+tab_multiple1 <- tabularTestPairwise(t_multiple,"pvalue")
+print(tab_multiple1)
+tab_multiple2 <- tabularTestPairwise(t_multiple, "wtl")
+print(tab_multiple2)
+end.rcode-->
+
+
+<p>
+The results show that only exist statistical difference between IL1 and IL3, being the rest (IL1 versus IL2 and IL2 versus IL3) statistically equivalent.
+</p>
+
+
+<p>
+At this point we can collect all the output we have generated during this exreport
+workflow and pack it into a document. In this case we will be creating an interactive
+HTML report, from which we are going to be able to download the figures.
+</p>
+
+
+<!--begin.rcode fig.width=7, fig.height=6
+report <- exreport("Your ILs Comparison example report")
+report <- exreportAdd(report, list(experiment,p_all,e,p1,t_control,p_control,tab_control,t_multiple,tab_mutiple1,tab_mutiple2))
+# Render the report in HTML format:
+exreportRender(report)
+end.rcode-->
+
+</body>
+</html>
