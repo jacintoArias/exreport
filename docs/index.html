@@ -5,27 +5,29 @@ navigation_weight: 1
 ---
 
 <div class="container">
+  <div class="row">
+    <div class="col-md-12">
 
-   <div class="row">
-      <div class="col-md-12">
-          <br/>
-          <div class="jumbotron">
-            <h2>An R package for easy reproducible research</h2>
-<p>
-<strong>exreport</strong> has been conceived to obtain robust and transparent
-<strong>reproducibility</strong> when developing scientific publishable results.
-Describe your experiments and your analysis in an exreport script and reproduce
-<strong>publish-ready</strong> descriptive statistics, tables, plots and many more with a single click.
-</p>
-            <a href="getstarted.html" class="btn btn-success">Learn More</a>
-          </div>
-      </div> <!-- End of column-->
+      <br>
+      <div class="jumbotron">
+        <h2>An R package for easy reproducible research</h2>
+        <p>
+        <strong>exreport</strong> has been conceived to obtain robust and transparent
+        <strong>reproducibility</strong> when developing scientific publishable results.
+        Describe your experiments and your analysis in an exreport script and reproduce
+        <strong>publish-ready</strong> descriptive statistics, tables, plots and many more with a single click.
+        </p>
+
+        <a href="getstarted.html" class="btn btn-success">Learn More</a>
+
+      </div>
+    </div> <!-- End of column-->
   </div><!-- End of row-->
 
-   <div class="row">
-       <div class="col-md-8">
+  <div class="row">
+    <div class="col-md-8">
 
-<div class="bs-callout bs-callout-primary">
+      <div class="bs-callout bs-callout-primary">
 
 <h2>Made for Researchers by Researchers</h2>
 <p>
@@ -94,12 +96,12 @@ requesting new functionalities or adding them yourself via pull-requests.
 <br/>
 Any help or feedback is welcomed!
 </p>
-
 <br/>
-          </div>
-       </div> <!-- End of column-->
 
-       <div class="col-md-4">
+</div>
+  </div> <!-- End of column-->
+
+  <div class="col-md-4">
          <br/>
          <br/>
          <br/>
@@ -109,10 +111,9 @@ Any help or feedback is welcomed!
          <h3>News:</h3>
          <hr/>
          <ul>
-           <li><i>20/11/2015 - exreport now on CRAN!</i></li>
-           <li><i>22/10/2015 - exreport 0.4 is online!</i></li>
-           <li><i>27/09/2015 - exreport 0.3 is online!</i></li>
-           <li><i>10/06/2015 - exreport 0.1 is online!</i></li>
+           {% for new in site.data.news %}
+            <li><i>{{new.date}} - {{new.title}}</i></li>
+           {%endfor%}
          </ul>
          <hr/>
          <br/>
