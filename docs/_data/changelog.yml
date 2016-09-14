@@ -1,0 +1,14 @@
+- title: exreport beta 0.4
+  date: 22/10/2015
+  changes:
+    - description: The HTML rendering has been improved in style and functionality.
+    - description: Other minor bugs fixes.
+- title: exreport beta 0.3
+  date: 27/09/2015
+  changes:
+    - description: The PDF rendering functionality has been added
+    - description: Other minor bugs fixes.
+- title: exreport beta 0.1
+  date: 10/06/2015
+  changes:
+    - description: Initial Release.
