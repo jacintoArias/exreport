@@ -37,7 +37,7 @@ plotRankDistribution <- function(testMultiple) {
   da <- reshape2::melt(da, id.vars="method")
   
   means <- aggregate(value ~ method, da, mean)
-  methodNames <- as.character(testMultiple$names[[1]]) # as characters
+  methodNames <- as.character(means[[1]]) # as characters
   
   # The boxes are shaded only if a control post-hoc has been peformed
   if (is.testMultipleControl(testMultiple)) {
