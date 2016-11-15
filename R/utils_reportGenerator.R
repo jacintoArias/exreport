@@ -47,7 +47,7 @@
   else
     parameters <- .nestedList2Latex(params)
   
-  outputs     <- paste(element[["outputs"]], collapse = ', ')
+  outputs   <- paste(element[["outputs"]], collapse = ', ')
   
   if(target == "html")
     history <- .nestedList2HTML(element$h)
