@@ -1,0 +1,105 @@
+---
+title: "Display pairwise information about a multiple test between the methods"
+name: "tabularTestPairwise"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='tabularTestPairwise.html'>tabularTestPairwise</a></span><span class="keyword">(</span><span class="symbol">ph</span><span class="keyword">,</span> <span class="argument">value</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"pvalue"</span><span class="keyword">,</span> <span class="argument">charForNAs</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"-"</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>ph</dt>
+      <dd>The input testMultiplePairwise object</dd>
+      <dt>value</dt>
+      <dd>Indicates the metric to be displayed (&quot;pvalue&quot;, &quot;wtl&quot;)</dd>
+      <dt>charForNAs</dt>
+      <dd>Indicates the character included when there is not
+comparison available</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+An extabular object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function obtain a pairwise table comparing the methods among themselves
+for the specified metrics. It takes an testMultiplePairwise object as an
+input.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># First we create an experiment from the wekaExperiment problem and prepare</span>
+<span class="comment"># it to apply the test:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># Then we perform a a testMultiplePairwise test procedure</span>
+<span class="symbol">test</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='testMultiplePairwise.html'>testMultiplePairwise</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">,</span> <span class="string">"max"</span><span class="keyword">)</span>
+
+<span class="comment"># Different tables can be obtained by using a range of metrics</span>
+<span class="functioncall"><a href='tabularTestPairwise.html'>tabularTestPairwise</a></span><span class="keyword">(</span><span class="symbol">test</span><span class="keyword">,</span> <span class="string">"pvalue"</span><span class="keyword">)</span></div>
+<div class='output'>$testPairwise
+            method J48,no RandomForest,yes   J48,yes NaiveBayes,no
+1  RandomForest,no      1                1 0.4309044    0.06025137
+2           J48,no     NA                1 1.0000000    0.45981358
+3 RandomForest,yes     NA               NA 1.0000000    1.00000000
+4          J48,yes     NA               NA        NA    1.00000000
+5    NaiveBayes,no     NA               NA        NA            NA
+6   NaiveBayes,yes     NA               NA        NA            NA
+7          OneR,no     NA               NA        NA            NA
+  NaiveBayes,yes      OneR,no     OneR,yes
+1     0.01395224 4.125442e-05 6.205344e-06
+2     0.17266188 1.668243e-03 3.376488e-04
+3     0.61839883 1.529973e-02 4.012438e-03
+4     1.00000000 1.822777e-01 6.476731e-02
+5     1.00000000 8.818142e-01 4.462741e-01
+6             NA 1.000000e+00 9.581391e-01
+7             NA           NA 1.000000e+00
+
+</div>
+<div class='input'>
+<span class="functioncall"><a href='tabularTestPairwise.html'>tabularTestPairwise</a></span><span class="keyword">(</span><span class="symbol">test</span><span class="keyword">,</span> <span class="string">"wtl"</span><span class="keyword">)</span></div>
+<div class='output'>$testPairwise
+            method J48,no RandomForest,yes J48,yes NaiveBayes,no
+1  RandomForest,no  9/0/6           12/1/2  13/0/2        11/0/4
+2           J48,no   &lt;NA&gt;            9/0/6  10/1/4        10/0/5
+3 RandomForest,yes   &lt;NA&gt;             &lt;NA&gt;  10/0/5        10/0/5
+4          J48,yes   &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;        10/0/5
+5    NaiveBayes,no   &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;          &lt;NA&gt;
+6   NaiveBayes,yes   &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;          &lt;NA&gt;
+7          OneR,no   &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;          &lt;NA&gt;
+  NaiveBayes,yes OneR,no OneR,yes
+1         12/0/3  15/0/0   15/0/0
+2         11/0/4  15/0/0   15/0/0
+3         12/0/3  14/0/1   14/0/1
+4          9/0/6  13/0/2   14/0/1
+5          9/1/5   9/0/6   10/0/5
+6           &lt;NA&gt;  10/0/5   10/0/5
+7           &lt;NA&gt;    &lt;NA&gt;   3/12/0
+
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>tabularTestPairwise</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

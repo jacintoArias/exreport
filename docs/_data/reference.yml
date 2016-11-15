@@ -1,0 +1,112 @@
+- title: Experimental Data Manipulation
+  description: "<p>This functions manipulate the experiment objects, implementing
+           common data manipulation operations, such as subseting and joining.
+           In addition, there are a number of available functions to sanitize
+           and preprecessing the experimental data such as looking for duplicated
+           entries, reducing parameters and instantiating the methods with the
+           parameters.</p>
+"
+  items:
+    - name: expCreate
+      title: "Load data and create an exreport experiment"
+      aliases: ""
+    - name: expCreateFromTable
+      title: "Create an exreport experiment from a tabular representation"
+      aliases: ""
+    - name: expCombine
+      title: "Combine two experiments with different outputs"
+      aliases: ""
+    - name: expConcat
+      title: "Concatenate rows of matching experiments"
+      aliases: ""
+    - name: expExtend
+      title: "Extend an experiment by adding new parameters"
+      aliases: ""
+    - name: expExtract
+      title: "Extract statistically equivalent methods from a multiple comparison test"
+      aliases: ""
+    - name: expGetDuplicated
+      title: "Create a new experiment with only the duplicated rows"
+      aliases: ""
+    - name: expInstantiate
+      title: "Instatiate the methods in the experiment for each one of the different
+parameter configurations."
+      aliases: ""
+    - name: expReduce
+      title: "Reduce a parameter by a function for each method, problem and remaining
+parameter configuration interaction"
+      aliases: ""
+    - name: expRemoveDuplicated
+      title: "Remove duplicated rows from an experiment"
+      aliases: ""
+    - name: expRename
+      title: "Change the name of elements that an experiment contains"
+      aliases: ""
+    - name: expReorder
+      title: "Change the order of elements that an experiment contains"
+      aliases: ""
+    - name: expSubset
+      title: "Obtains a subset of an experiment matching the given conditions"
+      aliases: ""
+- title: Statistical Tests
+  description: "<p>This functions implement several statistical test to compare the
+           methods of the experiment.</p>
+"
+  items:
+    - name: testPaired
+      title: "Paired Wilcoxon statistical test"
+      aliases: ""
+    - name: testMultipleControl
+      title: "Multiple Comparison Statistical Test (Friedman + Control Holm PostHoc)"
+      aliases: ""
+    - name: testMultiplePairwise
+      title: "Multiple Comparison Statistical Test (Friedman + Pairwise Shaffer PostHoc)"
+      aliases: ""
+- title: Tabular Data Generation
+  description: "<p>This functions generate tables summarizing the information of an
+           experiment or a text to be printed to pdf or web reports.</p>
+"
+  items:
+    - name: tabularExpSummary
+      title: "Summarize the experiment with a table for given outputs"
+      aliases: ""
+    - name: tabularTestPairwise
+      title: "Display pairwise information about a multiple test between the methods"
+      aliases: ""
+    - name: tabularTestSummary
+      title: "Summarize the result of a multiple comparison statistical test in a table"
+      aliases: ""
+- title: Graphical Plots
+  description: "<p>This functions generate plots summarizing the information of an
+           experiment or a text to be printed to pdf or web reports.</p>
+"
+  items:
+    - name: plotCumulativeRank
+      title: "Area plot for the rank distribution from a multiple test"
+      aliases: ""
+    - name: plotExpSummary
+      title: "Barplot for summarizing an experiment output variable"
+      aliases: ""
+    - name: plotRankDistribution
+      title: "Boxplot for the ranks distribution and control hypotheses from multiple test"
+      aliases: ""
+- title: Rendering Reports
+  description: "<p>These are the main functions used to generate and render the reports</p>
+"
+  items:
+    - name: exreport
+      title: "Create a new exreport document"
+      aliases: ""
+    - name: exreportAdd
+      title: "Add elements to an existing exreport document"
+      aliases: ""
+    - name: exreportRender
+      title: "Render an exreport document"
+      aliases: ""
+- title: Problems
+  description: "<p>Example problems for the examples and documentations</p>
+"
+  items:
+    - name: wekaExperiment
+      title: "Problem: Comparison between several Machine Learning algorithms from the Weka library"
+      aliases: ""

@@ -1,0 +1,68 @@
+---
+title: "Boxplot for the ranks distribution and control hypotheses from multiple test"
+name: "plotRankDistribution"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='plotRankDistribution.html'>plotRankDistribution</a></span><span class="keyword">(</span><span class="symbol">testMultiple</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>testMultiple</dt>
+      <dd>The statistical test from which the plot is generated.
+The functions accepts either control and pairwise multiple tests.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+an experiment object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function generates a boxplot from a testMultiple statistical test
+showing the ordered distrubution of rankings for each method computed for
+the Friedman test. If the input test features a control multiple comparison
+then the rejected hypotheses by the Holm methd are also indicates in the plot.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># First we create an experiment from the wekaExperiment problem and prepare</span>
+<span class="comment"># it to apply the test:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">featureSelection</span> <span class="argument">=</span> <span class="string">"yes"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># Then we perform a Friedman test included ina a testMultipleControl</span>
+<span class="comment"># test procedure</span>
+<span class="symbol">test</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='testMultipleControl.html'>testMultipleControl</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">)</span>
+
+<span class="comment"># Finally we obtain the plot</span>
+<span class="functioncall"><a href='plotRankDistribution.html'>plotRankDistribution</a></span><span class="keyword">(</span><span class="symbol">test</span><span class="keyword">)</span></div>
+<p><img src='plotRankDistribution-2.png' alt='' width='540' height='400' /></p>
+<div class='output'>[1] &quot;Distribution of ranks for output \&quot;accuracy\&quot;&quot;
+</div>
+<div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="keyword">)</span></div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>plotRankDistribution</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

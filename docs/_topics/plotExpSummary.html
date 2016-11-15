@@ -1,0 +1,112 @@
+---
+title: "Barplot for summarizing an experiment output variable"
+name: "plotExpSummary"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='plotExpSummary.html'>plotExpSummary</a></span><span class="keyword">(</span><span class="symbol">exp</span><span class="keyword">,</span> <span class="symbol">output</span><span class="keyword">,</span> <span class="argument">columns</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0</span><span class="keyword">,</span> <span class="argument">freeScale</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">fun</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">identity</span><span class="keyword">,</span> <span class="argument">grayscale</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>exp</dt>
+      <dd>- The experiment object to take the data from</dd>
+      <dt>output</dt>
+      <dd>- A string identifying the name of the output variable to be
+plotted</dd>
+      <dt>columns</dt>
+      <dd>- Integer number, 0 for a wide aspect plot and any other value
+to include n columns of facets separating the problems.</dd>
+      <dt>freeScale</dt>
+      <dd>- Boolean, if using facets sets the scale of each one
+independent or not</dd>
+      <dt>fun</dt>
+      <dd>- A function to be applied to the selected output variables before
+being plotted.</dd>
+      <dt>grayscale</dt>
+      <dd>- Defaulted to False. True for a plot in grayscale.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+an exPlot object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function builds a barplot for a given experiment output variable,
+summarizing its distribution according to the different methods and problems.
+The aspect of the plot can be parametrized in several ways.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>Please notice that the plot function requires that an unique configuration
+of parameters is present in the experiment. So the user must have processed and
+instantiated the experiment before.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># This example plots the distribution of the trainingTime variable in the</span>
+<span class="comment"># wekaExperiment problem.</span>
+
+<span class="comment"># First we create the experiment from the problem.</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+
+<span class="comment"># Next we must process it to have an unique parameter configuration:</span>
+<span class="comment"># We select a value for the parameter featureSelection:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">featureSelection</span> <span class="argument">=</span> <span class="string">"yes"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="comment"># Then we reduce the fold parameter:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+<span class="comment"># Finally we remove unary parameters by instantiation:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># Now we can generate several plots:</span>
+
+<span class="comment"># Default plot:</span>
+<span class="functioncall"><a href='plotExpSummary.html'>plotExpSummary</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">)</span></div>
+<p><img src='plotExpSummary-2.png' alt='' width='540' height='400' /></p>
+<div class='output'>[1] &quot;Results for output \&quot;accuracy\&quot;&quot;
+</div>
+<div class='input'>
+<span class="comment"># We can include faceting in the plot by dividing it into columns:</span>
+<span class="functioncall"><a href='plotExpSummary.html'>plotExpSummary</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">,</span> <span class="argument">columns</span><span class="argument">=</span><span class="number">3</span><span class="keyword">)</span></div>
+<p><img src='plotExpSummary-5.png' alt='' width='540' height='400' /></p>
+<div class='output'>[1] &quot;Results for output \&quot;accuracy\&quot;&quot;
+</div>
+<div class='input'>
+<span class="comment"># If we want to show the independent interaction for the output variable</span>
+<span class="comment"># in each experiment we can make the scales for example, remark the difference</span>
+<span class="comment"># in :</span>
+<span class="functioncall"><a href='plotExpSummary.html'>plotExpSummary</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"trainingTime"</span><span class="keyword">,</span> <span class="argument">columns</span><span class="argument">=</span><span class="number">3</span><span class="keyword">,</span> <span class="argument">freeScale</span><span class="argument">=</span><span class="number">FALSE</span><span class="keyword">)</span></div>
+<p><img src='plotExpSummary-8.png' alt='' width='540' height='400' /></p>
+<div class='output'>[1] &quot;Results for output \&quot;trainingTime\&quot;&quot;
+</div>
+<div class='input'><span class="functioncall"><a href='plotExpSummary.html'>plotExpSummary</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"trainingTime"</span><span class="keyword">,</span> <span class="argument">columns</span><span class="argument">=</span><span class="number">3</span><span class="keyword">,</span> <span class="argument">freeScale</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span></div>
+<p><img src='plotExpSummary-11.png' alt='' width='540' height='400' /></p>
+<div class='output'>[1] &quot;Results for output \&quot;trainingTime\&quot;&quot;
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>plotExpSummary</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+   <div class="row">
+        <div class="col-md-8">
+           <ul class="nav nav-pills nav-justified">
+             {% assign navigation_pages = site.html_pages | sort: 'navigation_weight' %}
+              {% for p in navigation_pages %}
+                {% if p.navigation_weight %}
+                  <li {% if p.url == page.url | prepend: site.github.url %} class="active"{% endif %} role="presentation"><a href="{{p.url}}">{{p.title}}</a></li>
+                {% endif %}
+              {% endfor %}
+           </ul>
+        </div> <!-- End of column-->
+        <div class="col-md-4">
+        </div> <!-- End of column-->
+   </div><!-- End of row-->
+ </div><!-- End of container-->

@@ -1,0 +1,71 @@
+---
+title: "Paired Wilcoxon statistical test"
+name: "testPaired"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='testPaired.html'>testPaired</a></span><span class="keyword">(</span><span class="symbol">e</span><span class="keyword">,</span> <span class="symbol">output</span><span class="keyword">,</span> <span class="argument">rankOrder</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"max"</span><span class="keyword">,</span> <span class="argument">alpha</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.05</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>e</dt>
+      <dd>Input experiment</dd>
+      <dt>output</dt>
+      <dd>The output for which the tet will be performed.</dd>
+      <dt>rankOrder</dt>
+      <dd>The optimization strategy, can be either maximizing &quot;max&quot;
+or minimizing &quot;min&quot; the target output variable.</dd>
+      <dt>alpha</dt>
+      <dd>The significance level used for the whole testing procedure.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+a testPaired object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function performs a Wilcoxon paired test to compare the methods of an
+experiment consisting exactly on two of them. If more methods are present,
+then a multiple comparison test must be applied.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># First we create an experiment from the wekaExperiment problem and prepare</span>
+<span class="comment"># it to apply the test, we must subset it to only two methods:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">method</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"J48"</span><span class="keyword">,</span> <span class="string">"NaiveBayes"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">featureSelection</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"no"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># Then we perform a Wilcoxon test procedure</span>
+<span class="symbol">test</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='testPaired.html'>testPaired</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">,</span> <span class="string">"max"</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span><span class="keyword">(</span><span class="symbol">test</span><span class="keyword">)</span></div>
+<div class='output'>Wilcoxon test (maximize the output named accuracy)
+
+J48 vs NaiveBayes. Test accepted: p-value: 9.3811e-02 &gt;= 0.0500</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>testPaired</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

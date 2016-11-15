@@ -1,0 +1,108 @@
+---
+title: "Create an exreport experiment from a tabular representation"
+name: "expCreateFromTable"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='expCreateFromTable.html'>expCreateFromTable</a></span><span class="keyword">(</span><span class="symbol">data</span><span class="keyword">,</span> <span class="symbol">output</span><span class="keyword">,</span> <span class="symbol">name</span><span class="keyword">,</span> <span class="argument">parameters</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">respectOrder</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>data</dt>
+      <dd>Input tabular data satisfying the previous constraints.</dd>
+      <dt>output</dt>
+      <dd>String indicating the name of the output that the table values
+represent.</dd>
+      <dt>name</dt>
+      <dd>A string which will identify the experiment in the report.</dd>
+      <dt>parameters</dt>
+      <dd>A list of strings containing the names and values for the
+static configuration
+of the algorithm. The name of each element of the list will correspond with
+the name of a parameter
+and the element with the value asigned.</dd>
+      <dt>respectOrder</dt>
+      <dd>A logical parameter which indicates if the order of the
+elements of the method and problem columns must be respected by appearance or
+ordered alphabeticaly. It affects to the look of data representations.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+A new exreport experiment object.
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Create an exreport experiment object from a tabular representation.
+The input data must be a table having methods as rows and problems as columns.
+The values in such table correspond to a particular output.
+The resulting experiment can be characterized with static parameters.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># We generate a data frame where the methods are rows and the problems columns</span>
+<span class="comment"># from the wekaExperiment problem. (This is only an example, normally you</span>
+<span class="comment"># would prefer to load a proper experiment and process it.)</span>
+
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/library'>library</a></span><span class="keyword">(</span><span class="symbol">reshape2</span><span class="keyword">)</span>
+<span class="symbol">df</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/reshape2/topics/cast'>dcast</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">[</span><span class="symbol">wekaExperiment</span><span class="keyword">$</span><span class="symbol">featureSelection</span>==<span class="string">"no"</span><span class="keyword">,</span><span class="keyword">]</span><span class="keyword">,</span>
+<span class="symbol">method</span> <span class="keyword">~</span> <span class="symbol">problem</span><span class="keyword">,</span>
+<span class="argument">value.var</span><span class="argument">=</span><span class="string">"accuracy"</span><span class="keyword">,</span>
+<span class="argument">fun.aggregate</span> <span class="argument">=</span> <span class="symbol">mean</span><span class="keyword">)</span>
+
+<span class="comment"># We can create it and parametrice accordingly:</span>
+<span class="functioncall"><a href='expCreateFromTable.html'>expCreateFromTable</a></span><span class="keyword">(</span><span class="symbol">df</span><span class="keyword">,</span> <span class="argument">output</span><span class="argument">=</span><span class="string">"accuracy"</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"weka"</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: weka
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) 
+*) 
+
+#outputs: accuracy
+</div>
+<div class='input'>
+<span class="comment"># Optionally we can set a fixed value for parameters, and ordered by appearance:</span>
+<span class="functioncall"><a href='expCreateFromTable.html'>expCreateFromTable</a></span><span class="keyword">(</span><span class="symbol">df</span><span class="keyword">,</span> <span class="argument">output</span><span class="argument">=</span><span class="string">"accuracy"</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"weka"</span><span class="keyword">,</span>
+<span class="argument">parameters</span><span class="argument">=</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">featureSelection</span> <span class="argument">=</span> <span class="string">"no"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">respectOrder</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span></div>
+<div class='output'>#Experiment name: weka
+
+#method: J48, NaiveBayes, OneR, RandomForest
+
+#problem: anneal, audiology, balance-scale, car, glass, horsecolic, hypothyroid, ionosphere, liver-disorders, lymph, primary-tumor, soybean, vehicle, vote, vowel
+
+#parameters:
+*) featureSelection [no]
+
+#outputs: accuracy
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>expCreateFromTable</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+    <h2>See also</h2>
+      <p>expCreate</p>
+
+    
+
+
+  </div>
+</div>

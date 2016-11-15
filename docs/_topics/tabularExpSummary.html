@@ -1,0 +1,101 @@
+---
+title: "Summarize the experiment with a table for given outputs"
+name: "tabularExpSummary"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='tabularExpSummary.html'>tabularExpSummary</a></span><span class="keyword">(</span><span class="symbol">exp</span><span class="keyword">,</span> <span class="symbol">outputs</span><span class="keyword">,</span> <span class="argument">boldfaceColumns</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"none"</span><span class="keyword">,</span> <span class="argument">format</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"f"</span><span class="keyword">,</span>
+  <span class="argument">digits</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">4</span><span class="keyword">,</span> <span class="argument">tableSplit</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">rowsAsMethod</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>exp</dt>
+      <dd>The ource experiment to generate the table from</dd>
+      <dt>outputs</dt>
+      <dd>A given variable or list of them to be the target of the table</dd>
+      <dt>boldfaceColumns</dt>
+      <dd>Indicate (&quot;none&quot;,&quot;max&quot; or &quot;min&quot;) to highlight the
+method optimizing the variables for each problem.</dd>
+      <dt>format</dt>
+      <dd>Indicates the format of the numeric output using C formatting
+styles. Defaults to &#39;f&#39;</dd>
+      <dt>digits</dt>
+      <dd>The number of decimal digits to include for the numeric output.</dd>
+      <dt>tableSplit</dt>
+      <dd>Indicates the number of parititions of the table that
+will be rendered. Usefull when the the table is excessivelly wide.</dd>
+      <dt>rowsAsMethod</dt>
+      <dd>Display the methods as the rows of the table, indicate
+FALSE for a transpose table.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+An extabular object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function generates a table for the given outputs of the experiment,
+comparing all methods for each one of the problems. In addition the function
+can highlight the best results for each problem as well as display a range of
+parameters for the posterior renderization.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># This example plots the distribution of the trainingTime variable in the</span>
+<span class="comment"># wekaExperiment problem.</span>
+
+<span class="comment"># First we create the experiment from the problem.</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+
+<span class="comment"># Next we must process it to have an unique parameter configuration:</span>
+<span class="comment"># We select a value for the parameter featureSelection:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">featureSelection</span> <span class="argument">=</span> <span class="string">"yes"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="comment"># Then we reduce the fold parameter:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+<span class="comment"># Finally we remove unary parameters by instantiation:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># Generate the default table:</span>
+<span class="functioncall"><a href='tabularExpSummary.html'>tabularExpSummary</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">)</span></div>
+<div class='output'>$accuracy
+        method   anneal audiology balance-scale      car    glass
+1          J48 96.21723  76.12649      75.71431 73.25617 70.17317
+2   NaiveBayes 85.86641  68.26088      87.84692 70.69801 45.02163
+3         OneR 83.63296  46.56128      36.35432 70.00806 53.83119
+4 RandomForest 97.66293  69.92095      79.70305 75.68492 78.05194
+  horsecolic hypothyroid ionosphere liver-disorders    lymph
+1   81.23876    97.26951   86.92857        50.23529 75.71428
+2   81.80182    94.80443   86.89683        38.31932 77.00000
+3   81.51653    96.34148   77.48414        48.78992 74.28571
+4   83.13815    96.47432   92.89683        48.16808 79.00000
+  primary-tumor  soybean  vehicle     vote    vowel
+1      40.69519 82.98593 67.35714 96.31078 53.13134
+2      50.13368 86.51535 47.74370 94.69873 55.65658
+3      25.32977 19.36061 52.60504 95.61838 26.36361
+4      40.39215 84.62489 70.07703 96.08350 66.16164
+
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>tabularExpSummary</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

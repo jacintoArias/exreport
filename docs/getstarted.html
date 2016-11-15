@@ -1,0 +1,421 @@
+---
+layout: default
+title: Get Started
+navigation_weight: 2
+---
+
+<div class="container">
+   <div class="row">
+     <div class="col-md-9 span-2">
+<h3>Explore your results, format your paper and repeat instantly</h3>
+<p>
+This package respond to a novel methodology for reproducible and formal manipulation
+of research results, trying to provide a seamless procedure to transform your
+experiments into a valuable research interpretable output.
+</p>
+<p>
+Furthermore, exreport aims for a considerable reduction on the effort required for
+the validation and publishing of research results, by providing and easy and quick framework
+define your objects and produce quality reports, tables, plots for your papers
+and meetings.
+</p>
+<p>
+In this document you will find the basic <a href="#workflow">workflow</a> of exreport
+as well as the proposed <a href="#methodology">methodology</a>.
+</p>
+<hr/>
+     </div> <!-- End of column-->
+   </div><!-- End of row-->
+
+
+   <div class="row">
+       <div class="col-md-3">
+<div class="panel panel-info">
+<div class="panel-heading">
+<h3 class="panel-title"><i class="fa fa-flask"></i> Experiment Management</h3>
+</div>
+<div class="panel-body">
+<p>
+Automatize the transformations made to your experimental
+data and replicate the process inmediatelly avoiding errors.
+</p>
+</div>
+</div>
+       </div> <!-- End of column-->
+
+       <div class="col-md-3">
+<div class="panel panel-info">
+<div class="panel-heading">
+<h3 class="panel-title"><i class="fa fa-search"></i> Interactive HTML reports</h3>
+</div>
+<div class="panel-body">
+<p>
+Generate several graphical items and renderize them using an elegant and interactive
+HTML template for visualizations.
+</p>
+</div>
+</div>
+       </div> <!-- End of column-->
+
+       <div class="col-md-3">
+<div class="panel panel-info">
+<div class="panel-heading">
+<h3 class="panel-title"><i class="fa fa-graduation-cap"></i> Paper-ready LaTeX output</h3>
+</div>
+<div class="panel-body">
+<p>
+Generate common figures and tabular floating elements for your publications
+instantly using the built in models.
+</p>
+</div>
+</div>
+       </div> <!-- End of column-->
+   </div><!-- End of row-->
+
+   <div class="row">
+     <div class="col-md-9 span-3">
+<hr/>
+<a id="workflow"></a>
+<h2>Workflow</h2>
+<p>
+The exreport workflow starts where your experimentation ends, using your output
+experimental data to help you evaluate and visualice the quality and details of
+your experiments and to obtain quality documents for an effective communication.
+</p>
+<br/>
+<img class="center-block" src="img/workflow2.svg" alt="Workflow of using exreport" style="width:90%;" />
+<br/>
+
+<div class="bs-callout bs-callout-info">
+<h3>Process <small>Load your experiments and configure them for the analysis</small></h3>
+<p>
+Load your experiments into exreport by following the <a href="#dataModel">Data Model</a>
+or using any of the built-in helpers and preprocess your data to continue width
+the evaluation or visualization techniques.
+</p>
+<p>
+Exreport provides a good range of common operations on R <code>data.frames</code>
+adapted to the special case of the proposed experiment analysis methodology:
+</p>
+<h5>
+Filtering:
+<span class="label label-info">Subset</span>
+<span class="label label-info">Reduce</span>
+<br/>
+<br/>
+Joining:
+<span class="label label-info">Combine</span>
+<span class="label label-info">Concat</span>
+<span class="label label-info">Extend</span>
+<br/>
+<br/>
+Sanitizing:
+<span class="label label-info">Find Duplicates</span>
+<span class="label label-info">Check Consistency</span>
+</h5>
+</div>
+
+<div class="bs-callout bs-callout-success">
+<h3>Evaluate <small>Robust statistical testing methodology</small></h3>
+<p>
+Exreport packages a statistical validation procedure based on sound and community
+accepted practiques. Check the <a href="#statisticalTests">statistical tests</a> section of the methodology for
+additional bibliography.
+</p>
+<table class="table">
+<tr><th># Methods</th><th>Type of test</th><th>Procedure</th></tr>
+<tr><td>Two methods</td><td>Paired test</td><td>Wilcoxon Signed Rank Test</td></tr>
+<tr><td rowspan="2">More than two methods</td><td rowspan="2">Multiple Comparison Test + Post-hoc Analysis</td>
+<td>Friedman Test + Holm's Procedure</td></tr>
+<tr><td>Friedman Test + Shaffer's Procedure</td></tr>
+</table>
+</div>
+
+<div class="bs-callout bs-callout-warning">
+<h3>Visualize <small>Represent your results with plots and tables</small></h3>
+<p>
+Taking advantage of the inherent structure of its experiment data model, exreport
+ships with several built in functions to generate a range of elegant tables and
+plots that are commonly found in scientific papers and reports:
+<ul>
+<li>Generate a detailed table showing each method applied to every problem.</li>
+<li>Compare the results of your methods by obtaining an overview barplot.</li>
+<li>Obtain graphical representations of the statistical testing procedures.</li>
+</ul>
+These and many more graphical elements can be generated by exreport by simply
+calling a function from a loaded experiment.
+</p>
+<div class="row">
+<div class="col-md-4">
+<div class="thumbnail">
+<img src="figure/unnamed-chunk-10-1.png" alt="Example of a plot">
+</div>
+</div>
+<div class="col-md-4">
+<div class="thumbnail">
+<img src="img/tabularExample.png" alt="Example of a plot">
+</div>
+</div>
+<div class="col-md-4">
+<div class="thumbnail">
+<img src="figure/unnamed-chunk-11-1.png" alt="Example of a plot">
+</div>
+</div>
+</div>
+</div>
+
+<div class="bs-callout bs-callout-primary">
+<h3>Communicate <small>Generate HTML or PDF reports to discuss or publish your results</small></h3>
+<p>
+After performing all the required operations and generating the desired graphical
+outputs a report can be generated. Add and format the elements freely and render
+the report in the format you prefer:
+<br>
+
+<ul>
+<li><strong>HTML:</strong>
+Render and open an interactive report in your browser,
+it will be perfect to study your results or discuss them with your co-researchers.
+In addition you can download the pictures and tables in your image format or
+LaTeX code!</li>
+<li><strong>PDF/LaTeX:</strong>
+Generate a compiled PDF document with extended information about your experiment
+and statistical tests as well as pictures and tables. Alongside obtain an
+elegantly formated LaTeX code, almost prepared to be copied into your paper!
+</li>
+</ul>
+
+In addition, several aspects can be customized to adapt them to your paper needs:
+<ul>
+<li>Automatically boldface columns of tables according to metrics.</li>
+<li>Split your excessively wide tables into pieces</li>
+</ul>
+</p>
+<br/>
+</div>
+
+<div class="bs-callout bs-callout-danger">
+<h3>Repeat! <small>Save your exreport script and launch it all over again</small></h3>
+<p>
+Not satisfied with your results and want to test something else?, did you make
+and error in your experiments?. If you defined an exreport script to obtain your
+results you can launch it again an reproduce all the elements that you have already
+included in your paper or repeat the same report you discussed last week with your team
+effortless!
+</p>
+<a href="examples.html" class="btn btn-success">See it in action!</a>
+</div>
+<br/>
+<h2>Download and Install</h2>
+<p>
+The project is hosted on github so you can add it to your R installation
+via the <a href="http://www.rstudio.com/products/rpackages/devtools/">devtools</a> package.
+</p>
+<pre># install_package("devtools")
+devtools::install_github("jacintoArias/exreport")</pre>
+<br/>
+<hr/>
+<br/>
+<br/>
+<br/>
+<a id="methodology"></a>
+<h2>A framework for the reproducible analysis and communication of scientific
+experimental results</h2>
+<p>
+In this section we introduce the theoretical foundations and research behind
+development of this framework. This is a summary of a <strong>scientific paper</strong>
+still on developent for this idea:
+</p>
+<blockquote>J. Arias and J. Cózar. A framework for the reproducible analysis and communication of scientific
+experimental results. University of Castilla-La Mancha. Unpublished.</blockquote>
+<br/>
+<p>
+In this work we introduce a series of concepts in order to define a methodology
+to perform the analysis and communication of research experimental results emphasizing
+reproducibility and error avoidance.
+</p>
+<p>
+The <i>exreport</i> package responds to the methodology defined in this work and
+allow to easily implement the different steps discussed, these include:
+<ul>
+<li><strong>Experiment definition</strong></li>
+<li><strong>Data modeling</strong></li>
+<li><strong>Statistical testing validation</strong></li>
+</ul>
+</p>
+<br/>
+
+<h3>Experiment definition</h3>
+<p>
+The key point of the methodology that we propose is based on the fact that the
+objectives pursued for a series of scientific experiments must be fixed previous
+to the actual execution of the experiments and adquisition of the data.
+</p>
+<p>
+On the other hand, it is likely that the scientific process is iterative in its
+nature, and that trial and error is one of the most popular approaches. So this
+methodology also allows extending and repeating our analysis looking for the maximum
+grade of reproducibility.
+</p>
+<p>
+From now on we assume that the source of our experimental data is unknown to us,
+and we only have a model of such data, that we will use to define the goals of our
+experiment and then iterate to the proposed workflow to perform the analysis and
+obtain interpretable output that can be shared with the community.
+</p>
+
+<br/>
+<img class="center-block" src="img/workflow.svg" alt="A graphical representation of the methodology workflow" style="width:80%;"/>
+<br/>
+
+<p>
+Defining our experiment has two different phases: First, the properties and structure
+of the data must be defined in order to assure that our analysis methodology will be
+consistent over multiple iterations. Second, we define the validation process and the
+outputs that we would like to obtain for our publications.
+</p>
+<p>
+The proposed R package <i>exreport</i> that we present is focused on performing
+this particular task.
+</p>
+<br/>
+
+<a id="dataModel"></a>
+<h3>Data modeling</h3>
+<p>
+Researchers use a wide range of sources for digital experimental data adquisition:
+i.e. different dedicated hardware and software, programming languages, etc.
+</p>
+<p>
+In order to provide an unified pipeline for our analysis platform we have chosen
+a particular data model from which several transformation operations can be performed
+to assure consistency at the same time of elasticity.
+</p>
+<p>
+To specify a data model it is important to define the basic elements that
+compose an experiment. Initially, an experiment is performed by applying a
+particular <strong>method</strong> to a <strong>problem</strong>, these being
+our basic components of our model. The output of such experiment will be given
+by a series of <strong>outputs</strong>. Finally, our methods can be optionally
+parametrized by a set of <strong>parameters</strong>.
+</p>
+<p>
+Given the combination of the previous elements, we define out data model as a
+collection of experiments composed by a method, a dataset, one or more outputs,
+and optionally, a number of parameters. This particular model, can be easily
+represented by a columnar structure such as the R language <code>data.frame</code>;
+in fact, <i>exreport</i> experiment representation is an encapsulation of this
+particular data structure.
+</p>
+
+<table class="table" alt="Tabular representation of an general experiment data.frame">
+<tr><th>Method</th> <th>Problem </th><th> Parameter<sup>1</sup> </th><th> ... </th><th> Parameter<sup>i</sup> </th><th> Output<sup>1</sup> </th><th> ... </th><th> Output<sup>o</sup></th></tr>
+<tr><td>M<sub>1</sub> </td><td> P<sub>1</sub> </td><td> Par<sub>1</sub><sup>1</sup> </td><td> ... </td><td> Par<sub>1</sub><sup>i</sup> </td><td> Out<sub>1</sub><sup>1</sup> </td><td> ... </td><td> Out<sub>1</sub><sup>o</sup></td></tr>
+<tr><td>... </td><td> ... </td><td> ... </td><td> ... </td><td> ... </td><td> ... </td><td> ... </td><td> ...</td></tr>
+<tr><td>M<sub>m</sub> </td><td> P<sub>p</sub> </td><td> Par<sub>a</sub><sup>1</sup> </td><td> ... </td><td> Par<sub>b</sub><sup>i</sup> </td><td> Out<sub>c</sub><sup>1</sup> </td><td> ... </td><td> Out<sub>d</sub><sup>o</sup></td></tr>
+</table>
+<br/>
+
+<p>
+The main property of this format is its elasticity, as it allows the addition of
+new entries using new methods, or using existing ones on new problems. This can be
+done seamessly if they follow the same format. In addition, this format can
+be altered, by including new parameters or outputs extending the existing configurations;
+in general a wide range of transformations can be done to the format (Please
+refer to the exreport description or documentation for particular examples).
+</p>
+
+<p>
+<strong>Note:</strong> <i>exreport</i> ships with converter utilities for
+transforming other common data formats to our proposal.
+</p>
+
+<br/>
+<a id="statisticalTests"></a>
+<h3>Statistical testing validation</h3>
+
+<p>
+When it comes to validate a series of experimental results we can find a wide
+range of methods, from traditional statistical tests to descriptive analytics.
+In the literature we can find several approaches of validation methodologies,
+given the scope in which this project was developed, our proposal is based on
+a series of <strong>Machine Learning</strong> papers that were accepted as a standard. We believe
+that a generalization of these methodologies can be applied to other areas of
+expertise as they are based on sound statistical procedures an isolate the problem
+to a general problem that can be associated with the proposed data model. Concretelly:
+</p>
+
+<blockquote cite="http://machinelearning.wustl.edu/mlpapers/paper_files/Demsar06.pdf" style=" font-size: 16px;">
+Demšar, J. (2006). Statistical comparisons of classifiers over multiple data sets. The Journal of Machine Learning Research, 7, 1-30.
+</blockquote>
+<blockquote cite="http://www.researchgate.net/profile/Francisco_Herrera/publication/254306218_An_Extension_on_Statistical_Comparisons_of_Classifiers_over_Multiple_Data_Sets_for_all_Pairwise_Comparisons/links/00463536d312be4a11000000.pdf" style=" font-size: 16px;">
+García, S., & Herrera, F. (2008). An Extension on “Statistical Comparisons of Classifiers over Multiple Data Sets” for all Pairwise Comparisons. Journal of Machine Learning Research, 9, 2677-2694.
+</blockquote>
+
+<p>
+This methodology includes different tests given the properties of the source problem:
+<ul>
+<li>
+<strong>Paired Comparison:</strong> In this case, two different methods
+are compared given the set of evaluated problems for a given output.
+In this case, the statistical test performed is the
+<a href="http://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test">Wilcoxon signed rank test</a>.
+</li>
+<li>
+<strong>Multiple Comparison:</strong> In this case, more than two
+methods must be compared for the set of problems for a given output.
+The test of choice is the
+<a href="http://en.wikipedia.org/wiki/Friedman_test">Friedman ranks test</a>.
+In addition to this test the methodology proposes to perform a post-hoc
+analysis, according to the cited bibliography we distinguish two cases that
+can be employed:
+<ul>
+  <li><strong>Control test:</strong> In this test all methods are compared
+    to the method that has obtained the best mean rank given the target output
+    variable. It is recommended when we want to determine if a proposal
+    outperforms the existing ones. A Holm's post-hoc procedure is applied
+    as explained in
+    <a href="http://machinelearning.wustl.edu/mlpapers/paper_files/Demsar06.pdf">(Demšar 2006)</a>.
+  </li>
+  <li><strong>Pairwise test:</strong> In this test all methods are compared
+    to each other. It is recommenteded when we want to determine the best
+    suited method regarding the overall performance for the given benchmark.
+    A Shaffer's post-hoc procedure is applied as described in
+    <a href="http://www.researchgate.net/profile/Francisco_Herrera/publication/254306218_An_Extension_on_Statistical_Comparisons_of_Classifiers_over_Multiple_Data_Sets_for_all_Pairwise_Comparisons/links/00463536d312be4a11000000.pdf">(García 2008)</a>.
+  </li>
+</ul>
+</li>
+</ul>
+All this tests assume that the methods have been instantiated by a particular
+configuration of their parameters. In addition, we believe that additional metrics
+can be of use when evaluating our results, for that we include several descriptive
+statistics techniques in our framework that we recommend to add to the final reports
+for a considerable enrichment of the validation process. (Refer to the examples
+and the documentation for a detailed).
+</p>
+
+<br/>
+<h3>Automatic Report Generation and Reproducibility</h3>
+<p>
+As we stated before, the final purpose of the methodology is to obtain a compact
+report of the defined analysis. By generating an exreport script in <i>R</i>, we
+are defining the goals to achieve with our experiments and we can thus perform or repeat
+the analysis and obtain the results iteratively by increasing and modifying our data model.
+</p>
+<p>
+Our graphical and interactive generated reports are intended to serve as final
+elements of scientific quality publications so the process of writing a paper
+can be enhaced by allowing the author to <strong>refresh</strong> the plots,
+figures and analytic conclusions of the manuscript interactively.
+</p>
+<p>
+Finally, if this software and its methodology succeeds, it can serve as a
+sharing utility between researchers, allowing the direct transference of
+experimental data to invite others to replicate, check and extends our conclusions.
+</p>
+<br/>
+<br/>
+<br/>
+     </div> <!-- End of column-->
+  </div><!-- End of row-->
+</div><!-- End of container-->

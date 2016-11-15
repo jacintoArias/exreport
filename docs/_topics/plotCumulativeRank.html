@@ -1,0 +1,70 @@
+---
+title: "Area plot for the rank distribution from a multiple test"
+name: "plotCumulativeRank"
+---
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='plotCumulativeRank.html'>plotCumulativeRank</a></span><span class="keyword">(</span><span class="symbol">testMultiple</span><span class="keyword">,</span> <span class="argument">grayscale</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>testMultiple</dt>
+      <dd>Statistical test from which the plot is generated. The
+rankings are obtained from the Friedman test.</dd>
+      <dt>grayscale</dt>
+      <dd>Configure the plot using a grayscale palette.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+an exPlot object
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function builds an area plot from a testMultiple object displaying the
+cumulative value for each method for all the evaluated problems. The value
+for the rankings is obtained from the Friedman test independently of the scope
+of the test (control or pairwise).</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment"># First we create an experiment from the wekaExperiment problem and prepare</span>
+<span class="comment"># it to apply the test:</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expCreate.html'>expCreate</a></span><span class="keyword">(</span><span class="symbol">wekaExperiment</span><span class="keyword">,</span> <span class="argument">name</span><span class="argument">=</span><span class="string">"test"</span><span class="keyword">,</span> <span class="argument">parameter</span><span class="argument">=</span><span class="string">"fold"</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expReduce.html'>expReduce</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"fold"</span><span class="keyword">,</span> <span class="symbol">mean</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expSubset.html'>expSubset</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/list'>list</a></span><span class="keyword">(</span><span class="argument">featureSelection</span> <span class="argument">=</span> <span class="string">"no"</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="symbol">experiment</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='expInstantiate.html'>expInstantiate</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="argument">removeUnary</span><span class="argument">=</span><span class="number">TRUE</span><span class="keyword">)</span>
+
+<span class="comment"># Then we perform a Friedman test included ina a testMultipleControl</span>
+<span class="comment"># test procedure</span>
+<span class="symbol">test</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='testMultipleControl.html'>testMultipleControl</a></span><span class="keyword">(</span><span class="symbol">experiment</span><span class="keyword">,</span> <span class="string">"accuracy"</span><span class="keyword">)</span>
+
+<span class="comment"># Finally we obtain the plot</span>
+<span class="functioncall"><a href='plotCumulativeRank.html'>plotCumulativeRank</a></span><span class="keyword">(</span><span class="symbol">test</span><span class="keyword">)</span></div>
+<p><img src='plotCumulativeRank-2.png' alt='' width='540' height='400' /></p>
+<div class='output'>[1] &quot;Cumulative Ranking for Var accuracy&quot;
+</div>
+<div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span><span class="keyword">(</span><span class="keyword">)</span></div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>plotCumulativeRank</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>

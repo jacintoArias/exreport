@@ -1,0 +1,26 @@
+---
+layout: default
+extra_css:
+  - file: staticdocs.css
+---
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-8 span-4">
+      <h1>{{page.name}}</h1>
+      <h3>{{page.title}}</h3>
+    </div>
+  </div>
+  
+  {{content}}
+
+  <div class="row">
+    <div class="col-md-8 span-4">
+      <hr>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+      <p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+    </div>
+  </div>
+
+</div>
