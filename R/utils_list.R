@@ -30,6 +30,8 @@
   # A toString method por nested lists.
   x <- .createDepthStructure(l)
   s <- ""
+  if(is.null(x))
+    return(s)
   for(i in 1:length(x)){
     sep <- ifelse(numbered, paste0(i," ) "), '*) ')
     s <- paste(s,do.call(function(...){ paste(...,sep="") },as.list(c(rep('\t',x[[i]]$depth),sep,x[[i]]$str,'\n'))),sep="")
