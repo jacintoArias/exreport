@@ -196,10 +196,10 @@ Now we carry out a statistical paired test to check which IL is better. We have 
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">testPaired</span><span class="hl std">(e1,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">)</span>
 <span class="hl kwd">summary</span><span class="hl std">(t1)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##             Length Class    Mode     
-## bestMethod  1      -none-   character
-## worstMethod 1      -none-   character
-## tags        9      metaTags list
+<div class="output"><pre class="knitr r">## Wilcoxon test (maximize the output named CO2)
+## 
+## Statistic distributed according to Wilcoxon Signed Rank: 48.0000
+## IL2 vs IL1. Test rejected: p-value: 1.6384e-02 &lt; 0.0500
 </pre></div>
 </div></div>
 
@@ -237,10 +237,10 @@ Now we apply the same statistical comparison. The results show in this case that
 <div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">testPaired</span><span class="hl std">(e2,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">)</span>
 <span class="hl kwd">summary</span><span class="hl std">(t2)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##             Length Class    Mode     
-## bestMethod  1      -none-   character
-## worstMethod 1      -none-   character
-## tags        9      metaTags list
+<div class="output"><pre class="knitr r">## Wilcoxon test (maximize the output named CO2)
+## 
+## Statistic distributed according to Wilcoxon Signed Rank: 49.0000
+## IL1 vs IL2. Test rejected: p-value: 1.8117e-02 &lt; 0.0500
 </pre></div>
 </div></div>
 

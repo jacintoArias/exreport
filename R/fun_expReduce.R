@@ -75,7 +75,7 @@ expReduce  <- function(e, parameters = NULL, FUN=mean){
                    list(paste("Parameters '",
                               toString(parameters),
                               "' have been removed using the function '",
-                              formals()$FUN,"'", sep="")))
+                              as.character(substitute(FUN)),"'", sep="")))
   
   e1
 }

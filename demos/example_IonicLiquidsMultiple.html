@@ -246,7 +246,7 @@ We can see the results of the statistical comparison in the following table. We 
 
 
 <p>
-The results show that only exist statistical difference between IL1 and IL3, being the rest (IL1 versus IL2 and IL2 versus IL3) statistically similar.
+The results show that only exist statistical difference between IL1 and IL3, being the rest (IL1 versus IL2 and IL2 versus IL3) statistically equivalent.
 </p>
 
 
@@ -258,11 +258,8 @@ HTML report, from which we are going to be able to download the figures.
 
 
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreport</span><span class="hl std">(</span><span class="hl str">&quot;Your ILs Comparison example report&quot;</span><span class="hl std">)</span>
-<span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment,p_all,e,p1,t_control,p_control,tab_control,t_multiple,tab_mutiple1,tab_mutiple2))</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in is(x, &quot;reportable&quot;): object 'tab_mutiple1' not found
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># Render the report in HTML format:</span>
+<span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment,p_all,e,p1,t_control,p_control,tab_control,t_multiple,tab_multiple1,tab_multiple2))</span>
+<span class="hl com"># Render the report in HTML format:</span>
 <span class="hl kwd">exreportRender</span><span class="hl std">(report)</span>
 </pre></div>
 </div></div>
