@@ -81,6 +81,9 @@
   newText <- gsub("<-","$\\\\leftarrow$",newText)
   newText <- gsub("->","$\\\\rightarrow$",newText)
   
+  # in latex _ must be scaped like this \_
+  newText <- gsub("_","$\\\\_$",newText)
+  
   newText
 }
 

@@ -60,6 +60,7 @@ exreportAdd <- function(rep, elem) {
 #' This function renders an existing exreport object to a given file and format.
 #'
 #' @export
+#' @importFrom utils browseURL
 #' @param rep The exreport object to be rendered
 #' @param destination Path to the rendered file. If NULL, it uses a temporary directory
 #' @param target The format of the target rendering. HTML and PDF are allowed.
@@ -132,7 +133,7 @@ exreportRender <- function(rep, destination=NULL, target="html", safeMode=TRUE, 
   
   counter <- 1
   for ( element in rep$content ) {
-    id <- sprintf( "elem_%d", counter )
+    id <- sprintf( "elem-%d", counter )
     .print2exreport( element, id, file = f, path = path, target = "html" ) 
     counter <- counter + 1
   }
@@ -142,7 +143,7 @@ exreportRender <- function(rep, destination=NULL, target="html", safeMode=TRUE, 
   # first, generate the index
   indexString <- ""
   counter <- 1
-  pattern <- '<li><a href="#elem_%d_hook"><strong>%s:</strong>%s</a></li>'
+  pattern <- '<li><a href="#elem-%d_hook"><strong>%s:</strong>%s</a></li>'
   for ( element in rep$content ) {
     indexString <- paste(indexString, sprintf(pattern, 
                                         counter,
@@ -184,7 +185,7 @@ exreportRender <- function(rep, destination=NULL, target="html", safeMode=TRUE, 
   
   counter <- 1
   for ( element in rep$content ) {
-    id <- sprintf( "elem_%d", counter )
+    id <- sprintf( "elem-%d", counter )
     .print2exreport( element, id, file = f, path = path, target = "pdf" ) 
     counter <- counter + 1
   }

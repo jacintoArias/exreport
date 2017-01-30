@@ -1,0 +1,268 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Comparison of three Ionic Liquids for CO<sub>2</sub> emission reduction.</title>
+</head>
+
+<body>
+
+<h2>Introduction</h2>
+
+<p>
+In this example we will use the same situation exposed in the example <i>Comparison of two Ionic Liquids for CO<sub>2</sub> emission reduction</i>. In contrast, in this case we have three ILs so the statistical analysis is different (we need to apply a multiple comparison instead of a paired comparison). Therefore, we will start directly applying the statistical analysis (for more information refer to the previously mentioned example).
+</p>
+
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(exreport)</span>
+<span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expCreate</span><span class="hl std">(ILsMultiple,</span> <span class="hl kwc">methods</span> <span class="hl std">=</span> <span class="hl str">&quot;IL&quot;</span><span class="hl std">,</span> <span class="hl kwc">problems</span> <span class="hl std">=</span> <span class="hl str">&quot;Scenario&quot;</span><span class="hl std">,</span> <span class="hl kwc">name</span><span class="hl std">=</span><span class="hl str">&quot;ILsComparison&quot;</span><span class="hl std">,</span> <span class="hl kwc">parameters</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Execution&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Reused&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div></div>
+
+
+<p>
+Now we preprocess the data by aggregating the result of the three executions under the same conditions. For that, we reduce the <i>Execution</i> parameter by using the mean function:
+</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReduce</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;Execution&quot;</span><span class="hl std">,</span> <span class="hl kwc">FUN</span> <span class="hl std">= mean)</span>
+</pre></div>
+</div></div>
+
+<p>
+Now we can check the general behaviour of the ILs. For that, we are going to generate a plot <q>IL - CO<sub>2</sub> reduction</q>, ordering the ILs by the number of uses. This way we can see the reusability capacity for each IL as well as compare the CO<sub>2</sub> reduction. Note that first we need to apply an instantiation to the experiment (as well as in the paired example).
+</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">expForPlot</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment)</span>
+<span class="hl std">expForPlot</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReorder</span><span class="hl std">(expForPlot,</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">IL</span><span class="hl std">=</span><span class="hl kwd">paste0</span><span class="hl std">(</span><span class="hl str">&quot;IL&quot;</span><span class="hl std">,</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">),</span><span class="hl kwc">each</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">),</span><span class="hl str">&quot;,&quot;</span><span class="hl std">,</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">),</span><span class="hl kwc">times</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">))))</span>
+<span class="hl std">p_all</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(expForPlot,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">, T)</span>
+<span class="hl std">p_all</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">## [1] &quot;Results for output \&quot;CO2\&quot;&quot;
+</pre></div>
+</div></div>
+
+<p>
+Now we are going to analyse the behaviour when using up to three times the same IL pill for the same scenario. To test the performance of the ILs, we are going to use the mean of three consecutives uses of the same IL pill. For that, we need to reduce the <i>Reused</i> parameter by using the mean function:
+</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">experiment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expReduce</span><span class="hl std">(experiment,</span> <span class="hl str">&quot;Reused&quot;</span> <span class="hl std">,</span><span class="hl kwc">FUN</span> <span class="hl std">= mean)</span>
+<span class="hl std">e</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expInstantiate</span><span class="hl std">(experiment)</span>
+</pre></div>
+</div></div>
+
+<p>
+We show the plot of the experiment (IL- CO<sub>2</sub> reduction) after applying the mean to the CO<sub>2</sub> emision reuction for each experiment with 0, 1 and 2 reuses.
+</p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">p1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotExpSummary</span><span class="hl std">(e,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">,</span> <span class="hl num">0</span><span class="hl std">, T)</span>
+<span class="hl std">p1</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">## [1] &quot;Results for output \&quot;CO2\&quot;&quot;
+</pre></div>
+</div></div>
+
+<p>
+Now we are going to apply a statistical comparison for the three ILs. We have two options:
+<ol>
+<li>Multiple comparison using a control method.</li>
+<li>Multiple comparison using a pairwise comparison.</li>
+</ol>
+</p>
+
+<h3> Statistical comparison using a control method </h3>
+
+<p>
+In this case we apply the statistical comparison using the best ILs (in terms of mean rank) as control. That means that the best ILs will be compared with each other IL. First we have to determine if there exists differences between the three ILs. For that, it is applied the Friedman test, which shows that there exists statistical difference between the three ILs, with a p-value of 2.5991e-02.
+</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t_control</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">testMultipleControl</span><span class="hl std">(e,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(t_control)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## ---------------------------------------------------------------------
+## Friedman test, objetive maximize output variable CO2. Obtained p-value: 2.5991e-02
+## Chi squared with 2 degrees of freedom statistic: 7.3000
+## Test rejected: p-value: 2.5991e-02 &lt; 0.0500
+## ---------------------------------------------------------------------
+## Control post hoc test for output CO2
+## Adjust method: Holm
+## 
+## Control method: IL1
+## p-values:
+##             IL2	0.1138
+##             IL3	0.0144
+## ---------------------------------------------------------------------
+</pre></div>
+</div></div>
+
+
+<p>
+Then, we can see the ranking distribution using the <i>plotRankDistribution</i> function. The best IL in terms of mean rank is IL1. The black lines inside each box show the mode, while the number tell us the mean.
+</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">p_control</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotRankDistribution</span><span class="hl std">(t_control)</span>
+<span class="hl std">p_control</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">## [1] &quot;Distribution of ranks for output \&quot;CO2\&quot;&quot;
+</pre></div>
+</div></div>
+
+<p>
+We can see the results of the statistical comparison in the following table. We show three outputs: the mean rank, the p-value of the statistical comparison and the win/tie/loss metric (number of times the control method wins/ties/losses against the compared method).
+</p>
+
+<p>
+The results show that even if the best method is IL1, there is not statistical difference between IL1 and IL2, but there is between IL1 and IL3.
+</p>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">tab_control</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularTestSummary</span><span class="hl std">(t_control,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;rank&quot;</span><span class="hl std">,</span><span class="hl str">&quot;pvalue&quot;</span><span class="hl std">,</span><span class="hl str">&quot;wtl&quot;</span><span class="hl std">))</span>
+<span class="hl std">tab_control</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $testMultiple
+##      IL rank     pvalue win tie loss
+## IL1 IL1 1.55         NA  NA  NA   NA
+## IL2 IL2 2.05 0.11384630  15   0    5
+## IL3 IL3 2.40 0.01437903  14   0    6
+</pre></div>
+</div></div>
+
+
+<h3> Statistical test using a pairwise comparison analysis </h3>
+
+<p>
+Now we apply the pairwise comparison. That means we are going to compare each different pair of ILs and compute the p-values with that information. 
+</p>
+
+<p>
+Again, the Friedman test shows there exist statistical difference between the three ILs, with a p-value of 2.5991e-02 (the Friedman test is applied in the same condicions as before). Therefore, the ranking distribution is also the same.
+</p>
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t_multiple</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">testMultiplePairwise</span><span class="hl std">(e,</span> <span class="hl str">&quot;CO2&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(t_multiple)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## ---------------------------------------------------------------------
+## Friedman test, objetive maximize output variable CO2. Obtained p-value: 2.5991e-02
+## Chi squared with 2 degrees of freedom statistic: 7.3000
+## Test rejected: p-value: 2.5991e-02 &lt; 0.0500
+## ---------------------------------------------------------------------
+## Pairwise post hoc test for output CO2
+## Adjust method: Shaffer
+## 
+## p-values:
+##           IL2        IL3
+## IL1 0.2276926 0.02156855
+## IL2        NA 0.26838163
+## ---------------------------------------------------------------------
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">p_multiple</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">plotRankDistribution</span><span class="hl std">(t_multiple)</span>
+<span class="hl std">p_multiple</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">## [1] &quot;Distribution of ranks for output \&quot;CO2\&quot;&quot;
+</pre></div>
+</div></div>
+
+We can see the results of the statistical comparison in the following table. We show two tables, each one with a different output: the p-value of the statistical comparison and the win/tie/loss metric.
+
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">tab_multiple1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularTestPairwise</span><span class="hl std">(t_multiple,</span><span class="hl str">&quot;pvalue&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">print</span><span class="hl std">(tab_multiple1)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $testPairwise
+##    IL       IL2        IL3
+## 1 IL1 0.2276926 0.02156855
+## 2 IL2        NA 0.26838163
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">tab_multiple2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tabularTestPairwise</span><span class="hl std">(t_multiple,</span> <span class="hl str">&quot;wtl&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">print</span><span class="hl std">(tab_multiple2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $testPairwise
+##    IL    IL2    IL3
+## 1 IL1 15/0/5 14/0/6
+## 2 IL2   &lt;NA&gt; 14/0/6
+</pre></div>
+</div></div>
+
+
+<p>
+The results show that only exist statistical difference between IL1 and IL3, being the rest (IL1 versus IL2 and IL2 versus IL3) statistically equivalent.
+</p>
+
+
+<p>
+At this point we can collect all the output we have generated during this exreport
+workflow and pack it into a document. In this case we will be creating an interactive
+HTML report, from which we are going to be able to download the figures.
+</p>
+
+
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreport</span><span class="hl std">(</span><span class="hl str">&quot;Your ILs Comparison example report&quot;</span><span class="hl std">)</span>
+<span class="hl std">report</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">exreportAdd</span><span class="hl std">(report,</span> <span class="hl kwd">list</span><span class="hl std">(experiment,p_all,e,p1,t_control,p_control,tab_control,t_multiple,tab_multiple1,tab_multiple2))</span>
+<span class="hl com"># Render the report in HTML format:</span>
+<span class="hl kwd">exreportRender</span><span class="hl std">(report)</span>
+</pre></div>
+</div></div>
+
+</body>
+</html>

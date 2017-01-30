@@ -1,4 +1,4 @@
-
+#' @importFrom methods is
 is.testMultipleControl <- function(x) {
   is(x, "testMultipleControl")
 }

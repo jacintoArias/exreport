@@ -15,6 +15,52 @@
 #' @keywords problems
 #' @name wekaExperiment
 #' @usage data(wekaExperiment)
-#' @format A data frame with 
+#' @format A data frame with the data detailed in the Description.
 #'
 "wekaExperiment"
+
+#' Problem: Comparison between two Ionic Liquids packs to capture and reduce the
+#' emission of CO2 in industrial fuel combustion processes.
+#'
+#' A problem containing the percentage of the CO2 reduction in the emission of 20 industrial
+#' fuel combustion processes. It has been used two different Ionic Liquids (ILs) pills with
+#' different properties. The pills has been reused up to three times, and each experiment
+#' has been repeated three times under the same conditions. The variables of the problem are as follows:
+#'
+#' \itemize{
+#'   \item IL The name of the IL pills (IL1 and IL2).
+#'   \item Scenario The name of the industrial fuel combustion process (from Scenario 1 to Scenario20).
+#'   \item Execution The number of the execution for each experiment under the same conditions.
+#'   \item Reused The number of experiments which the IL pill has been used previously (from 0 to 2).
+#'   \item CO2 The percentage of CO2 which has been reduced from the emission.
+#'}
+#' @docType data
+#' @keywords problems
+#' @name ILsPaired
+#' @usage data(ILsPaired)
+#' @format A data frame with the data detailed in the Description.
+#'
+"ILsPaired"
+
+#' Problem: Comparison between three Ionic Liquids packs to capture and reduce the
+#' emission of CO2 in industrial fuel combustion processes.
+#'
+#' A problem containing the percentage of the CO2 reduction in the emission of 20 industrial
+#' fuel combustion processes. It has been used three different Ionic Liquids (ILs) pills with
+#' different properties. The pills has been reused up to three times, and each experiment
+#' has been repeated three times under the same conditions. The variables of the problem are as follows:
+#'
+#' \itemize{
+#'   \item IL The name of the IL pills (IL1, IL2 and IL3).
+#'   \item Scenario The name of the industrial fuel combustion process (from Scenario 1 to Scenario20).
+#'   \item Execution The number of the execution for each experiment under the same conditions.
+#'   \item Reused The number of experiments which the IL pill has been used previously (from 0 to 2).
+#'   \item CO2 The percentage of CO2 which has been reduced from the emission.
+#'}
+#' @docType data
+#' @keywords problems
+#' @name ILsMultiple
+#' @usage data(ILsMultiple)
+#' @format A data frame with the data detailed in the Description.
+#'
+"ILsMultiple"

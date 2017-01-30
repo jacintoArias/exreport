@@ -47,7 +47,7 @@
   else
     parameters <- .nestedList2Latex(params)
   
-  outputs     <- paste(element[["outputs"]], collapse = ', ')
+  outputs   <- paste(element[["outputs"]], collapse = ', ')
   
   if(target == "html")
     history <- .nestedList2HTML(element$h)
@@ -184,6 +184,12 @@
   cat( content, file = file )
 }
 
+#' @importFrom grDevices dev.off
+#' @importFrom grDevices pdf
+#' @importFrom grDevices png
+#' @importFrom grDevices postscript
+#' @importFrom grDevices setEPS
+#' @importFrom grDevices svg
 .print2exreport.exPlot <- function(element, id, file, path, target) {
   
   figPath <- paste(path, "/img/", sep="")

@@ -52,6 +52,7 @@
   mySet
 }
 
+#' @importFrom stats psignrank
 .statisticsWilcoxon <- function(x,y, alternative = "less"){
   # Performs the paired wilcoxon signed rank test. Ties are allowed.
   #
@@ -176,6 +177,7 @@
   results
 }
 
+#' @importFrom stats pf
 .statisticsImanDavenport <- function(f){
   # Performs the iman davenport test.
   #
@@ -211,6 +213,7 @@
   results
 }
 
+#' @importFrom stats pf
 .statisticsGeneralControl <- function(f){
   # Performs the general control test.
   #
@@ -256,6 +259,7 @@
   results
 }
 
+#' @importFrom stats pf
 .statisticsGeneralPairwise <- function(f){
   # Performs the general pairwise test.
   #
