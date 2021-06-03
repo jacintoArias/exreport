@@ -2,6 +2,12 @@
   # Transform a nested list to a vector of objects with two elements: $depth and $str
   # $depth refers to the nested level
   # $str refers to the string representation for that element in the nested list
+  
+  # Parameter checking
+  # If l is NULL or is an empty list, it returns NULL
+  if(is.null(l) || length(l)==0)
+    return(NULL)
+  
   s <- list()
   for(i in 1:length(l))
   {
@@ -24,6 +30,8 @@
   # A toString method por nested lists.
   x <- .createDepthStructure(l)
   s <- ""
+  if(is.null(x))
+    return(s)
   for(i in 1:length(x)){
     sep <- ifelse(numbered, paste0(i," ) "), '*) ')
     s <- paste(s,do.call(function(...){ paste(...,sep="") },as.list(c(rep('\t',x[[i]]$depth),sep,x[[i]]$str,'\n'))),sep="")
@@ -34,6 +42,8 @@
 .nestedList2HTML <- function(l, numbered=TRUE){
   # A toString method por nested lists.
   x <- .createDepthStructure(l)
+  if (is.null(x))
+    return("")
   depth <- 0
   sepA <- ifelse(numbered, "<ol>\n", "<ul>\n")
   sepB <- ifelse(numbered, "\n</ol>", "\n</ul>")
@@ -55,6 +65,8 @@
 .nestedList2Latex <- function(l){
   # A toString method por nested lists.
   x <- .createDepthStructure(l)
+  if (is.null(x))
+    return("")
   depth <- 0
   s <- "\\begin{enumerate}\n"
   for (i in 1:length(x)){

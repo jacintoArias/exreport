@@ -6,6 +6,8 @@
 #' then the rejected hypotheses by the Holm methd are also indicates in the plot.
 #'
 #' @export
+#' @importFrom stats reorder
+#' @importFrom stats aggregate
 #' @import ggplot2
 #' @param testMultiple The statistical test from which the plot is generated.
 #' The functions accepts either control and pairwise multiple tests.
@@ -35,7 +37,7 @@ plotRankDistribution <- function(testMultiple) {
   da <- reshape2::melt(da, id.vars="method")
   
   means <- aggregate(value ~ method, da, mean)
-  methodNames <- as.character(testMultiple$names[[1]]) # as characters
+  methodNames <- as.character(means[[1]]) # as characters
   
   # The boxes are shaded only if a control post-hoc has been peformed
   if (is.testMultipleControl(testMultiple)) {

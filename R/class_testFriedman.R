@@ -1,4 +1,4 @@
-
+#' @importFrom methods is
 is.testFriedman <- function(x) {
   is(x, "testFriedman")
 }

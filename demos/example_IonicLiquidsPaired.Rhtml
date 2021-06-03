@@ -1,0 +1,167 @@
+<html>
+
+<head>
+<title>Comparison of two Ionic Liquids for CO<sub>2</sub> emission reduction.</title>
+</head>
+
+<body>
+
+<h2>Introduction</h2>
+
+<p>
+Ionic Liquids are low-melting salts used to capture CO<sub>2</sub> and reduce its emission from fuel combustion in industrial processes <a href="http://pubs.acs.org/doi/abs/10.1021/jz1014828">[Ref.]</a>.
+</p>
+
+<p>
+In this example we will show a simulated comparison of two Ionic Liquids (ILs), called IL1 and IL2, used in 20 fuel combistion scenarios (from Scenario 1 to Scenario20). In order to simplify the experiment, we will suppose the same ambiental conditions (temperature and pressure) for all the scenarios. Also, for each experiment, ILs have been used in pills of the same shape and volume during a fixed amount of time.
+</p>
+
+<p>
+One of the most interesting characteristics of the ILs is the reusability. It refers to the degradation of the IL after each use,  continuously decreasing the ability to capture CO<sub>2</sub>. To evaluate this characteristic, each pill has been used in the same scenario up to three times.
+</p>
+
+<p>
+We call an experiment (or an instance of the set of experiments) to an evaluation of an IL (with a specific number of uses) in a specific scenario. To reduce the noise produced by the data acquisition, imperfections in ILs, or different sources, each experiment has been repeated three times. The result for each experiment is measured in the &#37; of CO<sub>2</sub> reduced from the fuel combustion process. The dataset, called <i>ILsPaired</i> is packaged with exreport.
+</p>
+
+<!--begin.rcode
+library(exreport)
+print(colnames(ILsPaired))
+#We show random rows from the experiment. To always show the same data, we fix the seed for the random numbers.
+set.seed(0)
+rows <- sample(dim(ILsPaired)[1],10)
+print(ILsPaired[rows,])
+end.rcode-->
+
+<p>
+In this example we will use exreport to compare the performance of each IL from two different points of view:
+<ol>
+<li>By replacing the IL pill after each experiment (so the number of reuses is 0 for every configuration)</li>
+<li>Reusing it up to three times</li>
+</ol>
+The first case represents a situation where the CO<sub>2</sub> reduction is crutial and it is better to use always new pills, while in the second case we prefer a balance between CO<sub>2</sub> reduction and cost (the more we reuse the pills, the cheaper it would be). In the later case, we will use the mean CO<sub>2</sub> reduction in the three consecutive experiments as the measure to compare the performance of the IL pills.
+</p>
+
+<h2>Analysis</h2>
+
+<p>
+We will start by loading the experiment into an exreport object. Notice that we have to specify the <i>methods</i> and <i>problems</i> parameters because their names are others than the default values.
+</p>
+
+<!--begin.rcode fig.width=10, fig.height=8
+experiment <- expCreate(ILsPaired, methods = "IL", problems = "Scenario", name="ILsComparison", parameters=c("Execution","Reused"))
+end.rcode-->
+
+
+<p>
+Now we preprocess the data by aggregating the result of the three executions under the same conditions. For that, we reduce the <i>Execution</i> parameter by using the mean function:
+</p>
+
+<!--begin.rcode
+experiment <- expReduce(experiment, "Execution", FUN = mean)
+end.rcode-->
+
+<p>
+Now we can check the general behaviour of the ILs. For that, we are going to generate a plot <q>IL - CO<sub>2</sub> reduction</q>, ordering the ILs by the number of uses. This way we can see the reusability capacity for each IL as well as compare the CO<sub>2</sub> reduction.
+
+<p>
+First we apply an instantiation to the experiment. This is required for certain operations, which needs to have each experiment without parameters. Lets see the problem and why the instantiation is required. In this case, the experiment is parametrized by the <i>Execution</i> and <i>Reused</i> parameters. If we want to generate a plot where for each problem it shows a specific <i>output</i> for all the methods, then each subplot (one per problem) would be dependant on these parameters. To deal with that issue, the instantiation process append each configuration of the parameters to its method, so the instantiated experiment will have more instantiated methods (the number of methods multiplied by the number of different parameter configurations) and no parameters.
+</p>
+
+<p>
+This plot shows that IL1 have a better capacity of reusability while IL2 is able to absorve more CO<sub>2</sub> in the first use.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+expForPlot <- expInstantiate(experiment)
+expForPlot <- expReorder(expForPlot, list(IL=c("IL1,0","IL1,1","IL1,2","IL2,0","IL2,1","IL2,2")))
+p <- plotExpSummary(expForPlot, "CO2", 5, T)
+p
+end.rcode-->
+
+<p>
+Now we are going to analyse the two different scenarios: reusing or not the IL pills.
+</p>
+
+<h3>Not reusing the IL pills.</h3>
+
+<p>
+In this case the IL pack is used only once, so we do not care about the capability of the IL to keep its properties to absorve the CO<sub>2</sub>, but we want the first time reduce the CO<sub>2</sub> emission as much as possible.
+</p>
+
+<p>
+To carry out this analysis, we need to preprocess our results by selecting only the instances with the number of reuses equals to 0. For that, we perform the following subset operation. Also we perform an instantiation in order to remove the variable <i>Reuses</i> which remains in the experiment but only with the value 0.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment1 <- expSubset(experiment, list("Reused"=0))
+e1 <- expInstantiate(experiment1)
+end.rcode-->
+
+<p>
+We show the plot of the experiment (IL- CO<sub>2</sub> reduction) but only with the uses equals to 0.
+</p>
+<!--begin.rcode fig.width=7, fig.height=6
+p1 <- plotExpSummary(e1, "CO2", 0, T)
+p1
+end.rcode-->
+
+<p>
+Now we carry out a statistical paired test to check which IL is better. We have used a confidence level of 0.05. The results show that IL2 is better than IL1, with a p-value of 1.6384e-02.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+t1 <- testPaired(e1, "CO2")
+summary(t1)
+end.rcode-->
+
+
+<h3>Reusing up to three times the IL pills.</h3>
+
+<p>
+In this case we use up to three times the same IL pill for the same scenario. Therefore, we prefer an IL with a high level of CO<sub>2</sub> absorvence, but also with a low level of deterioration.
+</p>
+
+<p>
+To test the performance of the ILs, we are going to use the mean of three consecutives uses of the same IL pill. For that, we need to reduce the <i>Reused</i> parameter by using the mean function:
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+experiment2 <- expReduce(experiment, "Reused" ,FUN = mean)
+e2 <- expInstantiate(experiment2)
+end.rcode-->
+
+<p>
+Similarly, we show the plot of the experiment (IL- CO<sub>2</sub> reduction) after applying the mean to the CO<sub>2</sub> emision reuction for each experiment with 0, 1 and 2 reuses.
+</p>
+<!--begin.rcode fig.width=7, fig.height=6
+p2 <- plotExpSummary(e2, "CO2", 0, T)
+p2
+end.rcode-->
+
+<p>
+Now we apply the same statistical comparison. The results show in this case that IL1 behaves better than IL2, with a p-value of 1.8117e-02.
+</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+t2 <- testPaired(e2, "CO2")
+summary(t2)
+end.rcode-->
+
+
+<p>
+At this point we can collect all the output we have generated during this exreport
+workflow and pack it into a document. In this case we will be creating an interactive
+HTML report, from which we are going to be able to download the figures.
+</p>
+
+
+<!--begin.rcode fig.width=7, fig.height=6
+report <- exreport("Your ILs Comparison example report")
+report <- exreportAdd(report, list(experiment,p,e1,p1,t1,e2,p2,t2))
+# Render the report in HTML format:
+exreportRender(report)
+end.rcode-->
+
+</body>
+</html>

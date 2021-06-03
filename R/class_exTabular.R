@@ -1,3 +1,4 @@
+#' @importFrom methods is
 is.exTabular <- function(x) {
   is(x, "exTabular")
 }

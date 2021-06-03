@@ -7,6 +7,7 @@
 #'
 #' @export
 #' @import ggplot2
+#' @importFrom stats aggregate
 #' @param testMultiple Statistical test from which the plot is generated. The 
 #' rankings are obtained from the Friedman test.
 #' @param grayscale Configure the plot using a grayscale palette.
