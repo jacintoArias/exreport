@@ -8,9 +8,9 @@ exreport has been conceived to obtain robust and transparent reproducibility whe
 
 ## Check our dedicated wwebsite and documentation:
 
-* [Exreport website](http://exreport.jarias.es)
+* [Exreport website](http://jacintoarias.github.io/exreport/)
 
-* [Exreport Docs](http://exreport.jarias.es/docs)
+* [Exreport Docs](http://jacintoarias.github.io/exreport/docs)
 
 ## Subscribe to our user mailing list:
 
