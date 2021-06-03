@@ -16,7 +16,7 @@
 title: exreport R package
 email: jacin@elrocin.es
 description: An R package for easy reproducible research
-url: "http://exreport.jarias.es" # the base hostname & protocol for your site
+url: "http://jacintoarias.github.io" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
